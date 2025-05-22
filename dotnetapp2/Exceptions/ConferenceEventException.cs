@@ -7,12 +7,10 @@ namespace dotnetapp2.Exceptions
 {
     public class ConferenceEventException :Exceptions
     {
-        private readonly ILogger<ConferenceEventException> _logger;
         private readonly string message;
-        public ConferenceEventException(ILogger<ConferenceEventException> logger, string message)
+        public ConferenceEventException(string message)
         {
             this.message = message;
-            _logger = logger;
         }
     }
 }
