@@ -1,0 +1,30 @@
+# .NET-specific ignores
+*.csproj.user
+*.sln.docstates
+*.suo
+*.user
+*.pfx
+*.vspscc
+_ReSharper*/
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+*.log
+*.swp
+*.cache
+*.nupkg
+packages/
+TestResults/
+*.DotSettings.user
+.vs/
+# Angular-specific ignores
+node_modules/
+dist/
+/e2e/
+/coverage/
+*.lock
+*.map
+# General ignores
+.env
+.vscode/
