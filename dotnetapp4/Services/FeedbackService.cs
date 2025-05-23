@@ -13,14 +13,14 @@ namespace dotnetapp4.Services
             _context = context;
         }
 
-        public async Task<bool> AddFeeback(Feedback feedback)
+        public async Task<bool> AddFeedback(Feedback feedback)
         {
             await _context.Feedbacks.AddAsync(feedback);
             int rowsAffected = _context.SaveChanges();
             return rowsAffected == 1;
         }
 
-        public async Task<bool> DeleteFeeback(int feedbackId)
+        public async Task<bool> DeleteFeedback(int feedbackId)
         {
             var feedback = await _context.Feedbacks.FindAsync(feedbackId);
             if (feedback != null)
