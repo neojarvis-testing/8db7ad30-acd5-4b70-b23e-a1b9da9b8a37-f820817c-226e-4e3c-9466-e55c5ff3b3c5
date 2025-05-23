@@ -29,7 +29,7 @@ namespace dotnetapp4.Controller
             }
         }
         [HttpGet]
-        [Route("{userId}")]
+        [Route("user/{userId}")]
         public async Task<IActionResult> GetFeedbacksByUserId(int userId)
         {
             try
