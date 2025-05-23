@@ -7,9 +7,9 @@ namespace dotnetapp1.Data
     {
         private readonly ILogger<ApplicationDbContext> _logger;
 
-        public ApplicationDbContext(DbContextOptions options,ILogger<ApplicationDbContext> logger) :base(options)
+        public ApplicationDbContext(DbContextOptions options) :base(options)
         {
-            _logger = logger;
+            //_logger = logger;
         }
 
         public DbSet<User> Users {get; set; }

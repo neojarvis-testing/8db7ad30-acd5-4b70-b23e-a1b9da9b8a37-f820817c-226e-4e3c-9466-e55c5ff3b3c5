@@ -46,7 +46,7 @@ namespace dotnetapp4.Controller
         {
             try
             {
-                return Ok(await _service.AddFeeback(feedback));
+                return Ok(await _service.AddFeedback(feedback));
             }
             catch (Exception ex)
             {
@@ -59,7 +59,7 @@ namespace dotnetapp4.Controller
         {
             try
             {
-                return Ok(await _service.DeleteFeeback(feedbackId));
+                return Ok(await _service.DeleteFeedback(feedbackId));
             }
             catch (Exception ex)
             {
