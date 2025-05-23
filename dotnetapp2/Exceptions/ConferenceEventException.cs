@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace dotnetapp2.Exceptions
 {
-    public class ConferenceEventException :Exceptions
+    public class ConferenceEventException :Exception
     {
         private readonly string message;
         public ConferenceEventException(string message)

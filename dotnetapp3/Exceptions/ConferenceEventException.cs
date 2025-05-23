@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace dotnetapp3.Exceptions
 {
-    public class ConferenceEventException : Exceptions
+    public class ConferenceEventException : Exception
     {
         private readonly string message;
 
