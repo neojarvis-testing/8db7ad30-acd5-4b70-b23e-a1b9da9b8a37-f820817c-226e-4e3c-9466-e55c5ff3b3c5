@@ -1,4 +1,4 @@
-using dotnetapp4.Data;
+using dotnetapp1.Data;
 using dotnetapp4.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<FeedbackDbContext>(options => options.UseSqlServer(connectionString: builder.Configuration.GetConnectionString("FeedbackCon")));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString: builder.Configuration.GetConnectionString("AppCon")));
 builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 
 var app = builder.Build();

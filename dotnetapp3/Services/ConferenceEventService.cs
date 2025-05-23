@@ -2,69 +2,70 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommonLibrary.Models;
+using dotnetapp1.Data;
+using dotnetapp3.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnetapp3.Services
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ConferenceEventService : ControllerBase
+    public class ConferenceEventService // add an interface
     {
         private readonly ApplicationDbContext _context;
         public ConferenceEventService(ApplicationDbContext context)
         {
-            this._context = context;
+            _context = context;
             
         }
 
         public async Task<IEnumerable<ConferenceEvent>> GetAllConferenceEvents()
         {
-            return this._context.ConferenceEvents;
+            return await _context.ConferenceEvents.ToListAsync();
         }
 
         public async Task<ConferenceEvent> GetConferenceEventById(int conferenceEventId)
         {
-            return this._context.ConferenceEvents.FirstOrDefault(x=>x.ConferenceEventId==conferenceEventId);
+            return await _context.ConferenceEvents.FirstOrDefaultAsync(x => x.ConferenceEventId == conferenceEventId);
         }
 
         public async Task<bool> AddConferenceEvent(ConferenceEvent conferenceEvent)
         {
-            var result = this._context.ConferenceEvents.Where(x=>x.EventName == conferenceEvent.EventName);
-            if(result)
+            var existingConferenceEvent = await _context.ConferenceEvents.FirstOrDefaultAsync(x=>x.EventName == conferenceEvent.EventName);
+            if(existingConferenceEvent != null)
             {
-                Throw new ConferenceEventException("Event with the same name already exists");
+                throw new ConferenceEventException("Event with the same name already exists");
             }
             else
             {
-                this._context.ConferenceEvents.Add(conferenceEvent);
-                this._context.SaveChanges();
+                _context.ConferenceEvents.Add(conferenceEvent);
+                _context.SaveChanges();
                 return true;
             }
         }
 
         public async Task<bool> UpdateConferenceEvent(int conferenceEventId, ConferenceEvent conferenceEvent)
         {
-            
-            if(this._context.ConferenceEvents.Where(x=>x.ConferenceEventId == conferenceEventId)==null)
+            var existingConference = await _context.ConferenceEvents.FirstOrDefaultAsync(x => x.ConferenceEventId == conferenceEventId);
+            if(existingConference == null)
             {
-                return false;
-            }
-            var result = this._context.ConferenceEvents.Where(x=>x.EventName == conferenceEvent.EventName);
-            if(result)
-            {
-                Throw new ConferenceEventException("Event with the same name already exists");
+                throw new ConferenceEventException("Event doesn't exists");
             }
             else
             {
-                this._context.ConferenceEvents.Update(conferenceEvent);
-                this._context.SaveChanges();
+                // assign required fields before updating
+                _context.ConferenceEvents.Update(existingConference);
+                _context.SaveChanges();
                 return true;
             }
         }
 
         public async Task<bool> DeleteConferenceEvent(int conferenceEventId)
         {
-
+            var existingConference = await _context.ConferenceEvents.FirstOrDefaultAsync(x => x.ConferenceEventId == conferenceEventId);
+            _context.ConferenceEvents.Remove(existingConference);
+            _context.SaveChanges();
+            return true;
         }
     }
 }

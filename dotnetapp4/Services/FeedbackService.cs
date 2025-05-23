@@ -1,14 +1,14 @@
 ﻿using CommonLibrary.Models;
-using dotnetapp4.Data;
+using dotnetapp1.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace dotnetapp4.Services
 {
     public class FeedbackService : IFeedbackService
     {
-        private readonly FeedbackDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public FeedbackService(FeedbackDbContext context)
+        public FeedbackService(ApplicationDbContext context)
         {
             _context = context;
         }

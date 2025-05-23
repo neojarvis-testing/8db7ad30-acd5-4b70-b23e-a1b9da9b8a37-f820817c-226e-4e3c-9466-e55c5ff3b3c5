@@ -28,6 +28,7 @@
 
       <ItemGroup>
     <ProjectReference Include="..\CommonLibrary\CommonLibrary.csproj" />
+    <ProjectReference Include="..\dotnetapp1\dotnetapp1.csproj" />
   </ItemGroup>
 
 </Project>
