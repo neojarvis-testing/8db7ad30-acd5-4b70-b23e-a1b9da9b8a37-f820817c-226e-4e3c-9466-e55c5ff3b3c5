@@ -1,8 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -12,9 +7,14 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
     .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
 builder.Services.AddOcelot();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -22,10 +22,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+app.UseCors("CorsPolicy");
+app.MapGet("/", () => "Hello World!");
 
-app.UseHttpsRedirection();
-app.UseRouting();
-app.UseAuthorization();
+app.UseOcelot().Wait();
 
-app.MapControllers();
 app.Run();
