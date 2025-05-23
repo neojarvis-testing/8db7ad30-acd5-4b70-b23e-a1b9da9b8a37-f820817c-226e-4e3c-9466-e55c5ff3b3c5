@@ -13,14 +13,14 @@ namespace dotnetapp1.Services
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IConfiguration configuration;        
-        private readonly AuthDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         private const string SecretKey ="abc123xyz";
 
         public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,        
-                            IConfiguration configuration, AuthDbContext context)
+                            IConfiguration configuration, ApplicationDbContext context)
         {
-            this._context = context;
+            _context = context;
             this.configuration = configuration;
             this.roleManager = roleManager;
             this.userManager = userManager;
@@ -29,7 +29,7 @@ namespace dotnetapp1.Services
 
         public async Task<(int,string)> Registration(User model, string role)
         {
-           var result =  this._context.Users.FirstOrDefault(x=>x.Email==model.Email);
+           var result =  _context.Users.FirstOrDefault(x=>x.Email==model.Email);
 
            if(result != null)
            {
@@ -37,7 +37,7 @@ namespace dotnetapp1.Services
            }
 
             //this._context.Users.UserRole=role;
-            var addUser = this._context.Users.Add(model);
+            var addUser = _context.Users.Add(model);
             var isAdded = _context.SaveChanges();
             //check below condition
             if(isAdded == 0)
@@ -52,14 +52,14 @@ namespace dotnetapp1.Services
 
         public async Task<(int,string)> Login(LoginModel model)
         {
-            var result =  this._context.Users.FirstOrDefault(x=>x.Email==model.Email);
+            var result =  _context.Users.FirstOrDefault(x=>x.Email==model.Email);
 
            if(result==null)
            {
             return (1,"Invalid Email");
            }
 
-           var passwordCheck = this._context.Users.Where(x=>x.Password==model.Password);
+           var passwordCheck = _context.Users.Where(x=>x.Password==model.Password);
            if(passwordCheck==null)
            {
             return (1,"Invalid password");
