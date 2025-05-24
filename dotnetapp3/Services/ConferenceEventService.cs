@@ -61,11 +61,26 @@ namespace dotnetapp3.Services
         }
 
         public async Task<bool> DeleteConferenceEvent(int conferenceEventId)
-        {
-            var existingConference = await _context.ConferenceEvents.FirstOrDefaultAsync(x => x.ConferenceEventId == conferenceEventId);
-            _context.ConferenceEvents.Remove(existingConference);
-            _context.SaveChanges();
-            return true;
+        {        
+            
+            bool isReferenced = await _context.Bookings.AnyAsync(b=> b.ConferenceEventId = conferenceEventId);
+
+            if(isReferenced)
+            {
+                throw new ConferenceEventException("Conference event cannot be deleted, it is referenced in bookings");
+            }
+
+
+            var existingConference = await _context.ConferenceEvents.FindAsync(conferenceEventId);
+            
+            if(existingConference!=null)
+            {
+                _context.ConferenceEvents.Remove(existingConference);
+                _context.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }
