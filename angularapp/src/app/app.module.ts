@@ -7,7 +7,8 @@ import { NotFoundComponent } from './error/not-found/not-found.component';
 import { InternalServerErrorComponent } from './error/internal-server-error/internal-server-error.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
-import { RegistrationComponent } from './registration/registration/registration.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+
 
 @NgModule({
   declarations: [AppComponent,
