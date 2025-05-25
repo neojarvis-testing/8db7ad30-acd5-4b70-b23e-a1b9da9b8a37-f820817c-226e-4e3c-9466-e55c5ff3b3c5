@@ -1,6 +1,6 @@
-class Feedback {
-    FeedbackId?: number;
-    UserId: number;
-    FeedbackText: string;
-    Date: Date;
+export interface Feedback {
+  feedbackId: number;
+  userId: number;
+  feedbackText: string;
+  date: Date;
 }
