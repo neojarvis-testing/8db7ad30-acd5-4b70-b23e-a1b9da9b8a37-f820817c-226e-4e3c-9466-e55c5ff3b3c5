@@ -10,7 +10,7 @@ using dotnetapp1.Data;
 using dotnetapp3.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using dotnetapp3.Services;
 namespace dotnetapp3.Controllers
 {
     [ApiController]
@@ -27,7 +27,7 @@ namespace dotnetapp3.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ConferenceEvent>>> GetConferenceEvent()
         {
-            return await _context.ConferenceEvent.ToListAsync(); 
+            return await _context.ConferenceEvents.ToListAsync(); 
         }
 
         //GET:api/ConferenceEvents/7
@@ -46,7 +46,7 @@ namespace dotnetapp3.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutConferenceEvent(int id,ConferenceEvent conferenceevent)
         {
-            if(id!=conferenceevent.Id)
+            if(id!=conferenceevent.ConferenceEventId)
             {
                 return BadRequest();
             }
@@ -77,7 +77,7 @@ namespace dotnetapp3.Controllers
     {
         _context.ConferenceEvents.Add(conferenceevent);
         await _context.SaveChangesAsync();
-        return CreatedAtAction("GetConferenceEvent",new{id=conferenceevent.Id},conferenceevent);
+        return CreatedAtAction("GetConferenceEvent",new{id=conferenceevent.ConferenceEventId},conferenceevent);
 
     }
     //DELETE: api/ConferenceEvents/7
@@ -95,7 +95,7 @@ namespace dotnetapp3.Controllers
     }
     private bool ConferenceEventExists(int id)
     {
-        return _context.ConferenceEvents.Any(e=>e.Id==id);
+        return _context.ConferenceEvents.Any(e=>e.ConferenceEventId==id);
     }
  }
 
