@@ -12,7 +12,7 @@ namespace dotnetapp3.Exceptions
     {
         private readonly string message;
 
-        public ConferenceEventException(string message)
+        public ConferenceEventException(string message) :base(message)
         {
             this.message = message;
         }

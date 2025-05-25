@@ -1,102 +1,105 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using CommonLibrary.Models;
-using dotnetapp1.Data;
-using dotnetapp3.Exceptions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using dotnetapp3.Services;
+using dotnetapp3.Exceptions;
+
 namespace dotnetapp3.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class ConferenceEventController : ControllerBase
     {
-        //ApplicationDbContext
-        private readonly ApplicationDbContext _context;
-        public ConferenceEventController(ApplicationDbContext context)
+        private readonly IConferenceEventService _service;
+
+        public ConferenceEventController(IConferenceEventService service)
         {
-            _context=context;
+            _service = service;
         }
-        //GET: api/ConferenceEvents
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ConferenceEvent>>> GetConferenceEvent()
+        public async Task<IActionResult> GetAllConferenceEvents()
         {
-            return await _context.ConferenceEvents.ToListAsync(); 
-        }
-
-        //GET:api/ConferenceEvents/7
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ConferenceEvent>> GetConferenceEvent(int id)
-        {
-            var conferanceevent  = await _context.ConferenceEvents.FindAsync(id);
-            if(conferanceevent==null)
-            {
-                return NotFound();
-            }
-            return conferanceevent;
-
-        }
-        //PUT: api/ConferenceEvents/7
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutConferenceEvent(int id,ConferenceEvent conferenceevent)
-        {
-            if(id!=conferenceevent.ConferenceEventId)
-            {
-                return BadRequest();
-            }
-            _context.Entry(conferenceevent).State=EntityState.Modified;
             try
             {
-              await _context.SaveChangesAsync();
+                var events = await _service.GetAllConferenceEvents();
+                return Ok(events);
             }
-            catch(DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if(!ConferenceEventExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return StatusCode(500, ex.Message);
             }
-            return NoContent();
-
         }
-        
-    
-    //POST: api/ConferenceEvents
-    [HttpPost]
-    public async Task<ActionResult<ConferenceEvent>> PostConferenceEvent(ConferenceEvent conferenceevent)
-    {
-        _context.ConferenceEvents.Add(conferenceevent);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction("GetConferenceEvent",new{id=conferenceevent.ConferenceEventId},conferenceevent);
 
-    }
-    //DELETE: api/ConferenceEvents/7
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteConferenceEvent(int id)
-    {
-        var conferenceevent=await _context.ConferenceEvents.FindAsync(id);
-        if(conferenceevent==null)
+        [HttpGet("{conferenceEventId}")]
+        public async Task<IActionResult> GetConferenceEventById(int conferenceEventId)
         {
-            return NotFound();
+            try
+            {
+                var conferenceEvent = await _service.GetConferenceEventById(conferenceEventId);
+                if (conferenceEvent == null)
+                    return NotFound("Conference event not found");
+                return Ok(conferenceEvent);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
-        _context.ConferenceEvents.Remove(conferenceevent);
-        await _context.SaveChangesAsync();
-        return NoContent();
-    }
-    private bool ConferenceEventExists(int id)
-    {
-        return _context.ConferenceEvents.Any(e=>e.ConferenceEventId==id);
-    }
- }
 
+        [HttpPost]
+        public async Task<IActionResult> AddConferenceEvent([FromBody] ConferenceEvent conferenceEvent)
+        {
+            try
+            {
+                var result = await _service.AddConferenceEvent(conferenceEvent);
+                return Ok(result);
+            }
+            catch (ConferenceEventException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPut("{conferenceEventId}")]
+        public async Task<IActionResult> UpdateConferenceEvent(int conferenceEventId, [FromBody] ConferenceEvent conferenceEvent)
+        {
+            try
+            {
+                var result = await _service.UpdateConferenceEvent(conferenceEventId, conferenceEvent);
+                return Ok(result);
+            }
+            catch (ConferenceEventException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("{conferenceEventId}")]
+        public async Task<IActionResult> DeleteConferenceEvent(int conferenceEventId)
+        {
+            try
+            {
+                var result = await _service.DeleteConferenceEvent(conferenceEventId);
+                return Ok(result);
+            }
+            catch (ConferenceEventException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+    }
 }
