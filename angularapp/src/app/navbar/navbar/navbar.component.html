@@ -1,0 +1,31 @@
+<div class="header">
+  <span class="title">CONFERENCE EVENT MANAGEMENT SYSTEM</span>
+  <div class="nav">
+    <!-- Hamburger icon for small screens -->
+    <button class="hamburger"
+            [class.open]="menuOpen"
+            (click)="toggleMenu()"
+            aria-label="Toggle navigation"
+            [attr.aria-expanded]="menuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <!-- Backdrop for mobile menu -->
+    <div class="nav-backdrop" *ngIf="menuOpen" (click)="closeMenu()"></div>
+    <div class="nav-links" [class.open]="menuOpen">
+      <ng-container *ngIf="isLoggedIn; else loggedOut">
+        <a class="admin-btn" routerLink="/admin" (click)="closeMenu()">Admin / Admin</a>
+        <a routerLink="/home" (click)="closeMenu()">Home</a>
+        <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
+        <a routerLink="/requested-event-bookings" (click)="closeMenu()">Requested Event Bookings</a>
+        <a class="feedback-btn" routerLink="/feedback" (click)="closeMenu()">Feedbacks</a>
+        <button class="logout-btn" (click)="logout(); closeMenu()">Logout</button>
+      </ng-container>
+      <ng-template #loggedOut>
+        <a routerLink="/register" (click)="closeMenu()">Register</a>
+        <a routerLink="/login" (click)="closeMenu()">Login</a>
+      </ng-template>
+    </div>
+  </div>
+</div>
