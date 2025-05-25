@@ -14,7 +14,6 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
