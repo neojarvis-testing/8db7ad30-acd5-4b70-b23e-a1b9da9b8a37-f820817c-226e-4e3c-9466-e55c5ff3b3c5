@@ -7,10 +7,10 @@ namespace dotnetapp3.Services
 {
     public interface IConferenceEventService
     {
-        Task<bool> AddConferenceEvent(ConferenceEvent conferenceevent);
-        Task<bool> DeleteConferenceEvent(int conferenceeventid);
         Task<IEnumerable<ConferenceEvent>> GetAllConferenceEvents();
-        Task<IEnumerable<ConferenceEvent>> GetConferenceEventById(int id);
-        
+        Task<ConferenceEvent> GetConferenceEventById(int conferenceEventId);
+        Task<bool> AddConferenceEvent(ConferenceEvent conferenceEvent);
+        Task<bool> UpdateConferenceEvent(int conferenceEventId, ConferenceEvent conferenceEvent);
+        Task<bool> DeleteConferenceEvent(int conferenceEventId);
     }
 }

@@ -1,24 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using CommonLibrary.Models;
-using dotnetapp1.Data;
-using dotnetapp3.Exceptions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using dotnetapp3.Services;
+using dotnetapp3.Exceptions;
+
 namespace dotnetapp3.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class ConferenceEventController : ControllerBase
     {
-         private readonly IConferenceEventService _service;
-         public ConferenceEventController(IConferenceEventService service)
+        private readonly IConferenceEventService _service;
+
+        public ConferenceEventController(IConferenceEventService service)
         {
             _service = service;
         }
@@ -28,7 +23,8 @@ namespace dotnetapp3.Controllers
         {
             try
             {
-                return Ok(await _service.GetAllConferenceEvents());
+                var events = await _service.GetAllConferenceEvents();
+                return Ok(events);
             }
             catch (Exception ex)
             {
@@ -36,38 +32,33 @@ namespace dotnetapp3.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("user/{userId}")]
-        public async Task<IActionResult> GetConferenceEventById(int userId)
+        [HttpGet("{conferenceEventId}")]
+        public async Task<IActionResult> GetConferenceEventById(int conferenceEventId)
         {
             try
             {
-                return Ok(await _service.GetConferenceEventById(userId));
+                var conferenceEvent = await _service.GetConferenceEventById(conferenceEventId);
+                if (conferenceEvent == null)
+                    return NotFound("Conference event not found");
+                return Ok(conferenceEvent);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
         }
+
         [HttpPost]
-        public async Task<IActionResult> AddConferenceEvent(ConferenceEvent conferenceevent)
+        public async Task<IActionResult> AddConferenceEvent([FromBody] ConferenceEvent conferenceEvent)
         {
             try
             {
-                return Ok(await _service.AddConferenceEvent(conferenceevent));
+                var result = await _service.AddConferenceEvent(conferenceEvent);
+                return Ok(result);
             }
-            catch (Exception ex)
+            catch (ConferenceEventException ex)
             {
-                return StatusCode(500, ex.Message);
-            }
-        }
-        [HttpDelete]
-        [Route("{ConferenceEventId}")]
-        public async Task<IActionResult> DeleteConferenceEvent(int conferenceeventId)
-        {
-            try
-            {
-                return Ok(await _service.DeleteConferenceEvent(conferenceeventId));
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
@@ -75,6 +66,40 @@ namespace dotnetapp3.Controllers
             }
         }
 
-        
+        [HttpPut("{conferenceEventId}")]
+        public async Task<IActionResult> UpdateConferenceEvent(int conferenceEventId, [FromBody] ConferenceEvent conferenceEvent)
+        {
+            try
+            {
+                var result = await _service.UpdateConferenceEvent(conferenceEventId, conferenceEvent);
+                return Ok(result);
+            }
+            catch (ConferenceEventException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("{conferenceEventId}")]
+        public async Task<IActionResult> DeleteConferenceEvent(int conferenceEventId)
+        {
+            try
+            {
+                var result = await _service.DeleteConferenceEvent(conferenceEventId);
+                return Ok(result);
+            }
+            catch (ConferenceEventException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
