@@ -63,7 +63,7 @@ namespace dotnetapp3.Services
         public async Task<bool> DeleteConferenceEvent(int conferenceEventId)
         {        
             
-            bool isReferenced = await _context.Bookings.AnyAsync(b=> b.ConferenceEventId = conferenceEventId);
+            bool isReferenced = await _context.Bookings.AnyAsync(b=> b.ConferenceEventId == conferenceEventId);
 
             if(isReferenced)
             {
