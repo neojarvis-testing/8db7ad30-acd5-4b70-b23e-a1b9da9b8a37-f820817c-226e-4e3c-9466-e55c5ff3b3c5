@@ -1,0 +1,27 @@
+
+<div class="container">
+  <h2 class="title">Feedback Details</h2>
+  <hr />
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>User Name</th>
+        <th>Feedback</th>
+        <th>Posted Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fb of feedbacks; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td><b>User</b></td>
+        <td>{{ fb.FeedbackText }}</td>
+        <td>{{ fb.Date | date:'dd/MM/yyyy' }}</td>
+        <td>
+          <button class="profile-btn">Show Profile</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
