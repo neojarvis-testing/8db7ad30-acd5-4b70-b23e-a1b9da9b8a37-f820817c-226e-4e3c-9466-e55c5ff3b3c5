@@ -10,6 +10,7 @@ namespace dotnetapp1.Data
         public ApplicationDbContext(DbContextOptions options) :base(options)
         {
             //_logger = logger;
+            Database.EnsureCreated();
         }
 
         public DbSet<User> Users {get; set; }

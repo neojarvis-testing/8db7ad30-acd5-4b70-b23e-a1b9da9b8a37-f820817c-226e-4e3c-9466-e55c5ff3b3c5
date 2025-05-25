@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using dotnetapp2.Services;
+using CommonLibrary.Models;
 
 namespace dotnetapp2.Controllers
 {
@@ -20,7 +23,7 @@ namespace dotnetapp2.Controllers
         }
 
         [HttpGet]
-        [Authorize(Role="Admin,User")]
+        [Authorize(Roles="Admin,User")]
         public async Task<ActionResult<IEnumerable<Booking>>> GetAllBookings()
         {
             try
@@ -34,7 +37,7 @@ namespace dotnetapp2.Controllers
         }
 
         [HttpGet]
-        [Authorize(Role="Admin,User")]
+        [Authorize(Roles="Admin,User")]
         [Route("{userId}")]
         public async Task<ActionResult<IEnumerable<Booking>>> GetBookingsByUserId(int userId)
         {
@@ -57,7 +60,7 @@ namespace dotnetapp2.Controllers
         }
 
         [HttpPost]
-        [Authorize(Role="Admin,User")]
+        [Authorize(Roles="Admin,User")]
         public async Task<ActionResult> AddBooking([FromBody] Booking booking)
         {
             try
@@ -79,7 +82,7 @@ namespace dotnetapp2.Controllers
         }
 
         [HttpPut]
-        [Authorize(Role="Admin,User")]
+        [Authorize(Roles="Admin,User")]
         public async Task<ActionResult> UpdateBooking(int bookingId, [FromBody] Booking booking)
         {
             try
@@ -101,7 +104,7 @@ namespace dotnetapp2.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Role="Admin")]
+        [Authorize(Roles="Admin")]
         [Route("{bookingId}")]
         public async Task<ActionResult> DeleteBooking(int bookingId)
         {
