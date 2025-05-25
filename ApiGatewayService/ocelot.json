@@ -27,7 +27,7 @@
     {
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "UpstreamPathTemplate": "/api/bookings/{everything}",
-      "DownstreamPathTemplate": "/api/bookings/{everything}",
+      "DownstreamPathTemplate": "/api/booking/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -39,7 +39,7 @@
     {
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "UpstreamPathTemplate": "/api/booking/{everything}",
-      "DownstreamPathTemplate": "/api/bookings/{everything}",
+      "DownstreamPathTemplate": "/api/booking/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -51,7 +51,7 @@
     {
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "UpstreamPathTemplate": "/api/conference-events/{everything}",
-      "DownstreamPathTemplate": "/api/conference-events/{everything}",
+      "DownstreamPathTemplate": "/api/conferenceevent/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -63,7 +63,7 @@
     {
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "UpstreamPathTemplate": "/api/conference-event/{everything}",
-      "DownstreamPathTemplate": "/api/conference-events/{everything}",
+      "DownstreamPathTemplate": "/api/conferenceevent/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {

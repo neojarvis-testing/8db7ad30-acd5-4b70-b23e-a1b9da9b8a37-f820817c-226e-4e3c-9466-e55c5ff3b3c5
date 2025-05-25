@@ -15,9 +15,9 @@ namespace dotnetapp2.Controllers
     [ApiController]    
     public class BookingController : ControllerBase
     {
-        private readonly BookingService _bookingService;
+        private readonly IBookingService _bookingService;
 
-        public BookingController(BookingService bookingService)
+        public BookingController(IBookingService bookingService)
         {
             _bookingService = bookingService;            
         }
