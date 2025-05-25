@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     public apiUrl = 'http://your-workspace-url:8080/api';
-    private userRole = new BehaviorSubject<string | null>(null);
+    private userRole = new BehaviorSubject<string | null>(localStorage.getItem('role'));
     private userId = new BehaviorSubject<number | null>(null);
+    private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
 
     constructor(private http: HttpClient) { }
 
@@ -16,13 +18,15 @@ export class AuthService {
         return this.http.post(`${this.apiUrl}/register`, user);
     }
 
-    login(login: Login): Observable<any> {
+    login(login: any): Observable<any> {
         return this.http.post(`${this.apiUrl}/login`, login).pipe(
             tap((response: any) => {
                 if (response && response.token) {
                     localStorage.setItem('token', response.token);
+                    localStorage.setItem('role', response.role);
                     this.userRole.next(response.role);
                     this.userId.next(response.id);
+                    this.loggedIn.next(true);
                 }
             })
         );
@@ -40,9 +44,15 @@ export class AuthService {
         return this.userId.asObservable();
     }
 
+    get isLoggedIn$(): Observable<boolean> {
+        return this.loggedIn.asObservable();
+    }
+
     logout(): void {
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
         this.userRole.next(null);
         this.userId.next(null);
+        this.loggedIn.next(false);
     }
 }

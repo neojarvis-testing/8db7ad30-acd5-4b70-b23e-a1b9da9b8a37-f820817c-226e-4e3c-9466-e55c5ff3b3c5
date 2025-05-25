@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserSessionService } from 'src/app/services/user-session.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   standalone: false,
@@ -14,11 +14,11 @@ export class NavbarComponent {
 
   constructor(
     private router: Router,
-    private userSession: UserSessionService
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.userSession.isLoggedIn$.subscribe(val => this.isLoggedIn = val);
+    this.authService.isLoggedIn$.subscribe(val => this.isLoggedIn = val);
   }
 
   toggleMenu() {
@@ -31,8 +31,12 @@ export class NavbarComponent {
     document.body.style.overflow = '';
   }
 
+  get userRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
   logout() {
-    this.userSession.logout();
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 
