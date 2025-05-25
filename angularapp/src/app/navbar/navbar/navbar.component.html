@@ -15,11 +15,22 @@
     <div class="nav-backdrop" *ngIf="menuOpen" (click)="closeMenu()"></div>
     <div class="nav-links" [class.open]="menuOpen">
       <ng-container *ngIf="isLoggedIn; else loggedOut">
-        <a class="admin-btn" routerLink="/admin" (click)="closeMenu()">Admin / Admin</a>
-        <a routerLink="/home" (click)="closeMenu()">Home</a>
-        <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
-        <a routerLink="/requested-event-bookings" (click)="closeMenu()">Requested Event Bookings</a>
-        <a class="feedback-btn" routerLink="/feedback" (click)="closeMenu()">Feedbacks</a>
+        <!-- Admin Links -->
+        <ng-container *ngIf="userRole === 'Admin'">
+          <a class="admin-btn" routerLink="/home" (click)="closeMenu()">Admin/Admin</a>
+          <a routerLink="/home" (click)="closeMenu()">Home</a>
+          <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
+          <a routerLink="/requested-event-bookings" (click)="closeMenu()">Requested Event Bookings</a>
+          <a routerLink="/adminfeedback" (click)="closeMenu()">Feedbacks</a>
+        </ng-container>
+        <!-- User Links -->
+        <ng-container *ngIf="userRole === 'User'">
+          <a class="admin-btn" routerLink="/home" (click)="closeMenu()">User/User</a>
+          <a routerLink="/home" (click)="closeMenu()">Home</a>
+          <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
+          <a routerLink="/requested-event-bookings" (click)="closeMenu()">My Bookings</a>
+          <a routerLink="/userfeedback" (click)="closeMenu()">Feedbacks</a>
+        </ng-container>
         <button class="logout-btn" (click)="logout(); closeMenu()">Logout</button>
       </ng-container>
       <ng-template #loggedOut>
