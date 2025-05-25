@@ -33,12 +33,13 @@ namespace dotnetapp4.Services
 
         public async Task<IEnumerable<Feedback>> GetAllFeedbacks()
         {
-            return await _context.Feedbacks.ToListAsync();
+            return await _context.Feedbacks.Include(x=>x.User).ToListAsync();
         }
 
         public async Task<IEnumerable<Feedback>> GetFeedbacksByUserId(int userId)
         {
             return await _context.Feedbacks
+                .Include(x => x.User)
                 .Where(x => x.UserId == userId)
                 .ToListAsync();
         }

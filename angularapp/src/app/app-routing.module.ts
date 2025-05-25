@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { InternalServerErrorComponent } from './error/internal-server-error/internal-server-error.component';
-import { FeedbackComponent } from './components/feedback/feedback.component';
+import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
   // Main application routes
   { path: 'login', component: RegistrationComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'feedback', component: FeedbackComponent },
+  { path: 'feedback', component: AdminviewfeedbackComponent },
 
   // Error routes
   { path: '404', component: NotFoundComponent },
