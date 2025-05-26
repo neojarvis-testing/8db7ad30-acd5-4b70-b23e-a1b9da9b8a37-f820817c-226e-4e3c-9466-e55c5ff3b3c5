@@ -7,6 +7,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminViewBookings } from './components/admin-view-bookings/admin-view-bookings.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   // Home or landing route (adjust as needed)
@@ -15,6 +16,8 @@ const routes: Routes = [
   // Main application routes
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
+
+  { path: 'home', component: HomeComponent },
 
   { path: 'adminviewbooking', component: AdminViewBookings },
   //Admin routes
