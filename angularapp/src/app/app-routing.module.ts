@@ -8,6 +8,7 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { LoginComponent } from './components/login/login.component';
 import { AdminViewBookings } from './components/admin-view-bookings/admin-view-bookings.component';
 import { HomeComponent } from './components/home/home.component';
+import { AdminCreateConferenceEventComponent } from './components/admin-create-conference-event/admin-create-conference-event.component';
 
 const routes: Routes = [
   // Home or landing route (adjust as needed)
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent },
 
   { path: 'home', component: HomeComponent },
+
+  { path: 'createconferenceevent', component: AdminCreateConferenceEventComponent },
 
   { path: 'adminviewbooking', component: AdminViewBookings },
   //Admin routes
