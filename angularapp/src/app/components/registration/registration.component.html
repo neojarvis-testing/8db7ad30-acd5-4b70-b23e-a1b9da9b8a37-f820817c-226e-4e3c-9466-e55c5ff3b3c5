@@ -96,8 +96,8 @@
             </label>
             <select id="role" name="role" [(ngModel)]="role" #roleInput="ngModel" required>
                 <option value="">Select role</option>
-                <option value="admin">ADMIN</option>
-                <option value="user">User</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
             </select>
             <div class="error" *ngIf="roleInput.invalid && roleInput.touched">
                 <small *ngIf="roleInput.errors?.required">Role is required.</small>

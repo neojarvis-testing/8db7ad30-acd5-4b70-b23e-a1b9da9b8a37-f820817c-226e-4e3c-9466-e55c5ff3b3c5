@@ -24,6 +24,7 @@ export class AuthService {
                 if (response && response.token) {
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('role', response.role);
+                    localStorage.setItem('userId', response.userId);
                     this.userRole.next(response.role);
                     this.userId.next(response.id);
                     this.loggedIn.next(true);
@@ -51,6 +52,7 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
+        localStorage.removeItem('userId');
         this.userRole.next(null);
         this.userId.next(null);
         this.loggedIn.next(false);

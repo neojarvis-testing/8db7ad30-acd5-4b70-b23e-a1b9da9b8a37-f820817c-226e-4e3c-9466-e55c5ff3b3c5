@@ -1,6 +1,6 @@
 ﻿using CommonLibrary.Models;
 using dotnetapp4.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnetapp4.Controller
@@ -17,6 +17,7 @@ namespace dotnetapp4.Controller
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllFeedbacks()
         {
             try
@@ -31,6 +32,7 @@ namespace dotnetapp4.Controller
         }
 
         [HttpGet("user/{userId}")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetFeedbacksByUserId(int userId)
         {
             try
@@ -45,6 +47,7 @@ namespace dotnetapp4.Controller
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> AddFeedback([FromBody] Feedback feedback)
         {
             try
@@ -59,6 +62,7 @@ namespace dotnetapp4.Controller
         }
 
         [HttpDelete("{feedbackId}")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> DeleteFeedback(int feedbackId)
         {
             try

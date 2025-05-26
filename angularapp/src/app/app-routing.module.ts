@@ -8,6 +8,8 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { LoginComponent } from './components/login/login.component';
 import { AdminViewBookings } from './components/admin-view-bookings/admin-view-bookings.component';
 import { HomeComponent } from './components/home/home.component';
+import { adminGuard, userGuard } from './components/authguard/authguard';
+import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { AdminCreateConferenceEventComponent } from './components/admin-create-conference-event/admin-create-conference-event.component';
 
 const routes: Routes = [
@@ -24,9 +26,10 @@ const routes: Routes = [
 
   { path: 'adminviewbooking', component: AdminViewBookings },
   //Admin routes
-  { path: 'adminfeedback', component: AdminviewfeedbackComponent },
+    { path: 'adminfeedback', component: AdminviewfeedbackComponent, canActivate: [adminGuard] },
   //User routes
-  { path: 'userfeedback', component: UserviewfeedbackComponent }, // Assuming user feedback is handled similarly to admin feedback
+  { path: 'userfeedback', component: UserviewfeedbackComponent, canActivate: [userGuard] },
+  { path: 'addfeedback', component: UseraddfeedbackComponent, canActivate: [userGuard] },
 
   // Error routes
   { path: '404', component: NotFoundComponent },
