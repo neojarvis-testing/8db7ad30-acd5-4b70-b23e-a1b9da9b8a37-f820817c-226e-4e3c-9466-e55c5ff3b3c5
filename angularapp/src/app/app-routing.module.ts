@@ -6,7 +6,7 @@ import { AdminviewfeedbackComponent } from './components/adminviewfeedback/admin
 import { RegistrationComponent } from './components/registration/registration.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { LoginComponent } from './components/login/login.component';
-import { AdminViewBookings } from './components/admin-view-bookings/admin-view-bookings.component';
+import { AdminViewBookingsComponent } from './components/admin-view-bookings/admin-view-bookings.component';
 import { HomeComponent } from './components/home/home.component';
 import { adminGuard, userGuard } from './components/authguard/authguard';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
 
   { path: 'createconferenceevent', component: AdminCreateConferenceEventComponent },
 
-  { path: 'adminviewbooking', component: AdminViewBookings },
+  { path: 'adminviewbooking', component: AdminViewBookingsComponent },
   //Admin routes
     { path: 'adminfeedback', component: AdminviewfeedbackComponent, canActivate: [adminGuard] },
   //User routes

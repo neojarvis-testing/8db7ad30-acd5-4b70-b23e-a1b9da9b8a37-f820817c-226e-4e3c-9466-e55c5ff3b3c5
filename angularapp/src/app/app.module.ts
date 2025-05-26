@@ -22,7 +22,7 @@ import { AdminviewfeedbackComponent } from './components/adminviewfeedback/admin
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { LoginComponent } from './components/login/login.component';
-import { AdminViewBookings } from './components/admin-view-bookings/admin-view-bookings.component';
+import { AdminViewBookingsComponent } from './components/admin-view-bookings/admin-view-bookings.component';
 
 
 
@@ -44,7 +44,7 @@ import { AdminViewBookings } from './components/admin-view-bookings/admin-view-b
     AdminviewfeedbackComponent,
     UseraddfeedbackComponent,
     UserviewfeedbackComponent,
-    AdminViewBookings
+    AdminViewBookingsComponent
   ],
   imports: [
     CommonModule,

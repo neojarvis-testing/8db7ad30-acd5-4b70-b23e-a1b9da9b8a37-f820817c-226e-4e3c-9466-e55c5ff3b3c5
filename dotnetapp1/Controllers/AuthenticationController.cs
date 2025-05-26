@@ -22,6 +22,7 @@ namespace dotnetapp1.Controllers
             _authService=authService;
         }
         [HttpPost("login")]
+        
         public async Task<IActionResult>Login([FromBody]LoginModel model )
         {
             if(!ModelState.IsValid)
@@ -61,7 +62,7 @@ namespace dotnetapp1.Controllers
             try
             {
                 var result=await _authService.Registration(model,model.UserRole);
-                return Ok(result);
+                return Ok(new {Success= true,result});
             }
             catch(Exception ex)
             {
