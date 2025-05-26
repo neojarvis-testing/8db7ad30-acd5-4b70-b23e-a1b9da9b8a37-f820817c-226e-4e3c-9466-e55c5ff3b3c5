@@ -5,18 +5,22 @@ import { InternalServerErrorComponent } from './error/internal-server-error/inte
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminViewBookings } from './components/admin-view-bookings/admin-view-bookings.component';
 
 const routes: Routes = [
   // Home or landing route (adjust as needed)
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
   // Main application routes
-  { path: 'login', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
+
+  { path: 'adminviewbooking', component: AdminViewBookings },
   //Admin routes
   { path: 'adminfeedback', component: AdminviewfeedbackComponent },
   //User routes
-  {path: 'userfeedback', component: UserviewfeedbackComponent}, // Assuming user feedback is handled similarly to admin feedback
+  { path: 'userfeedback', component: UserviewfeedbackComponent }, // Assuming user feedback is handled similarly to admin feedback
 
   // Error routes
   { path: '404', component: NotFoundComponent },

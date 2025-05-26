@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { InternalServerErrorComponent } from './error/internal-server-error/internal-server-error.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AdminCreateConferenceEventComponent } from './components/admin-create-conference-event/admin-create-conference-event.component';
@@ -21,6 +21,9 @@ import { CommonModule } from '@angular/common';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminViewBookings } from './components/admin-view-bookings/admin-view-bookings.component';
+
 
 
 @NgModule({
@@ -29,6 +32,7 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
     InternalServerErrorComponent,
     NavbarComponent,
     RegistrationComponent,
+    LoginComponent,
     AdminCreateConferenceEventComponent,
     AdminEditConferenceEventComponent,
     AdminViewConferenceEventComponent,
@@ -39,14 +43,16 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
     UsernavComponent,
     AdminviewfeedbackComponent,
     UseraddfeedbackComponent,
-    UserviewfeedbackComponent
+    UserviewfeedbackComponent,
+    AdminViewBookings
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
