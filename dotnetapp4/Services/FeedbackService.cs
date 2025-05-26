@@ -16,30 +16,32 @@ namespace dotnetapp4.Services
         public async Task<bool> AddFeedback(Feedback feedback)
         {
             await _context.Feedbacks.AddAsync(feedback);
-            int rowsAffected = _context.SaveChanges();
+            int rowsAffected = await _context.SaveChangesAsync();
             return rowsAffected == 1;
         }
 
         public async Task<bool> DeleteFeedback(int feedbackId)
         {
             var feedback = await _context.Feedbacks.FindAsync(feedbackId);
-            if (feedback != null)
-            {
-                _context.Feedbacks.Remove(feedback);
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            return false;
+            if (feedback == null)
+                return false;
+
+            _context.Feedbacks.Remove(feedback);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<IEnumerable<Feedback>> GetAllFeedbacks()
         {
-            return await _context.Feedbacks.ToListAsync();
+            return await _context.Feedbacks.Include(x=>x.User).ToListAsync();
         }
 
         public async Task<IEnumerable<Feedback>> GetFeedbacksByUserId(int userId)
         {
-            return await _context.Feedbacks.Where(x=>x.UserId == userId).ToListAsync();
+            return await _context.Feedbacks
+                .Include(x => x.User)
+                .Where(x => x.UserId == userId)
+                .ToListAsync();
         }
     }
 }

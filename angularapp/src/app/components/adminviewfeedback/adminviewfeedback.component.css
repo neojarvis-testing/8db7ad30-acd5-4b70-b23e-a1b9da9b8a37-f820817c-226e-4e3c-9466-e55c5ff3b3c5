@@ -1,0 +1,79 @@
+.container {
+  max-width: 90%;
+  margin: 40px auto 0 auto;
+  background: #fff;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #4b4b60;
+  margin-bottom: 18px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background: #fff;
+}
+
+th, td {
+  border: 1px solid #e0e0e0;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+th {
+  background: #7da0b6;
+  color: #fff;
+  font-weight: 600;
+}
+
+.profile-btn {
+  background: #7da0b6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.profile-btn:hover {
+  background: #4b4b60;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: #fff;
+  padding: 24px 32px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  min-width: 300px;
+  text-align: center;
+}
+.close-btn {
+  margin-top: 16px;
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}

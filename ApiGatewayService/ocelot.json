@@ -2,8 +2,8 @@
   "Routes": [
     {
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "UpstreamPathTemplate": "/api/ms/register",
-      "DownstreamPathTemplate": "/api/register",
+      "UpstreamPathTemplate": "/api/register",
+      "DownstreamPathTemplate": "/api/authentication/register",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -14,8 +14,8 @@
     },
     {
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "UpstreamPathTemplate": "/api/ms/login",
-      "DownstreamPathTemplate": "/api/login",
+      "UpstreamPathTemplate": "/api/login",
+      "DownstreamPathTemplate": "/api/authentication/login",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -26,8 +26,8 @@
     },
     {
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "UpstreamPathTemplate": "/api/ms/bookings/{everything}",
-      "DownstreamPathTemplate": "/api/bookings/{everything}",
+      "UpstreamPathTemplate": "/api/bookings/{everything}",
+      "DownstreamPathTemplate": "/api/booking/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -38,8 +38,20 @@
     },
     {
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "UpstreamPathTemplate": "/api/ms/conference-events/{everything}",
-      "DownstreamPathTemplate": "/api/conference-events/{everything}",
+      "UpstreamPathTemplate": "/api/booking/{everything}",
+      "DownstreamPathTemplate": "/api/booking/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8078
+        }
+      ]
+    },
+    {
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamPathTemplate": "/api/conference-events/{everything}",
+      "DownstreamPathTemplate": "/api/conferenceevent/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -50,7 +62,19 @@
     },
     {
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "UpstreamPathTemplate": "/api/ms/feedback/{everything}",
+      "UpstreamPathTemplate": "/api/conference-event/{everything}",
+      "DownstreamPathTemplate": "/api/conferenceevent/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8077
+        }
+      ]
+    },
+    {
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamPathTemplate": "/api/feedback/{everything}",
       "DownstreamPathTemplate": "/api/feedback/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

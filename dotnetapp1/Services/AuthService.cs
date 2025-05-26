@@ -8,82 +8,79 @@ using System.Text;
 
 namespace dotnetapp1.Services
 {
-    public class AuthService: IAuthService
+    public class AuthService : IAuthService
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly IConfiguration configuration;        
+        private readonly IConfiguration configuration;
         private readonly ApplicationDbContext _context;
 
-        private const string SecretKey ="abc123xyz";
+        private const string SecretKey = "this_is_a_top_secret_key_for_accessing_our_application_service";
 
-        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,        
-                            IConfiguration configuration, ApplicationDbContext context)
+        public AuthService(
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            IConfiguration configuration,
+            ApplicationDbContext context)
         {
             _context = context;
             this.configuration = configuration;
             this.roleManager = roleManager;
             this.userManager = userManager;
-            
         }
 
-        public async Task<(int,string)> Registration(User model, string role)
+        public async Task<(int, string)> Registration(User model, string role)
         {
-           var result =  _context.Users.FirstOrDefault(x=>x.Email==model.Email);
-
-           if(result != null)
-           {
-            return (1,"User already Exists");
-           }
-
-            //this._context.Users.UserRole=role;
-            var addUser = _context.Users.Add(model);
-            var isAdded = _context.SaveChanges();
-            //check below condition
-            if(isAdded == 0)
+            var existingUser = _context.Users.FirstOrDefault(x => x.Email == model.Email);
+            if (existingUser != null)
             {
-                return (1,"User Created Failed! Please check user details and try again.");
+                return (1, "User already Exists");
+            }
+
+            // Assign role if needed
+            model.UserRole = role;
+
+            _context.Users.Add(model);
+            var isAdded = await _context.SaveChangesAsync();
+            if (isAdded == 0)
+            {
+                return (1, "User Creation Failed! Please check user details and try again.");
             }
             else
             {
-                return (1,"User Created Successfully!");
-            }      
+                return (0, "User Created Successfully!");
+            }
         }
 
-        public async Task<(int,string)> Login(LoginModel model)
+        public async Task<(int, string)> Login(LoginModel model)
         {
-            var result =  _context.Users.FirstOrDefault(x=>x.Email==model.Email);
+            var user = _context.Users.FirstOrDefault(x => x.Email == model.Email);
+            if (user == null)
+            {
+                return (1, "Invalid Email");
+            }
 
-           if(result==null)
-           {
-            return (1,"Invalid Email");
-           }
+            if (user.Password != model.Password)
+            {
+                return (1, "Invalid password");
+            }
 
-           var passwordCheck = _context.Users.Where(x=>x.Password==model.Password);
-           if(passwordCheck==null)
-           {
-            return (1,"Invalid password");
-           }
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.UserRole)
+            };
 
-            IEnumerable<Claim> claims = new List<Claim>
-           {
-             //new Claim(ClaimTypes.Id, model.UserId), //need to check
-             new Claim(ClaimTypes.Name, result.Username),
-             new Claim(ClaimTypes.Email, model.Email),
-             new Claim(ClaimTypes.Role, result.UserRole)
-           };
-
-            //need to call Generate method
             var token = GenerateToken(claims);
 
-          return (1,token);
-           
+            return (0, token);
         }
 
         private string GenerateToken(IEnumerable<Claim> claims)
         {
-            var key =  new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
-            var credentials = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

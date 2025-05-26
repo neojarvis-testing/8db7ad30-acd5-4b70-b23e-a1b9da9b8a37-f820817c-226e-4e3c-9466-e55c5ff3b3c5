@@ -1,45 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   standalone: false,
-  selector: 'app-registration',
+  selector: 'app-register',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
-  registrationForm!: FormGroup;  // The registration form group
+export class RegistrationComponent {
+  username: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  mobile: string = '';
+  role: string = '';
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-    // Initialize the reactive form with all controls and validators
-    this.registrationForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-      mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      role: ['', Validators.required]
-    }, { validators: this.passwordMatchValidator });
+  // Getter to check if passwords match
+  get passwordMismatch(): boolean {
+    return this.password && this.confirmPassword ? this.password !== this.confirmPassword : false;
   }
 
-  // Custom validator to verify that the password and confirmPassword match
-  passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password')?.value;
-    const confirmPassword = form.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { mismatch: true };
-  }
-
-  // Called when the registration form is submitted
-  onSubmit(): void {
-    if (this.registrationForm.valid) {
-      console.log('Form Submitted Successfully:', this.registrationForm.value);
-      // Proceed with additional processing or an API call
-    } else {
-      // Mark all fields as touched to trigger validation messages
-      this.registrationForm.markAllAsTouched();
-      console.log('Registration form is invalid.');
+  onSubmit(form: NgForm): void {
+    if (form.invalid || this.passwordMismatch) {
+      this.errorMessage = 'Please fix the errors above.';
+      return;
     }
+
+    this.errorMessage = '';
+
+    this.authService.register({
+      username: this.username,
+      email: this.email,
+      password: this.password,
+      mobileNumber: this.mobile,
+      userRole: this.role
+    }).subscribe(
+      (response: any) => {
+        if (response.success) {
+          // Navigate to login page upon successful registration
+          this.router.navigate(['/login']);
+        } else {
+          this.errorMessage = response.message || 'Registration failed. Please try again.';
+        }
+      },
+      error => {
+        console.error('Registration error:', error);
+        this.errorMessage = 'An error occurred during registration. Please try again later.';
+      }
+    );
   }
 }
