@@ -69,7 +69,8 @@ namespace dotnetapp1.Services
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.UserRole)
+                new Claim(ClaimTypes.Role, user.UserRole),
+                new Claim("UserId", user.UserId.ToString()) 
             };
 
             var token = GenerateToken(claims);

@@ -15,6 +15,7 @@ namespace dotnetapp4.Services
 
         public async Task<bool> AddFeedback(Feedback feedback)
         {
+            feedback.Date = DateTime.UtcNow; 
             await _context.Feedbacks.AddAsync(feedback);
             int rowsAffected = await _context.SaveChangesAsync();
             return rowsAffected == 1;
