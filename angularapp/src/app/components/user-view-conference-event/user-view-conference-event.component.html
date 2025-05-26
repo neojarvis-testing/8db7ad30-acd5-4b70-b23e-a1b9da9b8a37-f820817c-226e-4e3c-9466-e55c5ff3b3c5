@@ -1,1 +1,39 @@
-<p>user-view-conference-event works!</p>
+<div class="container">
+    <h2>My ConferenceEvents</h2>
+    <div *ngIf="loading" class="center-message">Loading...</div>
+    <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
+    <table *ngIf="!loading && conferenceevents.length > 0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>EventName</th>
+          <th>OrganizerName</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Location</th>
+          <th>StartDateTime</th>
+          <th>EndDateTime</th>
+          <th>Capacity</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ce of conferenceevents; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ ce.EventName }}</td>
+          <td>{{ ce.OrganizerName }}</td>
+          <td>{{ ce.Category }}</td>
+          <td>{{ ce.Description }}</td>
+          <td>{{ ce.Location }}</td>
+          <td>{{ ce.StartDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ ce.EndDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ ce.Capacity }}</td>
+          <td>
+            <button (click)="deleteConferenceEvent(ce.ConferenceEventId!)" class="delete-btn">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!loading && conferenceevents.length === 0" class="center-message">No conferenceevents found.</div>
+  </div>
