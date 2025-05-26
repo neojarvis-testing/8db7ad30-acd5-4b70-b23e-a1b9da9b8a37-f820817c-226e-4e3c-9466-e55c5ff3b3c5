@@ -20,7 +20,7 @@ interface Booking {
   templateUrl: './admin-view-bookings.component.html',
   styleUrls: ['./admin-view-bookings.component.css']
 })
-export class AdminViewBookings {
+export class AdminViewBookingsComponent {
   // Sample booking data
   bookings: Booking[] = [
     {
