@@ -21,49 +21,54 @@ namespace dotnetapp4.Controller
         {
             try
             {
-                return Ok(await _service.GetAllFeedbacks());
+                var feedbacks = await _service.GetAllFeedbacks();
+                return Ok(feedbacks);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        [HttpGet]
-        [Route("user/{userId}")]
+
+        [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetFeedbacksByUserId(int userId)
         {
             try
             {
-                return Ok(await _service.GetAllFeedbacks());
+                var feedbacks = await _service.GetFeedbacksByUserId(userId);
+                return Ok(feedbacks);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
         [HttpPost]
-        public async Task<IActionResult> AddFeedback(Feedback feedback)
+        public async Task<IActionResult> AddFeedback([FromBody] Feedback feedback)
         {
             try
             {
-                return Ok(await _service.AddFeedback(feedback));
+                var result = await _service.AddFeedback(feedback);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        [HttpDelete]
-        [Route("{feedbackId}")]
+
+        [HttpDelete("{feedbackId}")]
         public async Task<IActionResult> DeleteFeedback(int feedbackId)
         {
             try
             {
-                return Ok(await _service.DeleteFeedback(feedbackId));
+                var result = await _service.DeleteFeedback(feedbackId);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }

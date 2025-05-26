@@ -30,7 +30,7 @@ namespace dotnetapp1.Controllers
             try
             {
                 var token=await _authService.Login(model);
-                return Ok(new{Token=token});
+                return Ok(new {Token = token.Item2});
             }
             catch (Exception ex)
             {
