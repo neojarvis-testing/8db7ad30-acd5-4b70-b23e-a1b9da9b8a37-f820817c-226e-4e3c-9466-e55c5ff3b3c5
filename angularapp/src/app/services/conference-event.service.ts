@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ConferenceEvent } from '../models/conference-event.model';
 import { Booking } from '../models/booking.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ConferenceEventService {
-    private baseUrl = 'http://your-workspace-url:8080/api';
+    private baseUrl = environment.apiBaseUrl;
 
     constructor(private http: HttpClient) { }
 

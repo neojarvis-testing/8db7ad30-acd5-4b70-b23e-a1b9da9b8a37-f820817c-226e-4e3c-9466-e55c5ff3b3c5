@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { User } from '../models/user.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    public apiUrl = 'https://8080-dedbbeabbedbaacafdecbcbbfceececffbc.project.examly.io/api/Authentication';
+    public apiUrl = environment.apiBaseUrl;
     private userRole = new BehaviorSubject<string | null>(localStorage.getItem('role'));
     private userId = new BehaviorSubject<number | null>(null);
     private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
