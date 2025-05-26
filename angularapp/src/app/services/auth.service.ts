@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
     providedIn: 'root'
 })
 export class AuthService {
-    public apiUrl = 'http://your-workspace-url:8080/api';
+    public apiUrl = 'https://8080-dedbbeabbedbaacafdecbcbbfceececffbc.project.examly.io/api/Authentication';
     private userRole = new BehaviorSubject<string | null>(localStorage.getItem('role'));
     private userId = new BehaviorSubject<number | null>(null);
     private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
