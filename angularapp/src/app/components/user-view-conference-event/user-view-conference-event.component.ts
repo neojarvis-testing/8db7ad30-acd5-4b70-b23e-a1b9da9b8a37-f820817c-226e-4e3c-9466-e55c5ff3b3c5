@@ -34,7 +34,7 @@ export class UserViewConferenceEventComponent  implements OnInit {
     });
   }
 
-  deleteFeedback(conferenceEventId: number): void {
+  deleteConferenceEvent(conferenceEventId: number): void {
     if (!confirm('Are you sure you want to delete this ConferenceEventId?')) return;
     this.conferenceEventService.deleteConferenceEvent(conferenceEventId).subscribe({
       next: () => {
