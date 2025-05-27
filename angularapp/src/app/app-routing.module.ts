@@ -11,6 +11,8 @@ import { HomeComponent } from './components/home/home.component';
 import { adminGuard, userGuard } from './components/authguard/authguard';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { AdminCreateConferenceEventComponent } from './components/admin-create-conference-event/admin-create-conference-event.component';
+import { AdminEditConferenceEventComponent } from './components/admin-edit-conference-event/admin-edit-conference-event.component';
+import { AdminViewConferenceEventComponent } from './components/admin-view-conference-event/admin-view-conference-event.component';
 
 const routes: Routes = [
   // Home or landing route (adjust as needed)
@@ -23,10 +25,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
 
   { path: 'createconferenceevent', component: AdminCreateConferenceEventComponent },
-
+  { path: 'editconferenceevent', component: AdminEditConferenceEventComponent },
+  { path: 'viewconferenceevent', component: AdminViewConferenceEventComponent },
   { path: 'adminviewbooking', component: AdminViewBookingsComponent },
   //Admin routes
-    { path: 'adminfeedback', component: AdminviewfeedbackComponent, canActivate: [adminGuard] },
+  { path: 'adminfeedback', component: AdminviewfeedbackComponent, canActivate: [adminGuard] },
   //User routes
   { path: 'userfeedback', component: UserviewfeedbackComponent, canActivate: [userGuard] },
   { path: 'addfeedback', component: UseraddfeedbackComponent, canActivate: [userGuard] },

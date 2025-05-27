@@ -1,1 +1,90 @@
-<p>admin-edit-conference-event works!</p>
+<div class="container">
+    <h2>Edit Conference Event</h2>
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+        <!-- Event Name Field -->
+        <div class="form-group">
+            <label for="eventName">Event Name*</label>
+            <input type="text" id="eventName" formControlName="eventName" class="form-control" />
+            <div *ngIf="submitted && f.eventName.errors" class="error">
+                <span *ngIf="f.eventName.errors.required">Event Name is required.</span>
+            </div>
+        </div>
+
+        <!-- Organizer Name Field -->
+        <div class="form-group">
+            <label for="organizerName">Organizer Name*</label>
+            <input type="text" id="organizerName" formControlName="organizerName" class="form-control" />
+            <div *ngIf="submitted && f.organizerName.errors" class="error">
+                <span *ngIf="f.organizerName.errors.required">Organizer Name is required.</span>
+            </div>
+        </div>
+
+        <!-- Category Field -->
+        <div class="form-group">
+            <label for="category">Category*</label>
+            <input type="text" id="category" formControlName="category" class="form-control" />
+            <div *ngIf="submitted && f.category.errors" class="error">
+                <span *ngIf="f.category.errors.required">Category is required.</span>
+            </div>
+        </div>
+
+        <!-- Description Field -->
+        <div class="form-group">
+            <label for="description">Description*</label>
+            <textarea id="description" formControlName="description" class="form-control" rows="4"></textarea>
+            <div *ngIf="submitted && f.description.errors" class="error">
+                <span *ngIf="f.description.errors.required">Description is required.</span>
+            </div>
+        </div>
+
+        <!-- Location Field -->
+        <div class="form-group">
+            <label for="location">Location*</label>
+            <input type="text" id="location" formControlName="location" class="form-control" />
+            <div *ngIf="submitted && f.location.errors" class="error">
+                <span *ngIf="f.location.errors.required">Location is required.</span>
+            </div>
+        </div>
+
+        <!-- Start Date & Time Field -->
+        <div class="form-group">
+            <label for="startDateTime">Start Date & Time*</label>
+            <input type="datetime-local" id="startDateTime" formControlName="startDateTime" class="form-control" />
+            <div *ngIf="submitted && f.startDateTime.errors" class="error">
+                <span *ngIf="f.startDateTime.errors.required">Start Date & Time is required.</span>
+            </div>
+        </div>
+
+        <!-- End Date & Time Field -->
+        <div class="form-group">
+            <label for="endDateTime">End Date & Time*</label>
+            <input type="datetime-local" id="endDateTime" formControlName="endDateTime" class="form-control" />
+            <div *ngIf="submitted && f.endDateTime.errors" class="error">
+                <span *ngIf="f.endDateTime.errors.required">End Date & Time is required.</span>
+            </div>
+        </div>
+
+        <!-- Capacity Field -->
+        <div class="form-group">
+            <label for="capacity">Capacity*</label>
+            <input type="number" id="capacity" formControlName="capacity" class="form-control" />
+            <div *ngIf="submitted && f.capacity.errors" class="error">
+                <span *ngIf="f.capacity.errors.required">Capacity is required.</span>
+                <span *ngIf="f.capacity.errors.min">Capacity must be at least 1.</span>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Update Event</button>
+    </form>
+</div>
+
+<!-- Success Popup -->
+<div class="popup" *ngIf="showSuccessPopup">
+    <div class="popup-content">
+        <!-- (Optional) Uncomment the button below if you want a red circular close button in the popup header -->
+        <!-- <button class="close-button" (click)="closePopup()">&times;</button> -->
+        <p>Conference Event updated successfully!</p>
+        <button class="btn-ok" (click)="closePopup()">Ok</button>
+    </div>
+</div>
