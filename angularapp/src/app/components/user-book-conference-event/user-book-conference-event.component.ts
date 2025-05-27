@@ -30,6 +30,10 @@ export class UserBookConferenceEventComponent implements OnInit {
     this.loading = true;
     this.errorMessage = '';
     this.conferenceEventList$= this.conferenceEventService.getAllConferenceEvents();
+    error: () => {
+      this.errorMessage = 'Failed to load conferenceEvents.';
+      this.loading = false;
+    }
   }
   updatePsgeItems(){
     const startIndex=(this.currentPage-1)*this.pageSize;
