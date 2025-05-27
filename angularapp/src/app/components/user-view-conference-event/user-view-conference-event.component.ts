@@ -1,7 +1,10 @@
 import { Component , OnInit } from '@angular/core';
 import { ConferenceEventService } from '../../services/conference-event.service';
 import { ConferenceEvent } from '../../models/conference-event.model';
+import { UserBookConferenceEventComponent } from '../../components/user-book-conference-event/user-book-conference-event.component';
 import { Observable } from 'rxjs';
+import {Matdialog} from '@angular/material/dialogue';
+import { DialogFormComponent } from '../dialogue-form/dialogue-form.component';
 //import {UserAppliedConferenceEventComponent} from '../../components/user-applied-conference-event';
 @Component({
   selector: 'app-user-view-conference-event',
@@ -19,7 +22,7 @@ export class UserViewConferenceEventComponent  implements OnInit {
   totalpages=1;
   pagedItems:any[]=[];
   constructor(private conferenceEventService: ConferenceEventService) {}
-
+//constructor(private dialogue:Matdialog){}
   ngOnInit(): void {
     this.totalpages=Math.ceil(this.conferenceevents.length/this.pageSize);
     this.updatePsgeItems();
@@ -75,9 +78,13 @@ export class UserViewConferenceEventComponent  implements OnInit {
       }
     });
   }
-openRegisterForm(data:any)
+openDialog():void
 {
-  
+  this.dialogue.open(DialogFormComponent,
+    {
+      width:'400px',
+      disableClose:true,
+    });
 }
   deleteConferenceEvent(conferenceEventId: number): void {
     if (!confirm('Are you sure you want to delete this ConferenceEventId?')) return;
