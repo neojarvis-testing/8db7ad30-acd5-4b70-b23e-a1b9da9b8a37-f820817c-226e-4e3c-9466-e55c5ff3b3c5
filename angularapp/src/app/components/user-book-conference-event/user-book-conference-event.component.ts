@@ -2,6 +2,7 @@ import { Component , OnInit } from '@angular/core';
 import { ConferenceEventService } from '../../services/conference-event.service';
 import { ConferenceEvent } from '../../models/conference-event.model';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-user-book-conference-event',
   templateUrl: './user-book-conference-event.component.html',
@@ -71,11 +72,15 @@ export class UserBookConferenceEventComponent implements OnInit {
       }
     });
   }
-   sortbyAscending(){
-    
+  sortbyAscending(){
+    const sortedConferenceEvents$: Observable<any[]>=this.conferenceEventList$.pipe(
+      map(events => [...events].sort((a,b) => a.ConferenceEventId.localeCompare(b.ConferenceEventId)))
+    );
   }
   sortbyDeascending(){
-    
+    const sortedConferenceEventsDescending$: Observable<any[]>=this.conferenceEventList$.pipe(
+      map(events => [...events].sort((a,b) => b.ConferenceEventId.localeCompare(a.ConferenceEventId)))
+    );
   }
   openRegisterForm(data:any)
 {
