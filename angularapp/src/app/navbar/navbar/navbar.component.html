@@ -14,7 +14,7 @@
       <ng-container *ngIf="isLoggedIn; else loggedOut">
         <!-- Admin Links -->
         <ng-container *ngIf="userRole === 'Admin'">
-          <a class="btn-admin" routerLink="/home" (click)="closeMenu()">Admin/Admin</a>
+          <a class="btn-admin" routerLink="/home" (click)="closeMenu()">Admin/{{userName}}</a>
           <a routerLink="/home" (click)="closeMenu()">Home</a>
           <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/requested-event-bookings" (click)="closeMenu()">Requested Event Bookings</a>
@@ -22,7 +22,7 @@
         </ng-container>
         <!-- User Links -->
         <ng-container *ngIf="userRole === 'User'">
-          <a class="btn-admin" routerLink="/home" (click)="closeMenu()">User/User</a>
+          <a class="btn-admin" routerLink="/home" (click)="closeMenu()">User/{{userName}}</a>
           <a routerLink="/home" (click)="closeMenu()">Home</a>
           <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/requested-event-bookings" (click)="closeMenu()">My Bookings</a>

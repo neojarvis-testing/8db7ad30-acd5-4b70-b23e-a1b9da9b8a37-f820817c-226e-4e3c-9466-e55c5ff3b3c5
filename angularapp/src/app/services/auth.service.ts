@@ -12,7 +12,7 @@ export class AuthService {
     private userRole = new BehaviorSubject<string | null>(localStorage.getItem('role'));
     private userId = new BehaviorSubject<number | null>(null);
     private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
-
+    
     constructor(private http: HttpClient) { }
 
     register(user: User): Observable<any> {
@@ -26,6 +26,7 @@ export class AuthService {
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('role', response.role);
                     localStorage.setItem('userId', response.userId);
+                    localStorage.setItem('userName', response.userName);
                     this.userRole.next(response.role);
                     this.userId.next(response.id);
                     this.loggedIn.next(true);
@@ -54,6 +55,7 @@ export class AuthService {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
         localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
         this.userRole.next(null);
         this.userId.next(null);
         this.loggedIn.next(false);
