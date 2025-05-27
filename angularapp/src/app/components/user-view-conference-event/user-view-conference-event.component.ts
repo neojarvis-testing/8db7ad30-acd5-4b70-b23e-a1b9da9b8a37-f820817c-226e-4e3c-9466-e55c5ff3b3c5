@@ -1,6 +1,7 @@
 import { Component , OnInit } from '@angular/core';
 import { ConferenceEventService } from '../../services/conference-event.service';
 import { ConferenceEvent } from '../../models/conference-event.model';
+//import {UserAppliedConferenceEventComponent} from '../../components/user-applied-conference-event';
 @Component({
   selector: 'app-user-view-conference-event',
   templateUrl: './user-view-conference-event.component.html',
@@ -33,7 +34,10 @@ export class UserViewConferenceEventComponent  implements OnInit {
       }
     });
   }
-
+openRegisterForm(data:any)
+{
+  
+}
   deleteConferenceEvent(conferenceEventId: number): void {
     if (!confirm('Are you sure you want to delete this ConferenceEventId?')) return;
     this.conferenceEventService.deleteConferenceEvent(conferenceEventId).subscribe({

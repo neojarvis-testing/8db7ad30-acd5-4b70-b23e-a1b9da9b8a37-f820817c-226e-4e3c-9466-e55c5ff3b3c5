@@ -1,5 +1,8 @@
 <div class="container">
     <h1>Available ConferenceEvents</h1>
+    <div>
+      <input type="Search By Event Name Organise Location" onkeyup="getConferenceEvents()">
+    </div>
     <div *ngIf="loading" class="center-message">Loading...</div>
     <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
     <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
@@ -30,7 +33,7 @@
           <td>{{ ce.EndDateTime | date:'dd/MM/yyyy' }}</td>
           <td>{{ ce.Capacity }}</td>
           <td>
-            <button (click)="deleteConferenceEvent(ce.ConferenceEventId!)" class="register-btn">Register</button>
+            <button (click)="openRegisterForm()" class="register-btn">Register</button>
           </td>
         </tr>
       </tbody>
