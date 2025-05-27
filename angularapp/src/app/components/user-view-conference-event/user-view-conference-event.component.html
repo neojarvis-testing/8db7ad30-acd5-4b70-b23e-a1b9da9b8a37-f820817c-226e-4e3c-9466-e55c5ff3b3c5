@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ce of conferenceevents; let i = index">
+        <tr *ngFor="let ce of conferenceEventList$; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ ce.EventName }}</td>
           <td>{{ ce.OrganizerName }}</td>
