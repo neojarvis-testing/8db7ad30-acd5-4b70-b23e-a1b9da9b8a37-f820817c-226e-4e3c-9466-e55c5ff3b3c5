@@ -37,8 +37,9 @@
           </td>
         </tr>
         <tr>
-          <td><button (click)="previousPage()" class="previous-btn">Previous</button></td>
-          <td><button (click)="nextPage()" class="next-btn">Next </button></td>
+          <td><button (click)="previousPage()" class="previous-btn">Previous Page</button></td>
+          <td>{{ this.currentPage }}</td> <td>Page out Of</td> <td>{{ this.totalpages }}</td>
+          <td><button (click)="nextPage()" class="next-btn">Next Page</button></td>
         </tr>
       </tbody>
     </table>
