@@ -23,7 +23,6 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminViewBookingsComponent } from './components/admin-view-bookings/admin-view-bookings.component';
-import { ConfirmModalComponent } from './shared/confirm-modal/confirm-modal.component';
 
 
 
@@ -45,8 +44,7 @@ import { ConfirmModalComponent } from './shared/confirm-modal/confirm-modal.comp
     AdminviewfeedbackComponent,
     UseraddfeedbackComponent,
     UserviewfeedbackComponent,
-    AdminViewBookingsComponent,
-    ConfirmModalComponent
+    AdminViewBookingsComponent
   ],
   imports: [
     CommonModule,
