@@ -3,8 +3,8 @@ import { ConferenceEventService } from '../../services/conference-event.service'
 import { ConferenceEvent } from '../../models/conference-event.model';
 import { UserBookConferenceEventComponent } from '../../components/user-book-conference-event/user-book-conference-event.component';
 import { Observable } from 'rxjs';
-import {Matdialog} from '@angular/material/dialogue';
-import { DialogFormComponent } from '../dialogue-form/dialogue-form.component';
+// import {Matdialog} from '@angular/material/dialogue';
+// import { DialogFormComponent } from '../dialogue-form/dialogue-form.component';
 //import {UserAppliedConferenceEventComponent} from '../../components/user-applied-conference-event';
 @Component({
   selector: 'app-user-view-conference-event',
@@ -80,11 +80,11 @@ export class UserViewConferenceEventComponent  implements OnInit {
   }
 openDialog():void
 {
-  this.dialogue.open(DialogFormComponent,
-    {
-      width:'400px',
-      disableClose:true,
-    });
+  // this.dialogue.open(DialogFormComponent,
+  //   {
+  //     width:'400px',
+  //     disableClose:true,
+  //   });
 }
   deleteConferenceEvent(conferenceEventId: number): void {
     if (!confirm('Are you sure you want to delete this ConferenceEventId?')) return;

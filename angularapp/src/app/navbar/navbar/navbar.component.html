@@ -24,7 +24,9 @@
         <ng-container *ngIf="userRole === 'User'">
           <a class="admin-btn" routerLink="/home" (click)="closeMenu()">User/User</a>
           <a routerLink="/home" (click)="closeMenu()">Home</a>
-          <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
+          <a routerLink="/userappliedconferenceevent" (click)="closeMenu()">Conference Events</a>
+          <a routerLink="/userbookconferenceevent" (click)="closeMenu()">Conference Events</a>
+          <a routerLink="/userviewconferenceevent" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/requested-event-bookings" (click)="closeMenu()">My Bookings</a>
           <a routerLink="/userfeedback" (click)="closeMenu()">Feedbacks</a>
         </ng-container>
