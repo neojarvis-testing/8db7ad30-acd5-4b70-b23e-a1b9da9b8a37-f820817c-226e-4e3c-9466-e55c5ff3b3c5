@@ -58,7 +58,7 @@ export class AdminEditConferenceEventComponent implements OnInit {
       },
       error: () => {
         alert('Failed to load event details.');
-        this.router.navigate(['/viewconferenceevent']);
+        this.router.navigate(['/adminviewconferenceevent']);
       }
     });
   }
@@ -92,10 +92,10 @@ export class AdminEditConferenceEventComponent implements OnInit {
 
   closePopup(): void {
     this.showSuccessPopup = false;
-    this.router.navigate(['/viewconferenceevent']);
+    this.router.navigate(['/adminviewconferenceevent']);
   }
 
   goBack(): void {
-    this.router.navigate(['/viewconferenceevent']);
+    this.router.navigate(['/adminviewconferenceevent']);
   }
 }

@@ -16,7 +16,8 @@ import { UserAppliedConferenceEventComponent } from './components/user-applied-c
 import { UserBookConferenceEventComponent } from './components/user-book-conference-event/user-book-conference-event.component';
 import { UserViewConferenceEventComponent } from './components/user-view-conference-event/user-view-conference-event.component';
 import { UsernavComponent } from './components/usernav/usernav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
 import { CommonModule } from '@angular/common';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
@@ -54,7 +55,9 @@ import { AdminViewBookingsComponent } from './components/admin-view-bookings/adm
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

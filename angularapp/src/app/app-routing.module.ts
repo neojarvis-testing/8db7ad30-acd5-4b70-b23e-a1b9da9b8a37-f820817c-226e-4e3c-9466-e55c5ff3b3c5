@@ -27,9 +27,9 @@ const routes: Routes = [
 
   { path: 'adminviewbooking', component: AdminViewBookingsComponent },
   //Admin routes
-  { path: 'createconferenceevent', component: AdminCreateConferenceEventComponent, canActivate: [adminGuard] },
-  { path: 'viewconferenceevent', component: AdminViewConferenceEventComponent, canActivate: [adminGuard] },
-  { path: 'edit-conference-event/:id', component: AdminEditConferenceEventComponent, canActivate: [adminGuard] },
+  { path: 'admincreateconferenceevent', component: AdminCreateConferenceEventComponent, canActivate: [adminGuard] },
+  { path: 'adminviewconferenceevent', component: AdminViewConferenceEventComponent, canActivate: [adminGuard] },
+  { path: 'admineditconferenceevent/:id', component: AdminEditConferenceEventComponent, canActivate: [adminGuard] },
     { path: 'adminfeedback', component: AdminviewfeedbackComponent, canActivate: [adminGuard] },
   //User routes
   { path: 'userfeedback', component: UserviewfeedbackComponent, canActivate: [userGuard] },

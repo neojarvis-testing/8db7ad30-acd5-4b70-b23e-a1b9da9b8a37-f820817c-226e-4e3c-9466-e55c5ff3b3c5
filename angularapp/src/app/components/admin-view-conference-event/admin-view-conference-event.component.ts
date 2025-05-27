@@ -61,7 +61,7 @@ export class AdminViewConferenceEventComponent implements OnInit {
   }
 
   editEvent(eventId: number): void {
-    this.router.navigate(['/edit-conference-event', eventId]);
+    this.router.navigate(['/admineditconferenceevent', eventId]);
   }
 
   deleteEvent(eventId: number): void {
