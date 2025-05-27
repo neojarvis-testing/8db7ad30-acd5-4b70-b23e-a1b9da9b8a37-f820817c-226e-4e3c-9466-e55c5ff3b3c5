@@ -55,6 +55,10 @@ export class UserViewConferenceEventComponent  implements OnInit {
     this.loading = true;
     this.errorMessage = '';
     this.conferenceEventList$= this.conferenceEventService.getAllConferenceEvents();
+    error: () => {
+      this.errorMessage = 'Failed to load conferenceEvents.';
+      this.loading = false;
+    }
   }
   getConferenceEvents(): void {
     this.loading = true;
