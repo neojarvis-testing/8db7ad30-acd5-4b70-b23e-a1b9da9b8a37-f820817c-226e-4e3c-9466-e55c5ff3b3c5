@@ -13,6 +13,9 @@ export class UserviewfeedbackComponent implements OnInit {
   errorMessage = '';
   successMessage = '';
 
+  showDeleteModal = false;
+  feedbackIdToDelete: number | null = null;
+
   constructor(private feedbackService: FeedbackService) {}
 
   ngOnInit(): void {
@@ -35,15 +38,27 @@ export class UserviewfeedbackComponent implements OnInit {
     });
   }
 
-  deleteFeedback(feedbackId: number): void {
-    if (!confirm('Are you sure you want to delete this feedback?')) return;
-    this.feedbackService.deleteFeedback(feedbackId).subscribe({
+  openDeleteModal(feedbackId: number): void {
+    this.feedbackIdToDelete = feedbackId;
+    this.showDeleteModal = true;
+  }
+
+  closeDeleteModal(): void {
+    this.showDeleteModal = false;
+    this.feedbackIdToDelete = null;
+  }
+
+  confirmDelete(): void {
+    if (this.feedbackIdToDelete == null) return;
+    this.feedbackService.deleteFeedback(this.feedbackIdToDelete).subscribe({
       next: () => {
         this.successMessage = 'Feedback deleted successfully!';
         this.getFeedbacks();
+        this.closeDeleteModal();
       },
       error: () => {
         this.errorMessage = 'Failed to delete feedback.';
+        this.closeDeleteModal();
       }
     });
   }
