@@ -1,38 +1,41 @@
 <div class="feedback-container">
-    <h2 class="feedback-title">My Feedback</h2>
-    <hr class="feedback-divider" />
-    <table class="feedback-table">
-        <thead>
-            <tr>
-                <th>S.No</th>
-                <th>Feedback</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngIf="!loading && feedbacks.length === 0">
-                <td colspan="3" class="no-records">Oops! No records found</td>
-            </tr>
-            <tr *ngFor="let fb of feedbacks; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ fb.feedbackText }}</td>
-                <td>
-                    <button (click)="openDeleteModal(fb.feedbackId!)" class="delete-btn">Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div *ngIf="loading" class="center-message">Loading...</div>
-    <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
-    <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
+  <h2 class="feedback-title">My Feedback</h2>
+  <hr class="feedback-divider" />
+  <table class="feedback-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Feedback</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="!loading && feedbacks.length === 0">
+        <td colspan="3" class="no-records">Oops! No records found</td>
+      </tr>
+      <tr *ngFor="let fb of feedbacks; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ fb.feedbackText }}</td>
+        <td>
+          <button (click)="openDeleteModal(fb.feedbackId!)" class="delete-btn">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="loading" class="center-message">Loading...</div>
+  <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
 
-    <!-- Delete Confirmation Modal -->
-    <app-confirm-modal 
-        [show]="showDeleteModal" 
-        message="Are you sure you want to delete?" 
-        confirmText="Yes, Delete"
-        cancelText="Cancel" 
-        (confirm)="confirmDelete()" 
-        (cancel)="closeDeleteModal()">
-    </app-confirm-modal>
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-backdrop" *ngIf="showDeleteModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <p>Are you sure you want to delete?</p>
+        <div class="modal-actions">
+          <button class="modal-delete-btn" (click)="confirmDelete()">Yes, Delete</button>
+          <button class="modal-cancel-btn" (click)="closeDeleteModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
