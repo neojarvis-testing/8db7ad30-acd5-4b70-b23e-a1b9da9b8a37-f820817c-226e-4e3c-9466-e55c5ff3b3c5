@@ -78,7 +78,9 @@ export class UserAppliedConferenceEventComponent implements OnInit {
     );
   }
   sortbyDeascending(){
-    
+    const sortedConferenceEventsDescending$: Observable<any[]>=this.conferenceEventList$.pipe(
+      map(events => [...events].sort((a,b) => b.ConferenceEventId.localeCompare(a.ConferenceEventId)))
+    );
   }
   openRegisterForm(data:any)
 {
