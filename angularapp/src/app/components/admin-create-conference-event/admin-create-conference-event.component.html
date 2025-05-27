@@ -49,7 +49,8 @@
         <!-- Start Date & Time Field -->
         <div class="form-group">
             <label for="startDateTime">Start Date & Time*</label>
-            <input type="datetime-local" id="startDateTime" formControlName="startDateTime" class="form-control" />
+            <input type="datetime-local" id="startDateTime" formControlName="startDateTime" class="form-control"
+                [max]="f.endDateTime.value" (change)="onStartDateChange()" />
             <div *ngIf="submitted && f.startDateTime.errors" class="error">
                 <span *ngIf="f.startDateTime.errors.required">Start Date & Time is required.</span>
             </div>
@@ -58,9 +59,11 @@
         <!-- End Date & Time Field -->
         <div class="form-group">
             <label for="endDateTime">End Date & Time*</label>
-            <input type="datetime-local" id="endDateTime" formControlName="endDateTime" class="form-control" />
-            <div *ngIf="submitted && f.endDateTime.errors" class="error">
-                <span *ngIf="f.endDateTime.errors.required">End Date & Time is required.</span>
+            <input type="datetime-local" id="endDateTime" formControlName="endDateTime" class="form-control"
+                [min]="f.startDateTime.value" (change)="onEndDateChange()" />
+            <div *ngIf="submitted && (f.endDateTime.errors || dateError)" class="error">
+                <span *ngIf="f.endDateTime.errors?.required">End Date & Time is required.</span>
+                <span *ngIf="dateError">End Date & Time must be after Start Date & Time.</span>
             </div>
         </div>
 

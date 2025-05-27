@@ -13,6 +13,7 @@ export class AdminCreateConferenceEventComponent implements OnInit {
   eventForm: FormGroup;
   submitted = false;
   showSuccessPopup = false;
+  dateError = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,10 +39,31 @@ export class AdminCreateConferenceEventComponent implements OnInit {
     return this.eventForm.controls;
   }
 
+  onStartDateChange(): void {
+    // If endDateTime is before startDateTime, reset endDateTime
+    const start = this.f.startDateTime.value;
+    const end = this.f.endDateTime.value;
+    if (start && end && start > end) {
+      this.f.endDateTime.setValue('');
+    }
+    this.dateError = false;
+  }
+
+  onEndDateChange(): void {
+    const start = this.f.startDateTime.value;
+    const end = this.f.endDateTime.value;
+    this.dateError = !!(start && end && end < start);
+  }
+
   onSubmit(): void {
     this.submitted = true;
 
-    if (this.eventForm.invalid) {
+    // Validate date order
+    const start = this.f.startDateTime.value;
+    const end = this.f.endDateTime.value;
+    this.dateError = !!(start && end && end < start);
+
+    if (this.eventForm.invalid || this.dateError) {
       return;
     }
 
