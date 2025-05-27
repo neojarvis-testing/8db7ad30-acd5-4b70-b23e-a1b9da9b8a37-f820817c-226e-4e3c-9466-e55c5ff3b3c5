@@ -5,7 +5,6 @@ import { ConferenceEventService } from '../../services/conference-event.service'
 import { ConferenceEvent } from '../../models/conference-event.model';
 
 @Component({
-  standalone: false,
   selector: 'app-admin-edit-conference-event',
   templateUrl: './admin-edit-conference-event.component.html',
   styleUrls: ['./admin-edit-conference-event.component.css']

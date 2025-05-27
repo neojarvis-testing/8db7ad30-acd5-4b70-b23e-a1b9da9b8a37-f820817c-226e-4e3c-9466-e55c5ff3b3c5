@@ -15,7 +15,6 @@ interface Booking {
 }
 
 @Component({
-  standalone: false,
   selector: 'app-booking',
   templateUrl: './admin-view-bookings.component.html',
   styleUrls: ['./admin-view-bookings.component.css']
