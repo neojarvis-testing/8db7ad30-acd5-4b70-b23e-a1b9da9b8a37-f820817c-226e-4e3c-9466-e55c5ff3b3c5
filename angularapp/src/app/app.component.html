@@ -1,2 +1,6 @@
 <app-navbar></app-navbar>
 <router-outlet></router-outlet>
+<div *ngIf="loaderService.loading$ | async" class="global-loader-overlay">
+  <div class="global-loader"></div>
+</div>
+<router-outlet></router-outlet>
