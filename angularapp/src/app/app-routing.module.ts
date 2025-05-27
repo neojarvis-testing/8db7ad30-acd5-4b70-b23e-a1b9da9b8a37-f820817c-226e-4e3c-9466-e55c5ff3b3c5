@@ -10,6 +10,8 @@ import { AdminViewBookingsComponent } from './components/admin-view-bookings/adm
 import { HomeComponent } from './components/home/home.component';
 import { adminGuard, userGuard } from './components/authguard/authguard';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
+import { AdminViewConferenceEventComponent } from './components/admin-view-conference-event/admin-view-conference-event.component';
+import { AdminEditConferenceEventComponent } from './components/admin-edit-conference-event/admin-edit-conference-event.component';
 import { AdminCreateConferenceEventComponent } from './components/admin-create-conference-event/admin-create-conference-event.component';
 
 const routes: Routes = [
@@ -22,10 +24,12 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent },
 
-  { path: 'createconferenceevent', component: AdminCreateConferenceEventComponent },
 
   { path: 'adminviewbooking', component: AdminViewBookingsComponent },
   //Admin routes
+  { path: 'createconferenceevent', component: AdminCreateConferenceEventComponent, canActivate: [adminGuard] },
+  { path: 'viewconferenceevent', component: AdminViewConferenceEventComponent, canActivate: [adminGuard] },
+  { path: 'edit-conference-event/:id', component: AdminEditConferenceEventComponent, canActivate: [adminGuard] },
     { path: 'adminfeedback', component: AdminviewfeedbackComponent, canActivate: [adminGuard] },
   //User routes
   { path: 'userfeedback', component: UserviewfeedbackComponent, canActivate: [userGuard] },

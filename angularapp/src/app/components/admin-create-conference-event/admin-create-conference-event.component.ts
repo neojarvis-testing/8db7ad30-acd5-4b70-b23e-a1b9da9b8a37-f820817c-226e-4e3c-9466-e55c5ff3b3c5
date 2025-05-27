@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ConferenceEventService } from '../../services/conference-event.service';
+import { ConferenceEvent } from '../../models/conference-event.model';
 
 @Component({
   selector: 'app-admin-create-conference-event',
@@ -12,10 +14,13 @@ export class AdminCreateConferenceEventComponent implements OnInit {
   submitted = false;
   showSuccessPopup = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private conferenceEventService: ConferenceEventService
+  ) { }
 
   ngOnInit(): void {
-    // Build the event form with all controls marked as required.
     this.eventForm = this.formBuilder.group({
       eventName: ['', Validators.required],
       organizerName: ['', Validators.required],
@@ -36,22 +41,33 @@ export class AdminCreateConferenceEventComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
 
-    // If the form is invalid, stop here.
     if (this.eventForm.invalid) {
       return;
     }
 
-    // Process the valid form data (e.g., send data to the backend).
-    console.log(this.eventForm.value);
+    const payload: ConferenceEvent = {
+      eventName: this.f.eventName.value,
+      organizerName: this.f.organizerName.value,
+      category: this.f.category.value,
+      description: this.f.description.value,
+      location: this.f.location.value,
+      startDateTime: this.f.startDateTime.value,
+      endDateTime: this.f.endDateTime.value,
+      capacity: this.f.capacity.value
+    };
 
-    // Show the popup on successful submission.
-    this.showSuccessPopup = true;
+    this.conferenceEventService.addConferenceEvent(payload).subscribe({
+      next: () => {
+        this.showSuccessPopup = true;
+      },
+      error: () => {
+        alert('Failed to create event. Please try again.');
+      }
+    });
   }
 
   closePopup(): void {
     this.showSuccessPopup = false;
-    // Optionally, reset the form or perform additional actions.
-    //need to navigate to user-view-bookings component
-    this.router.navigate(['/adminviewbooking']);
+    this.router.navigate(['/viewconferenceevent']);
   }
 }

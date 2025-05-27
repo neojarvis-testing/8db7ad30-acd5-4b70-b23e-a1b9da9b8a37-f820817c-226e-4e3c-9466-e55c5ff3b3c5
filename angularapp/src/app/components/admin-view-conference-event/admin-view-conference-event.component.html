@@ -1,1 +1,67 @@
-<p>admin-view-conference-event works!</p>
+<div class="event-listings-container">
+  <h2 class="event-listings-title">Conference Event Listings</h2>
+  <hr class="event-divider" />
+
+  <div class="event-listings-search-centered">
+    <input
+      type="text"
+      placeholder="🔍 Search by Event Name, Organizer, or Location"
+      [(ngModel)]="searchTerm"
+      (input)="searchEvents()"
+      class="form-control event-search-input"
+    />
+  </div>
+
+  <table class="event-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Event Name</th>
+        <th>Organizer</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Capacity</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="paginatedEvents.length === 0">
+        <td colspan="10" class="no-records">No conference events found.</td>
+      </tr>
+      <tr *ngFor="let event of paginatedEvents; let i = index">
+        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+        <td>{{ event.eventName }}</td>
+        <td>{{ event.organizerName }}</td>
+        <td>{{ event.category }}</td>
+        <td>{{ event.description }}</td>
+        <td>{{ event.location }}</td>
+        <td>{{ event.startDateTime | date:'M/d/yy, h:mm a' }}</td>
+        <td>{{ event.endDateTime | date:'M/d/yy, h:mm a' }}</td>
+        <td>{{ event.capacity }}</td>
+        <td>
+          <button class="event-edit-btn" (click)="editEvent(event.conferenceEventId)">Edit</button>
+          <button class="event-delete-btn" (click)="deleteEvent(event.conferenceEventId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="event-pagination">
+    <button class="event-pagination-btn"
+            [disabled]="currentPage === 1"
+            (click)="goToPage(currentPage - 1)">
+      Prev
+    </button>
+    <span class="event-pagination-info">
+      Page {{ currentPage }} of {{ totalPages }}
+    </span>
+    <button class="event-pagination-btn"
+            [disabled]="currentPage === totalPages"
+            (click)="goToPage(currentPage + 1)">
+      Next
+    </button>
+  </div>
+</div>
