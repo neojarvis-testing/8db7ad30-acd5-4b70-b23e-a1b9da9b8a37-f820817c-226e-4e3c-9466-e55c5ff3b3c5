@@ -32,15 +32,16 @@ export class LoginComponent {
       (response: any) => {
         // Check the response for success and user role. Adjust this logic per your backend API.
         if (response && response.success) {
-          const userRole = response.role;
-          if (userRole === 'admin') {
-            this.router.navigate(['/admin-dashboard']);
-          } else if (userRole === 'user') {
-            this.router.navigate(['/user-dashboard']);
-          } else {
-            // Default navigation if role is not specified
-            this.router.navigate(['/dashboard']);
-          }
+          this.router.navigate(['/home']);
+          // const userRole = response.role;
+          // if (userRole === 'admin') {
+          //   this.router.navigate(['/admin-dashboard']);
+          // } else if (userRole === 'user') {
+          //   this.router.navigate(['/user-dashboard']);
+          // } else {
+          //   // Default navigation if role is not specified
+          //   this.router.navigate(['/dashboard']);
+          // }
         } else {
           this.errorMessage = 'Invalid email or password';
         }
