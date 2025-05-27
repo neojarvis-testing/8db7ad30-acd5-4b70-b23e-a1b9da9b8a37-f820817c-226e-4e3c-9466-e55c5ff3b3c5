@@ -14,7 +14,7 @@
       <ng-container *ngIf="isLoggedIn; else loggedOut">
         <!-- Admin Links -->
         <ng-container *ngIf="userRole === 'Admin'">
-          <a class="admin-btn" routerLink="/home" (click)="closeMenu()">Admin/Admin</a>
+          <a class="btn-admin" routerLink="/home" (click)="closeMenu()">Admin/{{userName}}</a>
           <a routerLink="/home" (click)="closeMenu()">Home</a>
           <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/requested-event-bookings" (click)="closeMenu()">Requested Event Bookings</a>
@@ -22,15 +22,21 @@
         </ng-container>
         <!-- User Links -->
         <ng-container *ngIf="userRole === 'User'">
-          <a class="admin-btn" routerLink="/home" (click)="closeMenu()">User/User</a>
+          <a class="btn-admin" routerLink="/home" (click)="closeMenu()">User/{{userName}}</a>
           <a routerLink="/home" (click)="closeMenu()">Home</a>
           <a routerLink="/userappliedconferenceevent" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/userbookconferenceevent" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/userviewconferenceevent" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/requested-event-bookings" (click)="closeMenu()">My Bookings</a>
-          <a routerLink="/userfeedback" (click)="closeMenu()">Feedbacks</a>
+          <div class="dropdown" (mouseenter)="dropdownOpen = true" (mouseleave)="dropdownOpen = false">
+            <button class="btn-feedback" (click)="dropdownOpen = !dropdownOpen">Feedback ▼</button>
+            <div class="dropdown-content" *ngIf="dropdownOpen">
+              <a routerLink="/addfeedback" (click)="closeMenu(); dropdownOpen = false">Post Feedback</a>
+              <a routerLink="/userfeedback" (click)="closeMenu(); dropdownOpen = false">My Feedbacks</a>
+            </div>
+          </div>
         </ng-container>
-        <button class="logout-btn" (click)="logout(); closeMenu()">Logout</button>
+        <button class="btn-logout" (click)="logout(); closeMenu()">Logout</button>
       </ng-container>
       <ng-template #loggedOut>
         <a routerLink="/register" (click)="closeMenu()">Register</a>
