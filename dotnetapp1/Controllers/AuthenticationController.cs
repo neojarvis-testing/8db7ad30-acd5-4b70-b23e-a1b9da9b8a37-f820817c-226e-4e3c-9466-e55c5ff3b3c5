@@ -41,8 +41,9 @@ namespace dotnetapp1.Controllers
 
                 var role = jwtToken.Claims.FirstOrDefault(c => c.Type == "role")?.Value;
                 var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+                var userName = jwtToken.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
 
-                return Ok(new {Success=true, Token = result.Item2, role, userId });
+                return Ok(new {Success=true, Token = result.Item2, role, userId,userName });
             }
             catch (Exception ex)
             {

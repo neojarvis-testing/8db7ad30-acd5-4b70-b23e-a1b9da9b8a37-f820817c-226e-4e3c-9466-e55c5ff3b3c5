@@ -150,6 +150,7 @@
   background: #d32f2f !important;
   color: #fff !important;
   border-color: #d32f2f;
+  font-size: 1rem;
   box-shadow: 0 4px 16px #d32f2f55;
 }
 
@@ -183,6 +184,7 @@
   min-width: 110px;
   min-height: 40px;
   font-weight: 500;
+  font-size: 1rem;
   box-shadow: 0 1px 4px #0001;
   display: inline-flex;
   align-items: center;
