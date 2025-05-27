@@ -2,6 +2,7 @@ import { Component , OnInit } from '@angular/core';
 import { ConferenceEventService } from '../../services/conference-event.service';
 import { ConferenceEvent } from '../../models/conference-event.model';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-user-applied-conference-event',
   templateUrl: './user-applied-conference-event.component.html',
@@ -72,7 +73,9 @@ export class UserAppliedConferenceEventComponent implements OnInit {
     });
   }
    sortbyAscending(){
-    
+    const sortedConferenceEvents$: Observable<any[]>=this.conferenceEventList$.pipe(
+      map(events => [...events].sort((a,b) => a.ConferenceEventId.localeCompare(b.ConferenceEventId)))
+    );
   }
   sortbyDeascending(){
     
