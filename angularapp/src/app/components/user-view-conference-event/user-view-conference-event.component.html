@@ -36,6 +36,10 @@
             <button (click)="openRegisterForm()" class="register-btn">Register</button>
           </td>
         </tr>
+        <tr>
+          <td><button (click)="previousPage()" class="previous-btn">Previous</button></td>
+          <td><button (click)="nextPage()" class="next-btn">Next </button></td>
+        </tr>
       </tbody>
     </table>
     <div *ngIf="!loading && conferenceevents.length === 0" class="center-message">No conferenceevents found.</div>
