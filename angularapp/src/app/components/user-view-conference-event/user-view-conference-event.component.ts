@@ -1,6 +1,7 @@
 import { Component , OnInit } from '@angular/core';
 import { ConferenceEventService } from '../../services/conference-event.service';
 import { ConferenceEvent } from '../../models/conference-event.model';
+import { Observable } from 'rxjs';
 //import {UserAppliedConferenceEventComponent} from '../../components/user-applied-conference-event';
 @Component({
   selector: 'app-user-view-conference-event',
@@ -9,6 +10,7 @@ import { ConferenceEvent } from '../../models/conference-event.model';
 })
 export class UserViewConferenceEventComponent  implements OnInit {
   conferenceevents: ConferenceEvent[] = [];
+  conferenceEventList$!:Observable<any[]>;
   loading = false;
   errorMessage = '';
   successMessage = '';
@@ -22,6 +24,7 @@ export class UserViewConferenceEventComponent  implements OnInit {
     this.totalpages=Math.ceil(this.conferenceevents.length/this.pageSize);
     this.updatePsgeItems();
     this.getConferenceEvents();
+    this. getAllConferenceEvents();
   }
   updatePsgeItems(){
     const startIndex=(this.currentPage-1)*this.pageSize;
@@ -48,7 +51,11 @@ export class UserViewConferenceEventComponent  implements OnInit {
     }
     this.updatePsgeItems();
   }
-  
+  getAllConferenceEvents(): void {
+    this.loading = true;
+    this.errorMessage = '';
+    this.conferenceEventList$= this.conferenceEventService.getAllConferenceEvents();
+  }
   getConferenceEvents(): void {
     this.loading = true;
     this.errorMessage = '';
