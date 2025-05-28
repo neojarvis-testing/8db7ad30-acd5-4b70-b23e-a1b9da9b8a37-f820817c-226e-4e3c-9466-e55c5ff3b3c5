@@ -35,7 +35,7 @@ export class UserViewBookingComponent {
   ) { }
 
   ngOnInit(): void {
-    this.authService.getUserId().subscribe(event => this.userid = event);
+    this.userid = Number(localStorage.getItem('userId'));
     this.loadBookings();
   }
 
