@@ -1,18 +1,4 @@
 <div class="booking-container">
-    <!-- Navigation Bar -->
-    <!-- <header class="header">
-        <div class="nav-left">
-            <span class="admin-label">Admin/Admin</span>
-        </div>
-        <nav class="nav-links">
-            <a routerLink="/home">Home</a>
-            <a routerLink="/conference-events">Conference Events</a>
-            <a routerLink="/bookings" class="active">Requested Event Bookings</a>
-            <a routerLink="/feedbacks">Feedbacks</a>
-            <a routerLink="/logout">Logout</a>
-        </nav>
-    </header> -->
-
     <!-- Main Content -->
     <section class="content">
         <h2>Bookings Management</h2>
@@ -50,8 +36,8 @@
             <tbody>
                 <tr *ngFor="let booking of getFilteredBookings(); let i = index">
                     <td>{{ i + 1 }}</td>
-                    <td>{{ booking.username }}</td>
-                    <td>{{ booking.eventName }}</td>
+                    <td>{{ booking.user.username }}</td>
+                    <td>{{ booking.conferenceEvent.eventName }}</td>
                     <td>{{ booking.occupation }}</td>
                     <td>{{ booking.gender }}</td>
                     <td>{{ booking.city }}</td>
@@ -79,6 +65,19 @@
         </table>
     </section>
 
+    <div class="event-pagination">
+        <button class="event-pagination-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+            Prev
+        </button>
+        <span class="event-pagination-info">
+            Page {{ currentPage }} of {{ totalPages }}
+        </span>
+        <button class="event-pagination-btn" [disabled]="currentPage === totalPages"
+            (click)="goToPage(currentPage + 1)">
+            Next
+        </button>
+    </div>
+
     <!-- Proof Image Popup -->
     <div class="popup" *ngIf="showProofPopup">
         <div class="popup-content">
@@ -98,6 +97,14 @@
                 <button class="confirm" (click)="confirmDelete()">Yes</button>
                 <button class="cancel" (click)="closePopup()">No</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="popup" *ngIf="showSuccessPopup">
+        <div class="popup-content">
+            <p>{{popupMessage}}</p>
+            <button class="btn-ok" (click)="closePopup()">OK</button>
         </div>
     </div>
 </div>

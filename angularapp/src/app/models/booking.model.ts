@@ -1,13 +1,18 @@
+import { ConferenceEvent } from "./conference-event.model";
+import { User } from "./user.model";
+
 export interface Booking {
-    BookingId: number;
-    UserId: number;
-    ConferenceEventId: number;
-    BookingStatus: string;
-    BookingDate: Date;
-    Gender: string;
-    Age: number;
-    Occupation: string;
-    City: string;
-    Proof: string;
-    AdditionalNotes?: string;
+    bookingId: number;
+    userId: number;
+    conferenceEventId: number;
+    bookingStatus: string;
+    bookingDate: Date;
+    gender: string;
+    age: number;
+    occupation: string;
+    city: string;
+    proof: string;
+    additionalNotes?: string;
+    user: User;
+    conferenceEvent: ConferenceEvent;
 }
