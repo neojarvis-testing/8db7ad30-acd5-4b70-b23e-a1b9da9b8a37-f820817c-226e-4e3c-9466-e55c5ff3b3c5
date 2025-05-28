@@ -19,11 +19,13 @@
           <div class="dropdown" (mouseenter)="dropdownOpen = true" (mouseleave)="dropdownOpen = false">
             <button class="btn-feedback" (click)="dropdownOpen = !dropdownOpen">Conference Events</button>
             <div class="dropdown-content" *ngIf="dropdownOpen">
-              <a routerLink="/admincreateconferenceevent" (click)="closeMenu(); dropdownOpen = false">Add Conference Event</a>
-              <a routerLink="/adminviewconferenceevent" (click)="closeMenu(); dropdownOpen = false">View Conference Event</a>
+              <a routerLink="/admincreateconferenceevent" (click)="closeMenu(); dropdownOpen = false">Add Conference
+                Event</a>
+              <a routerLink="/adminviewconferenceevent" (click)="closeMenu(); dropdownOpen = false">View Conference
+                Event</a>
             </div>
           </div>
-          <a routerLink="/requested-event-bookings" (click)="closeMenu()">Requested Event Bookings</a>
+          <a routerLink="/adminviewbooking" (click)="closeMenu()">Overall Bookings</a>
           <a routerLink="/adminfeedback" (click)="closeMenu()">Feedbacks</a>
         </ng-container>
         <!-- User Links -->
@@ -33,7 +35,7 @@
           <a routerLink="/userappliedconferenceevent" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/userbookconferenceevent" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/userviewconferenceevent" (click)="closeMenu()">Conference Events</a>
-          <a routerLink="/requested-event-bookings" (click)="closeMenu()">My Bookings</a>
+          <a routerLink="/userviewbooking" (click)="closeMenu()">My Bookings</a>
           <div class="dropdown" (mouseenter)="dropdownOpen = true" (mouseleave)="dropdownOpen = false">
             <button class="btn-feedback" (click)="dropdownOpen = !dropdownOpen">Feedback ▼</button>
             <div class="dropdown-content" *ngIf="dropdownOpen">
