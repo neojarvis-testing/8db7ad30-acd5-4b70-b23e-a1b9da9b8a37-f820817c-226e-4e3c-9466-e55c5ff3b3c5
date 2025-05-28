@@ -30,7 +30,9 @@
         <ng-container *ngIf="userRole === 'User'">
           <a class="btn-admin" routerLink="/home" (click)="closeMenu()">User/{{userName}}</a>
           <a routerLink="/home" (click)="closeMenu()">Home</a>
-          <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
+          <a routerLink="/userappliedconferenceevent" (click)="closeMenu()">Conference Events</a>
+          <a routerLink="/userbookconferenceevent" (click)="closeMenu()">Conference Events</a>
+          <a routerLink="/userviewconferenceevent" (click)="closeMenu()">Conference Events</a>
           <a routerLink="/requested-event-bookings" (click)="closeMenu()">My Bookings</a>
           <div class="dropdown" (mouseenter)="dropdownOpen = true" (mouseleave)="dropdownOpen = false">
             <button class="btn-feedback" (click)="dropdownOpen = !dropdownOpen">Feedback ▼</button>

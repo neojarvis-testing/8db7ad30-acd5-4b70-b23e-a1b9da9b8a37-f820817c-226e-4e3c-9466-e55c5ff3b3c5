@@ -1,1 +1,77 @@
-<p>user-book-conference-event works!</p>
+<div class="container">
+  <h2>Create Event BookingForm</h2>
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+      <!-- Event Name Field -->
+      <div class="form-group">
+         <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" formControlName="gender" class="form-control" >
+                <option value=" " disabled selected>Selected Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+          </div>
+          <div *ngIf="submitted && f.gender.errors" class="error">
+              <span *ngIf="f.gender.errors.required">You have to select gender.</span>
+          </div>
+      </div>
+
+      <!-- Organizer Name Field -->
+      <div class="form-group">
+          <label for="age">Age*</label>
+          <input type="text" id="age" formControlName="age" class="form-control" />
+          <div *ngIf="submitted && f.age.errors" class="error">
+              <span *ngIf="f.age.errors.required">Age is required.</span>
+          </div>
+      </div>
+
+      <!-- Category Field -->
+      <div class="form-group">
+          <label for="category">Occupation*</label>
+          <input type="text" id="category" formControlName="category" class="form-control" />
+          <div *ngIf="submitted && f.category.errors" class="error">
+              <span *ngIf="f.category.errors.required">Occupation is required.</span>
+          </div>
+      </div>
+
+      <!-- City Field -->
+      <div class="form-group">
+          <label for="city">City*</label>
+          <input type="text" id="city" formControlName="city" class="form-control" />
+          <div *ngIf="submitted && f.city.errors" class="error">
+              <span *ngIf="f.city.errors.required">City is required.</span>
+          </div>
+      </div>
+
+      <!-- Start Date & Time Field -->
+      <div class="form-group">
+          <label for="startDateTime">Start Date & Time*</label>
+          <input type="datetime-local" id="startDateTime" formControlName="startDateTime" class="form-control" />
+          <div *ngIf="submitted && f.startDateTime.errors" class="error">
+              <span *ngIf="f.startDateTime.errors.required">Start Date & Time is required.</span>
+          </div>
+      </div>
+
+ 
+
+      <!-- Additional details Field -->
+      <div class="form-group">
+          <label for="adddet">Additional Details -optional</label>
+          <input type="text" id="adddet" formControlName="adddet" class="form-control" />
+          
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Submit</button>
+  </form>
+</div>
+
+<!-- Success Popup -->
+<div class="popup" *ngIf="showSuccessPopup">
+  <div class="popup-content">
+
+      <p>Successfully Created Conference Event!</p>
+      <button class="btn-ok" (click)="closePopup()">Ok</button>
+  </div>
+</div>
