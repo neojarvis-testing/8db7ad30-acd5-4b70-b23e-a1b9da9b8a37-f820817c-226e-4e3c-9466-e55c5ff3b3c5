@@ -26,7 +26,8 @@ namespace dotnetapp2.Services
 
         public async Task<IEnumerable<Booking>> GetBookingsByUserId(int userId)
         {
-            return await _context.Bookings.Where(x => x.UserId == userId).ToListAsync();
+            return await _context.Bookings.Where(x => x.UserId == userId).Include(x => x.ConferenceEvent)
+                .Include(x => x.User).ToListAsync();
         }
 
         // public async Task<<Booking> GetBookingsById(int bookingId)

@@ -39,8 +39,8 @@
                 </tr>
                 <tr *ngFor="let booking of getFilteredBookings(); let i = index">
                     <td>{{ i + 1 }}</td>
-                    <td>{{ booking.user.username }}</td>
-                    <td>{{ booking.conferenceEvent.eventName }}</td>
+                    <td>{{ booking.user?.username }}</td>
+                    <td>{{ booking.conferenceEvent?.eventName }}</td>
                     <td>{{ booking.occupation }}</td>
                     <td>{{ booking.gender }}</td>
                     <td>{{ booking.city }}</td>

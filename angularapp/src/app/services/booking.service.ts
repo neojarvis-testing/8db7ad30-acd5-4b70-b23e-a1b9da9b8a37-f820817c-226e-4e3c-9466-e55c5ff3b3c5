@@ -26,7 +26,7 @@ export class BookingService {
   }
 
   getBookingsByUserId(userId: number): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.baseUrl}/bookings/user/${userId}`, this.options);
+    return this.http.get<Booking[]>(`${this.baseUrl}/bookings/${userId}`, this.options);
   }
 
   addBooking(requestObject: Booking): Observable<Booking> {
