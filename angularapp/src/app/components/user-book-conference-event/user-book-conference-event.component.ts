@@ -52,7 +52,7 @@ onSubmit(): void {
   this.showSuccessPopup = true;
 }
 addConferenceEventBooking():void{
-  if (this.eventForm.invalid) return;
+ // if (this.eventForm.invalid) return;
     this.submitted = true;
     this.errorMessage = '';
     this.successMessage = '';
