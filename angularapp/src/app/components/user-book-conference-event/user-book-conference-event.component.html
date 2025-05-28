@@ -3,8 +3,15 @@
   <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
       <!-- Event Name Field -->
       <div class="form-group">
-          <label for="gender">Gender*</label>
-          <input type="text" id="gender" formControlName="gender" class="form-control" />
+         <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" formControlName="gender" class="form-control" >
+                <option value=" " disabled selected>Selected Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+          </div>
           <div *ngIf="submitted && f.gender.errors" class="error">
               <span *ngIf="f.gender.errors.required">You have to select gender.</span>
           </div>
@@ -21,19 +28,10 @@
 
       <!-- Category Field -->
       <div class="form-group">
-          <label for="category">Age*</label>
+          <label for="category">Occupation*</label>
           <input type="text" id="category" formControlName="category" class="form-control" />
           <div *ngIf="submitted && f.category.errors" class="error">
               <span *ngIf="f.category.errors.required">Category is required.</span>
-          </div>
-      </div>
-
-      <!-- Description Field -->
-      <div class="form-group">
-          <label for="Occupation">Occupation*</label>
-          <textarea id="Occupation" formControlName="Occupation" class="form-control" rows="4"></textarea>
-          <div *ngIf="submitted && f.Occupation.errors" class="error">
-              <span *ngIf="f.Occupation.errors.required">Occupation is required.</span>
           </div>
       </div>
 
