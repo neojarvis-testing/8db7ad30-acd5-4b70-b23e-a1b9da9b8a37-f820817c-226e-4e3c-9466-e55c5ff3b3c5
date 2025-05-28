@@ -27,10 +27,19 @@ export class UserViewConferenceEventComponent  implements OnInit {
   constructor(private conferenceEventService: ConferenceEventService) {}
 //constructor(private dialogue:Matdialog){}
   ngOnInit(): void {
+    this.getEvents();
     this.totalpages=Math.ceil(this.conferenceevents.length/this.pageSize);
     this.updatePsgeItems();
     //this.getConferenceEvents();
     this. getAllConferenceEvents();
+  }
+  getEvents(){
+    this.conferenceEventService.getAllConferenceEvents().subscribe((data) =>{
+      this.conferenceevents=data;
+      this.totalpages=Math.ceil(this.conferenceevents.length/this.pageSize);
+      this.updatePsgeItems();
+    }
+    );
   }
   updatePsgeItems(){
     const startIndex=(this.currentPage-1)*this.pageSize;
