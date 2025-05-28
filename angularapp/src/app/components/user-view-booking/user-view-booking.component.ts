@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Booking } from 'src/app/models/booking.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { BookingService } from 'src/app/services/booking.service';
 })
 export class UserViewBookingComponent {
 
-  userid: number = 1;
+  userid: number;
   bookings: Booking[] = [];
   filteredBookings: Booking[] = [];
   loading = false;
@@ -30,10 +31,11 @@ export class UserViewBookingComponent {
 
   constructor(
     private bookingService: BookingService,
-    private router: Router
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.getUserId().subscribe(event => this.userid = event);
     this.loadBookings();
   }
 
