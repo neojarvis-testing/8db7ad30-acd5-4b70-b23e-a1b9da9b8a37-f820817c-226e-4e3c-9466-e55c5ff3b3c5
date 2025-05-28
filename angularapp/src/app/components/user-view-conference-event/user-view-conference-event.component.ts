@@ -89,6 +89,14 @@ export class UserViewConferenceEventComponent  implements OnInit {
       }
     });
   }
+  isRegistrationClosed(endDateStr:string): boolean
+  {
+    const today=new Date();
+    today.setHours(0,0,0,0);
+    const endDate= new Date(endDateStr);
+    endDate.setHours(0,0,0,0);
+    return endDate<today;
+  }
 openDialog():void
 {
   // this.dialogue.open(DialogFormComponent,

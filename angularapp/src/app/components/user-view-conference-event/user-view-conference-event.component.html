@@ -35,7 +35,7 @@
           <td>{{ event.endDateTime | date:'dd/MM/yyyy' }}</td>
           <td>{{ event.capacity }}</td>
           <td>
-            <button (click)="openDialog()" class="register-btn" [disabled]="(event.endDateTime)<today">Register</button>
+            <button (click)="openDialog()" class="register-btn" [disabled]="isRegistrationClosed(event.endDateTime)">Register</button>
           </td>
         </tr>
         <tr>
