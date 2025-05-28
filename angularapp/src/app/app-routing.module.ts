@@ -25,12 +25,13 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
 
 
-  { path: 'adminviewbooking', component: AdminViewBookingsComponent, canActivate: [adminGuard]  },
+  { path: 'adminviewbooking', component: AdminViewBookingsComponent, canActivate: [adminGuard] },
+  { path: 'userviewbooking', component: AdminViewBookingsComponent, canActivate: [userGuard] },
   //Admin routes
   { path: 'admincreateconferenceevent', component: AdminCreateConferenceEventComponent, canActivate: [adminGuard] },
   { path: 'adminviewconferenceevent', component: AdminViewConferenceEventComponent, canActivate: [adminGuard] },
   { path: 'admineditconferenceevent/:id', component: AdminEditConferenceEventComponent, canActivate: [adminGuard] },
-    { path: 'adminfeedback', component: AdminviewfeedbackComponent, canActivate: [adminGuard] },
+  { path: 'adminfeedback', component: AdminviewfeedbackComponent, canActivate: [adminGuard] },
   //User routes
   { path: 'userfeedback', component: UserviewfeedbackComponent, canActivate: [userGuard] },
   { path: 'addfeedback', component: UseraddfeedbackComponent, canActivate: [userGuard] },
