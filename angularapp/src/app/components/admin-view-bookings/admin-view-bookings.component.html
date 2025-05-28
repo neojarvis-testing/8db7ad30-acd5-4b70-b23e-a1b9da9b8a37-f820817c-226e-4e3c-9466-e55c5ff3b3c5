@@ -34,6 +34,9 @@
                 </tr>
             </thead>
             <tbody>
+                <tr *ngIf="!loading && getFilteredBookings().length === 0">
+                    <td colspan="3" class="no-records">Oops! No records found</td>
+                </tr>
                 <tr *ngFor="let booking of getFilteredBookings(); let i = index">
                     <td>{{ i + 1 }}</td>
                     <td>{{ booking.user.username }}</td>
@@ -65,6 +68,7 @@
         </table>
     </section>
 
+    <div *ngIf="loading" class="center-message">Loading...</div>
     <div class="event-pagination">
         <button class="event-pagination-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
             Prev

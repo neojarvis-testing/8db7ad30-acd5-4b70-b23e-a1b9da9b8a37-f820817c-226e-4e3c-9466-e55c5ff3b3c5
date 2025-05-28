@@ -270,3 +270,11 @@
 .event-pagination-info {
     font-size: 15px;
 }
+
+.no-records {
+    text-align: center !important;
+    font-style: italic;
+    color: #222;
+    background: #fff;
+    font-weight: 500;
+}

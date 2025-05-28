@@ -14,6 +14,7 @@ export class AdminViewBookingsComponent implements OnInit {
 
   bookings: Booking[] = [];
   filteredBookings: Booking[] = [];
+  loading = false;
 
 
   // Pagination properties
@@ -38,10 +39,12 @@ export class AdminViewBookingsComponent implements OnInit {
   }
 
   loadBookings(): void {
+    this.loading = true;
     this.bookingService.getAllBookings().subscribe(events => {
       this.bookings = events;
       this.filteredBookings = events;
       this.currentPage = 1;
+      this.loading = false;
     });
   }
 
@@ -73,13 +76,16 @@ export class AdminViewBookingsComponent implements OnInit {
 
   updateStatus(booking: Booking, newStatus: string): void {
     booking.bookingStatus = newStatus;
+    this.loading = true;
     this.bookingService.updateBooking(booking.bookingId, booking).subscribe({
       next: () => {
         this.showSuccessPopup = true;
-        this.popupMessage = 'Successfully Updated Booking!'
+        this.popupMessage = 'Successfully Updated Booking!';
+        this.loading = false;
       },
       error: () => {
         alert('Failed to update Booking. Please try again.');
+        this.loading = false;
       }
     });
   }
@@ -96,13 +102,16 @@ export class AdminViewBookingsComponent implements OnInit {
 
   confirmDelete(): void {
     if (this.selectedBooking) {
+      this.loading = true;
       this.bookingService.deleteBooking(this.selectedBooking.bookingId).subscribe({
         next: () => {
           this.showSuccessPopup = true;
-          this.popupMessage = 'Successfully Deleted Booking!'
+          this.popupMessage = 'Successfully Deleted Booking!';
+          this.loading = false;
         },
         error: () => {
           alert('Failed to update Booking. Please try again.');
+          this.loading = false;
         }
       });
 
