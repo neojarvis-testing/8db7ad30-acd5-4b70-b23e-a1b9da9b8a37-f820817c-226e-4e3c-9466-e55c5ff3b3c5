@@ -1,8 +1,9 @@
+-- Active: 1748356892262@@127.0.0.1@1433@appdb
 
 <div class="container">
     <h1>Available ConferenceEvents</h1>
-    <div>
-      <input type="Search By Event Name Organise Location" onkeyup="getConferenceEvents()">
+    <div class="input-wrapper">
+      <input type="text" class="full-width-input" placeholder="Enter Conferance Event ID to Search" onkeyup="getConferenceEvents()">
     </div>
     <div *ngIf="loading" class="center-message">Loading...</div>
     <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
@@ -34,7 +35,7 @@
           <td>{{ event.endDateTime | date:'dd/MM/yyyy' }}</td>
           <td>{{ event.capacity }}</td>
           <td>
-            <button (click)="openDialog()" class="register-btn">Register</button>
+            <button (click)="openDialog()" class="register-btn" [disabled]="(event.endDateTime)<today">Register</button>
           </td>
         </tr>
         <tr>

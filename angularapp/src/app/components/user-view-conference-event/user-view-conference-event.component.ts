@@ -23,6 +23,7 @@ export class UserViewConferenceEventComponent  implements OnInit {
   currentPage=1;
   totalpages=1;
   pagedItems:any[]=[];
+  today: Date= new Date();
   constructor(private conferenceEventService: ConferenceEventService) {}
 //constructor(private dialogue:Matdialog){}
   ngOnInit(): void {
