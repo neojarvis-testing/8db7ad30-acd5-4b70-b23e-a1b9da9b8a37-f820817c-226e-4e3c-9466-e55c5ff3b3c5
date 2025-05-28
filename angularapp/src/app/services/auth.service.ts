@@ -2,28 +2,31 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { User } from '../models/user.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    public apiUrl = 'http://your-workspace-url:8080/api';
+    public apiUrl = environment.apiBaseUrl;
     private userRole = new BehaviorSubject<string | null>(localStorage.getItem('role'));
     private userId = new BehaviorSubject<number | null>(null);
     private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
-
+    
     constructor(private http: HttpClient) { }
 
     register(user: User): Observable<any> {
         return this.http.post(`${this.apiUrl}/register`, user);
     }
 
-    login(login: any): Observable<any> {
-        return this.http.post(`${this.apiUrl}/login`, login).pipe(
+    login(email: string, password: string): Observable<any> {
+        return this.http.post(`${this.apiUrl}/login`, { Email: email, Password: password }).pipe(
             tap((response: any) => {
                 if (response && response.token) {
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('role', response.role);
+                    localStorage.setItem('userId', response.userId);
+                    localStorage.setItem('userName', response.userName);
                     this.userRole.next(response.role);
                     this.userId.next(response.id);
                     this.loggedIn.next(true);
@@ -51,6 +54,8 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
         this.userRole.next(null);
         this.userId.next(null);
         this.loggedIn.next(false);

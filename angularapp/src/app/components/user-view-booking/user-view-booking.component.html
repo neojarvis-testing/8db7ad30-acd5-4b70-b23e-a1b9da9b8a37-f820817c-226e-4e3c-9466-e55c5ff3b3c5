@@ -1,0 +1,114 @@
+<div class="booking-container">
+    <!-- Main Content -->
+    <section class="content">
+        <h2>Bookings Management</h2>
+        <!-- Light blue separator line -->
+        <div class="separator"></div>
+
+        <!-- Filter Section (left aligned) -->
+        <div class="filter">
+            <label for="statusFilter">Filter by Status:</label>
+            <select id="statusFilter" [(ngModel)]="filterStatus">
+                <option value="all">All</option>
+                <option value="Pending">Pending</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+        </div>
+
+        <!-- Bookings Table -->
+        <table class="booking-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Username</th>
+                    <th>Event Name</th>
+                    <th>Occupation</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                    <th>Booking Date</th>
+                    <th>Status</th>
+                    <th>Additional Notes</th>
+                    <th>Mobile Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="getFilteredBookings().length === 0">
+                    <td colspan="11" class="no-records">Oops! No records found</td>
+                </tr>
+                <tr *ngFor="let booking of getFilteredBookings(); let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ booking.user?.username }}</td>
+                    <td>{{ booking.conferenceEvent?.eventName }}</td>
+                    <td>{{ booking.occupation }}</td>
+                    <td>{{ booking.gender }}</td>
+                    <td>{{ booking.city }}</td>
+                    <td>{{ booking.bookingDate }}</td>
+                    <td>
+                        <!-- Status Dropdown with dynamic background color and custom arrow -->
+                        <select class="status-dropdown" [ngClass]="{
+                'pending': booking.status === 'Pending',
+                'accepted': booking.status === 'Accepted',
+                'rejected': booking.status === 'Rejected'
+              }" [ngModel]="booking.status" (ngModelChange)="updateStatus(booking, $event)">
+                            <option value="Pending">Pending</option>
+                            <option value="Accepted">Accepted</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </td>
+                    <td>{{ booking.additionalNotes }}</td>
+                    <td>{{ booking.mobile }}</td>
+                    <td>
+                        <button class="action-btn view-print" (click)="viewProof(booking)">View Proof</button>
+                        <button class="action-btn delete-btn" (click)="deleteBooking(booking)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div *ngIf="loading" class="center-message">Loading...</div>
+    <div *ngIf="getFilteredBookings().length > 0" class="event-pagination">
+        <button class="event-pagination-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+            Prev
+        </button>
+        <span class="event-pagination-info">
+            Page {{ currentPage }} of {{ totalPages }}
+        </span>
+        <button class="event-pagination-btn" [disabled]="currentPage === totalPages"
+            (click)="goToPage(currentPage + 1)">
+            Next
+        </button>
+    </div>
+
+    <!-- Proof Image Popup -->
+    <div class="popup" *ngIf="showProofPopup">
+        <div class="popup-content">
+            <!-- Red circular close button -->
+            <button class="close-button" (click)="closePopup()">&times;</button>
+            <h3>Proof Image</h3>
+            <img [src]="selectedBooking?.proofImage" alt="Proof Image" />
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Popup -->
+    <div class="popup" *ngIf="showDeletePopup">
+        <div class="popup-content">
+            <h3>Confirm Delete</h3>
+            <p>Are you sure you want to delete this booking?</p>
+            <div class="popup-buttons">
+                <button class="confirm" (click)="confirmDelete()">Yes</button>
+                <button class="cancel" (click)="closePopup()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="popup" *ngIf="showSuccessPopup">
+        <div class="popup-content">
+            <p>{{popupMessage}}</p>
+            <button class="btn-ok" (click)="closePopup()">OK</button>
+        </div>
+    </div>
+</div>

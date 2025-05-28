@@ -1,88 +1,112 @@
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <!-- Username: Required field -->
-    <div class="form-group">
-        <label for="username">
-            Username * <span class="help-text">(Required, minimum 3 characters)</span>
-        </label>
-        <input type="text" id="username" formControlName="username" required minlength="3"
-            placeholder="Enter your username" />
-        <div class="error"
-            *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
-            <small *ngIf="registrationForm.get('username')?.errors?.required">Username is required.</small>
-            <small *ngIf="registrationForm.get('username')?.errors?.minlength">Minimum 3 characters required.</small>
-        </div>
-    </div>
+<div class="register-container">
+    <!-- Page Title -->
+    <h1>Registration</h1>
 
-    <!-- Email: Required field -->
-    <div class="form-group">
-        <label for="email">
-            Email * <span class="help-text">(Required, valid email address)</span>
-        </label>
-        <input type="email" id="email" formControlName="email" required placeholder="Enter your email" />
-        <div class="error" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
-            <small *ngIf="registrationForm.get('email')?.errors?.required">Email is required.</small>
-            <small *ngIf="registrationForm.get('email')?.errors?.email">Please enter a valid email address.</small>
+    <!-- Registration Form -->
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <!-- Display overall error message -->
+        <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
         </div>
-    </div>
 
-    <!-- Password: Required field -->
-    <div class="form-group">
-        <label for="password">
-            Password * <span class="help-text">(Required, minimum 6 characters)</span>
-        </label>
-        <input type="password" id="password" formControlName="password" required minlength="6"
-            placeholder="Enter your password" />
-        <div class="error"
-            *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
-            <small *ngIf="registrationForm.get('password')?.errors?.required">Password is required.</small>
-            <small *ngIf="registrationForm.get('password')?.errors?.minlength">Minimum 6 characters required.</small>
+        <!-- Username Field -->
+        <div class="form-group">
+            <label for="username">
+                Username<span class="required">*</span>
+            </label>
+            <input type="text" id="username" name="username" placeholder="Enter username" [(ngModel)]="username"
+                #usernameInput="ngModel" required minlength="3" />
+            <div class="error" *ngIf="usernameInput.invalid && usernameInput.touched">
+                <small *ngIf="usernameInput.errors?.required">Username is required.</small>
+                <small *ngIf="usernameInput.errors?.minlength">
+                    Username must be at least 3 characters.
+                </small>
+            </div>
         </div>
-    </div>
 
-    <!-- Confirm Password: Required field -->
-    <div class="form-group">
-        <label for="confirmPassword">
-            Confirm Password * <span class="help-text">(Required, must match password)</span>
-        </label>
-        <input type="password" id="confirmPassword" formControlName="confirmPassword" required
-            placeholder="Confirm your password" />
-        <div class="error"
-            *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched">
-            <small *ngIf="registrationForm.get('confirmPassword')?.errors?.required">Confirm Password is
-                required.</small>
-            <small *ngIf="registrationForm.get('confirmPassword')?.errors?.mismatch">Passwords must match.</small>
+        <!-- Email Field -->
+        <div class="form-group">
+            <label for="email">
+                Email<span class="required">*</span>
+            </label>
+            <input type="email" id="email" name="email" placeholder="Enter email" [(ngModel)]="email"
+                #emailInput="ngModel" required email />
+            <div class="error" *ngIf="emailInput.invalid && emailInput.touched">
+                <small *ngIf="emailInput.errors?.required">Email is required.</small>
+                <small *ngIf="emailInput.errors?.email">Enter a valid email.</small>
+            </div>
         </div>
-    </div>
 
-    <!-- Mobile Number: Required field -->
-    <div class="form-group">
-        <label for="mobileNumber">
-            Mobile Number * <span class="help-text">(Required, valid mobile number)</span>
-        </label>
-        <input type="tel" id="mobileNumber" formControlName="mobileNumber" required
-            placeholder="Enter your mobile number" />
-        <div class="error"
-            *ngIf="registrationForm.get('mobileNumber')?.invalid && registrationForm.get('mobileNumber')?.touched">
-            <small *ngIf="registrationForm.get('mobileNumber')?.errors?.required">Mobile Number is required.</small>
-            <small *ngIf="registrationForm.get('mobileNumber')?.errors?.pattern">Please enter a valid mobile
-                number.</small>
+        <!-- Password Field -->
+        <div class="form-group">
+            <label for="password">
+                Password<span class="required">*</span>
+            </label>
+            <input type="password" id="password" name="password" placeholder="Enter password" [(ngModel)]="password"
+                #passwordInput="ngModel" required minlength="6" />
+            <div class="error" *ngIf="passwordInput.invalid && passwordInput.touched">
+                <small *ngIf="passwordInput.errors?.required">Password is required.</small>
+                <small *ngIf="passwordInput.errors?.minlength">
+                    Password must be at least 6 characters.
+                </small>
+            </div>
         </div>
-    </div>
 
-    <!-- Role: Required field with dropdown options -->
-    <div class="form-group">
-        <label for="role">
-            Role * <span class="help-text">(Required, select a role)</span>
-        </label>
-        <select id="role" formControlName="role" required>
-            <option value="" disabled selected>Select role</option>
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
-        </select>
-        <div class="error" *ngIf="registrationForm.get('role')?.invalid && registrationForm.get('role')?.touched">
-            <small *ngIf="registrationForm.get('role')?.errors?.required">Role is required.</small>
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+            <label for="confirmPassword">
+                Confirm Password<span class="required">*</span>
+            </label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password"
+                [(ngModel)]="confirmPassword" #confirmPasswordInput="ngModel" required minlength="6" />
+            <div class="error" *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched">
+                <small *ngIf="confirmPasswordInput.errors?.required">
+                    Confirm password is required.
+                </small>
+                <small *ngIf="confirmPasswordInput.errors?.minlength">
+                    Password must be at least 6 characters.
+                </small>
+            </div>
+            <div class="error" *ngIf="passwordMismatch && confirmPasswordInput.touched">
+                <small>Passwords do not match.</small>
+            </div>
         </div>
-    </div>
 
-    <button type="submit" [disabled]="registrationForm.invalid">Register</button>
-</form>
+        <!-- Mobile Number Field -->
+        <div class="form-group">
+            <label for="mobile">
+                Mobile Number<span class="required">*</span>
+            </label>
+            <input type="tel" id="mobile" name="mobile" placeholder="Enter mobile number" [(ngModel)]="mobile"
+                #mobileInput="ngModel" required pattern="[0-9]{10}" />
+            <div class="error" *ngIf="mobileInput.invalid && mobileInput.touched">
+                <small *ngIf="mobileInput.errors?.required">
+                    Mobile number is required.
+                </small>
+                <small *ngIf="mobileInput.errors?.pattern">
+                    Enter a valid 10-digit mobile number.
+                </small>
+            </div>
+        </div>
+
+        <!-- Role Field -->
+        <div class="form-group">
+            <label for="role">
+                Role<span class="required">*</span>
+            </label>
+            <select id="role" name="role" [(ngModel)]="role" #roleInput="ngModel" required>
+                <option value="">Select role</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+            </select>
+            <div class="error" *ngIf="roleInput.invalid && roleInput.touched">
+                <small *ngIf="roleInput.errors?.required">Role is required.</small>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="register-button" [disabled]="registerForm.invalid || passwordMismatch">
+            Register
+        </button>
+    </form>
+</div>

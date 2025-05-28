@@ -1,1 +1,49 @@
-<p>user-applied-conference-event works!</p>
+<div class="container">
+    <h1>Applied Conference Events</h1>
+    <div>
+        <td><button (click)="sortbyAscending()" class="srtasc-btn">Sort By Ascending </button></td>
+        <td><button (click)="sortbyDeascending()" class="strdesc-btn">Sort By Deascending </button></td> 
+    </div>
+    <div *ngIf="loading" class="center-message">Loading...</div>
+    <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
+    <table *ngIf="!loading && conferenceevents.length > 0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>EventName</th>
+          <th>OrganizerName</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Location</th>
+          <th>StartDateTime</th>
+          <th>EndDateTime</th>
+          <th>Capacity</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ce of conferenceEventList$; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ ce.EventName }}</td>
+          <td>{{ ce.OrganizerName }}</td>
+          <td>{{ ce.Category }}</td>
+          <td>{{ ce.Description }}</td>
+          <td>{{ ce.Location }}</td>
+          <td>{{ ce.StartDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ ce.EndDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ ce.Capacity }}</td>
+          <td><button (click)="openRegisterForm()" class="view-btn">View Proof</button></td>
+          <td>
+            <button (click)="deleteConferenceEvent(ce.ConferenceEventId)" class="delete-btn">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td><button (click)="previousPage()" class="previous-btn">Previous Page</button></td>
+          <td>{{ this.currentPage }}</td> <td>Page out Of</td> <td>{{ this.totalpages }}</td>
+          <td><button (click)="nextPage()" class="next-btn">Next Page</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!loading && conferenceevents.length === 0" class="center-message">No conferenceevents found.</div>
+</div>

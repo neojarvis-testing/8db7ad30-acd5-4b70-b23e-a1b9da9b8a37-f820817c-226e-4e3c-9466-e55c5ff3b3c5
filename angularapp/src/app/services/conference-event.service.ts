@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ConferenceEvent } from '../models/conference-event.model';
 import { Booking } from '../models/booking.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ConferenceEventService {
-    private baseUrl = 'http://your-workspace-url:8080/api';
+    private baseUrl = environment.apiBaseUrl;
 
     constructor(private http: HttpClient) { }
 
@@ -17,43 +18,47 @@ export class ConferenceEventService {
         return new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     }
 
+    private get options() {
+        return { headers: this.getHeaders() };
+    }
+
     getAllConferenceEvents(): Observable<ConferenceEvent[]> {
-        return this.http.get<ConferenceEvent[]>(`${this.baseUrl}/conference-events`, { headers: this.getHeaders() });
+        return this.http.get<ConferenceEvent[]>(`${this.baseUrl}/conference-events`, this.options);
     }
 
     addConferenceEvent(requestObject: ConferenceEvent): Observable<ConferenceEvent> {
-        return this.http.post<ConferenceEvent>(`${this.baseUrl}/conference-event`, requestObject, { headers: this.getHeaders() });
+        return this.http.post<ConferenceEvent>(`${this.baseUrl}/conference-event`, requestObject, this.options);
     }
 
     deleteConferenceEvent(conferenceEventId: number): Observable<void> {
-        return this.http.delete<void>(`${this.baseUrl}/conference-event/${conferenceEventId}`, { headers: this.getHeaders() });
+        return this.http.delete<void>(`${this.baseUrl}/conference-event/${conferenceEventId}`, this.options);
     }
 
     getConferenceEventById(id: number): Observable<ConferenceEvent> {
-        return this.http.get<ConferenceEvent>(`${this.baseUrl}/conference-event/${id}`, { headers: this.getHeaders() });
+        return this.http.get<ConferenceEvent>(`${this.baseUrl}/conference-event/${id}`, this.options);
     }
 
     updateConferenceEvent(id: number, requestObject: ConferenceEvent): Observable<ConferenceEvent> {
-        return this.http.put<ConferenceEvent>(`${this.baseUrl}/conference-event/${id}`, requestObject, { headers: this.getHeaders() });
+        return this.http.put<ConferenceEvent>(`${this.baseUrl}/conference-event/${id}`, requestObject, this.options);
     }
 
     getRegisteredEvents(userId: number): Observable<ConferenceEvent[]> {
-        return this.http.get<ConferenceEvent[]>(`${this.baseUrl}/bookings/user/${userId}`, { headers: this.getHeaders() });
+        return this.http.get<ConferenceEvent[]>(`${this.baseUrl}/bookings/user/${userId}`, this.options);
     }
 
     addConferenceEventBooking(data: Booking): Observable<Booking> {
-        return this.http.post<Booking>(`${this.baseUrl}/booking`, data, { headers: this.getHeaders() });
+        return this.http.post<Booking>(`${this.baseUrl}/booking`, data, this.options);
     }
 
     deleteConferenceEventBooking(bookingId: number): Observable<void> {
-        return this.http.delete<void>(`${this.baseUrl}/booking/${bookingId}`, { headers: this.getHeaders() });
+        return this.http.delete<void>(`${this.baseUrl}/booking/${bookingId}`, this.options);
     }
 
     getAllConferenceEventBookings(): Observable<Booking[]> {
-        return this.http.get<Booking[]>(`${this.baseUrl}/bookings`, { headers: this.getHeaders() });
+        return this.http.get<Booking[]>(`${this.baseUrl}/bookings`, this.options);
     }
 
     updateConferenceEventBooking(id: number, booking: Booking): Observable<Booking> {
-        return this.http.put<Booking>(`${this.baseUrl}/booking/${id}`, booking, { headers: this.getHeaders() });
+        return this.http.put<Booking>(`${this.baseUrl}/booking/${id}`, booking, this.options);
     }
 }

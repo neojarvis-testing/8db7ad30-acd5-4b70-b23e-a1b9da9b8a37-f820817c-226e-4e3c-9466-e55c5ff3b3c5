@@ -34,7 +34,9 @@ export class NavbarComponent {
   get userRole(): string | null {
     return localStorage.getItem('role');
   }
-
+  get userName(): string | null {
+    return localStorage.getItem('userName');
+  }
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);

@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+.global-toast {
+  visibility: hidden;
+  min-width: 280px;
+  max-width: 90vw;
+  background-color: #2ca6c9;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 16px 24px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 40px;
+  font-size: 1.1rem;
+  transform: translateX(-50%) scale(0.95);
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.4s, visibility 0.4s;
+  box-shadow: 0 2px 12px #0003;
+}
+.global-toast.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}

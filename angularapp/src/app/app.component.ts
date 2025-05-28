@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoaderService } from './services/loader.service';
 
 @Component({
   standalone: false,
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angularapp';
+  title = 'Conference Event Management System';
+  constructor(public loaderService: LoaderService) {}
 }

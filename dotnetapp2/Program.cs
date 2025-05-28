@@ -1,3 +1,4 @@
+using CommonLibrary.Extensions;
 using dotnetapp1.Data;
 using dotnetapp2.Services;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString: builder.Configuration.GetConnectionString("AppCon")));
 builder.Services.AddScoped<IBookingService, BookingService>();
+
+var key = "this_is_a_top_secret_key_for_accessing_our_application_service";
+
+builder.Services.AddJwtAuthentication(key);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,7 +29,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

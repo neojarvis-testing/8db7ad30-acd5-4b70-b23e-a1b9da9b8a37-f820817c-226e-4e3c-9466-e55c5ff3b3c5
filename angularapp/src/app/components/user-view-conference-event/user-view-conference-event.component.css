@@ -1,0 +1,125 @@
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0001;
+  }
+  .center-message {
+    text-align: center;
+    font-size: 1.1em;
+    padding: 24px 0;
+  }
+  .error { color: #c0392b; }
+  .success { color: #27ae60; }
+  .delete-btn {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  table{
+    width:100;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Segoe UI',sans-serif;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  thead{
+    background-color: #007bff;
+    color: white;
+  }
+  th,td{
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  .error{
+    color: #ff4d4f;
+    margin-top: 10px;
+    font-weight: bold;
+
+  }
+  .previous-btn{
+    padding: 8px 16px;
+    margin: 4px;
+    font-size: 14px;
+    border:none;
+    border-radius: 6px;
+    background-color: #4a90e2;
+    color:white;
+    cursor:pointer;
+    transition: background-color 0.3sease;
+  }
+  .previous-btn:hover
+  {
+    background-color: #357abd;
+  }
+  .previous-btn:disabled
+  {
+    background-color: #ccc;
+    cursor: not-allowed;
+
+  }
+  .next-btn{
+    padding: 8px 16px;
+    margin: 4px;
+    font-size: 14px;
+    border:none;
+    border-radius: 6px;
+    background-color: #4a90e2;
+    color:white;
+    cursor:pointer;
+    transition: background-color 0.3sease;
+  }
+  .next-btn:hover
+  {
+    background-color: #357abd;
+  }
+  .next-btn:disabled
+  {
+    background-color: #00ff00;
+    cursor: not-allowed;
+
+  }
+  .register-btn:disabled
+  {
+    background-color: silver;
+    cursor: not-allowed;
+
+  }
+  .register-btn{
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: lightseagreen;
+    color:black;
+    border:none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(144,238,144, 1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+  }
+  .register-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .register-btn:active{
+      transform: scale(0.98);
+    }
+.input-wrapper{
+  width:100%;
+  padding: 0 10px;;
+}
+.full-width-input{
+  width:100%;
+  padding: 10px;
+  font-size: 14px;
+  border:1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
