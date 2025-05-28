@@ -39,12 +39,10 @@ export class AdminViewBookingsComponent implements OnInit {
   }
 
   loadBookings(): void {
-    this.loading = true;
     this.bookingService.getAllBookings().subscribe(events => {
       this.bookings = events;
       this.filteredBookings = events;
       this.currentPage = 1;
-      this.loading = false;
     });
   }
 
