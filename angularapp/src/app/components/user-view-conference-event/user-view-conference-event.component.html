@@ -1,53 +1,58 @@
--- Active: 1748356892262@@127.0.0.1@1433@appdb
-
 <div class="container">
-    <h1>Available ConferenceEvents</h1>
-    <div class="input-wrapper">
-      <input type="text" class="full-width-input" placeholder="Enter Conferance Event ID to Search" onkeyup="getConferenceEvents()">
-    </div>
-    <div *ngIf="loading" class="center-message">Loading...</div>
-    <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
-    <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
-    <table *ngIf="conferenceevents.length>0 ">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>EventName</th>
-          <th>OrganizerName</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Location</th>
-          <th>StartDateTime</th>
-          <th>EndDateTime</th>
-          <th>Capacity</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let event of conferenceevents ">
-          <td>{{event.conferenceEventId }}</td>
-          <td>{{ event.eventName }}</td>
-          <td>{{ event.organizerName }}</td>
-          <td>{{ event.category }}</td>
-          <td>{{ event.description }}</td>
-          <td>{{ event.location }}</td>
-          <td>{{ event.startDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ event.endDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ event.capacity }}</td>
-          <td>
-            <button (click)="openDialog()" class="register-btn" [disabled]="isRegistrationClosed(event.endDateTime)">Register</button>
-          </td>
-        </tr>
-        <tr>
-          <td><button (click)="previousPage()" class="previous-btn">Previous Page</button></td>
-          <td>{{ this.currentPage }}</td> <td>Page out Of</td> <td>{{ this.totalpages }}</td>
-          <td><button (click)="nextPage()" class="next-btn">Next Page</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <ng-template #loadingTpl>
-
-    <p *ngIf="loading ">Loading ...</p>
-    <p *ngIf="!loading && conferenceevents.length===0">No DataFound</p>
-    <p *ngIf="errorMessage">{{ errorMessage }}</p>
-    </ng-template>
+  <h1>Available Conference Events</h1>
+  <div class="input-wrapper">
+    <input
+      type="text"
+      class="full-width-input"
+      placeholder="Search by Event Name, Organizer, Category, or Location"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+    />
+  </div>
+  <div *ngIf="loading" class="center-message">Loading...</div>
+  <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
+  <table *ngIf="pagedItems.length > 0">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Event Name</th>
+        <th>Organizer</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Capacity</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of pagedItems; let i = index">
+        <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+        <td>{{ event.eventName }}</td>
+        <td>{{ event.organizerName }}</td>
+        <td>{{ event.category }}</td>
+        <td>{{ event.description }}</td>
+        <td>{{ event.location }}</td>
+        <td>{{ event.startDateTime | date:'dd/MM/yyyy' }}</td>
+        <td>{{ event.endDateTime | date:'dd/MM/yyyy' }}</td>
+        <td>{{ event.capacity }}</td>
+        <td>
+          <button (click)="register(event.conferenceEventId)" class="register-btn"
+            [disabled]="isRegistrationClosed(event.endDateTime)">
+            Register
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="pagedItems.length === 0">
+        <td colspan="10" class="center-message">No events found.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="display: flex; justify-content: center; margin-top: 18px;">
+    <button (click)="previousPage()" class="previous-btn" [disabled]="currentPage === 1">Previous</button>
+    <span style="margin: 0 12px; align-self: center;">Page {{ currentPage }} of {{ totalpages }}</span>
+    <button (click)="nextPage()" class="next-btn" [disabled]="currentPage === totalpages">Next</button>
+  </div>
+</div>
