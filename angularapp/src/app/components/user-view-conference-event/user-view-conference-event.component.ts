@@ -4,9 +4,7 @@ import { ConferenceEventService } from '../../services/conference-event.service'
 import { ConferenceEvent } from '../../models/conference-event.model';
 import { UserBookConferenceEventComponent } from '../../components/user-book-conference-event/user-book-conference-event.component';
 import { Observable, catchError, finalize, of } from 'rxjs';
-// import {Matdialog} from '@angular/material/dialogue';
-// import { DialogFormComponent } from '../dialogue-form/dialogue-form.component';
-//import {UserAppliedConferenceEventComponent} from '../../components/user-applied-conference-event';
+
 @Component({
   selector: 'app-user-view-conference-event',
   templateUrl: './user-view-conference-event.component.html',
@@ -16,6 +14,8 @@ export class UserViewConferenceEventComponent  implements OnInit {
   conferenceevents: ConferenceEvent[] = [];
   conferenceevent: ConferenceEvent;
   conferenceEventList$!:Observable<any[]>;
+  filteredEvents: any[] =[];
+  typeEventId : string='';
   loading = false;
   errorMessage = '';
   successMessage = '';
@@ -40,6 +40,9 @@ export class UserViewConferenceEventComponent  implements OnInit {
       this.updatePsgeItems();
     }
     );
+  }
+  filterByEventId(): void {
+    
   }
   updatePsgeItems(){
     const startIndex=(this.currentPage-1)*this.pageSize;
