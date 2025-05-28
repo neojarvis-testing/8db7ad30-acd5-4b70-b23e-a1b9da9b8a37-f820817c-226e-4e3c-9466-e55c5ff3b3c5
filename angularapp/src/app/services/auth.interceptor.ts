@@ -5,13 +5,15 @@ import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LoaderService } from './loader.service';
 import { ToastService } from './toast.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
     private loaderService: LoaderService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authService: AuthService
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -19,10 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          localStorage.removeItem('token');
-          localStorage.removeItem('role');
-          localStorage.removeItem('userId');
-          localStorage.removeItem('userName');
+          this.authService.logout();
           this.toastService.show('Session timed out. Please login again.');
           this.router.navigate(['/login']);
         }
