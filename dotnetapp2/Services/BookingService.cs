@@ -18,13 +18,21 @@ namespace dotnetapp2.Services
 
         public async Task<IEnumerable<Booking>> GetAllBookings()
         {
-            return await _context.Bookings.ToListAsync();
+            return await _context.Bookings
+                .Include(x => x.ConferenceEvent)
+                .Include(x => x.User)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Booking>> GetBookingsByUserId(int userId)
         {
             return await _context.Bookings.Where(x => x.UserId == userId).ToListAsync();
         }
+
+        // public async Task<<Booking> GetBookingsById(int bookingId)
+        // {
+        //     return await _context.Bookings.Where(x => x.BookingId == bookingId);
+        // }
 
         public async Task<bool> AddBooking(Booking booking)
         {

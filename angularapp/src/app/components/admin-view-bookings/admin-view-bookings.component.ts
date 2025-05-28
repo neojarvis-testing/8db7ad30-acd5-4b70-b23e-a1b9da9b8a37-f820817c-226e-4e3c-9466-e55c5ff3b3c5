@@ -1,72 +1,65 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Booking } from 'src/app/models/booking.model';
+import { BookingService } from 'src/app/services/booking.service';
 
-interface Booking {
-  id: number;
-  username: string;
-  eventName: string;
-  occupation: string;
-  gender: string;
-  city: string;
-  bookingDate: string;
-  status: string;
-  additionalNotes: string;
-  mobile: string;
-  proofImage: string;
-}
 
 @Component({
+  standalone: false,
   selector: 'app-booking',
   templateUrl: './admin-view-bookings.component.html',
   styleUrls: ['./admin-view-bookings.component.css']
 })
-export class AdminViewBookingsComponent {
-  // Sample booking data
-  bookings: Booking[] = [
-    {
-      id: 1,
-      username: 'Alice',
-      eventName: 'Tech Innovations Summit',
-      occupation: 'Software Engineer',
-      gender: 'Female',
-      city: 'New York',
-      bookingDate: '2025-03-27',
-      status: 'Pending',
-      additionalNotes: 'Looking forward to the keynote session.',
-      mobile: '9585193456',
-      proofImage: 'assets/images/proof1.jpg'
-    },
-    {
-      id: 2,
-      username: 'Bob',
-      eventName: 'Cybersecurity Trends 2025',
-      occupation: 'Software Engineer',
-      gender: 'Male',
-      city: 'New York',
-      bookingDate: '2025-03-27',
-      status: 'Accepted',
-      additionalNotes: 'NA',
-      mobile: '9585193456',
-      proofImage: 'assets/images/proof2.jpg'
-    },
-    {
-      id: 3,
-      username: 'Carol',
-      eventName: 'Tech Innovations Summit',
-      occupation: 'Project Manager',
-      gender: 'Female',
-      city: 'Chicago',
-      bookingDate: '2025-03-27',
-      status: 'Rejected',
-      additionalNotes: 'Needs accessibility accommodations.',
-      mobile: '9585193456',
-      proofImage: 'assets/images/proof3.jpg'
-    }
-  ];
+export class AdminViewBookingsComponent implements OnInit {
+
+  bookings: Booking[] = [];
+  filteredBookings: Booking[] = [];
+  loading = false;
+
+
+  // Pagination properties
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
 
   filterStatus: string = 'all';
   showProofPopup: boolean = false;
   showDeletePopup: boolean = false;
   selectedBooking: Booking | null = null;
+
+  showSuccessPopup = false;
+  popupMessage: string = '';
+
+  constructor(
+    private bookingService: BookingService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.loadBookings();
+  }
+
+  loadBookings(): void {
+    this.bookingService.getAllBookings().subscribe(events => {
+      this.bookings = events;
+      this.filteredBookings = events;
+      this.currentPage = 1;
+    });
+  }
+
+  get paginatedBooking(): Booking[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredBookings.slice(start, start + this.itemsPerPage);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredBookings.length / this.itemsPerPage);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
 
   // Returns filtered bookings based on the filter dropdown value
   getFilteredBookings(): Booking[] {
@@ -74,38 +67,57 @@ export class AdminViewBookingsComponent {
       return this.bookings;
     } else {
       return this.bookings.filter(
-        b => b.status.toLowerCase() === this.filterStatus.toLowerCase()
+        b => b.bookingStatus.toLowerCase() === this.filterStatus.toLowerCase()
       );
     }
   }
 
-  // Update booking status when the dropdown value changes
   updateStatus(booking: Booking, newStatus: string): void {
-    booking.status = newStatus;
-    // (Optional) Send update to backend server here
+    booking.bookingStatus = newStatus;
+    this.loading = true;
+    this.bookingService.updateBooking(booking.bookingId, booking).subscribe({
+      next: () => {
+        this.showSuccessPopup = true;
+        this.popupMessage = 'Successfully Updated Booking!';
+        this.loading = false;
+      },
+      error: () => {
+        alert('Failed to update Booking. Please try again.');
+        this.loading = false;
+      }
+    });
   }
 
-  // Show the proof image popup
   viewProof(booking: Booking): void {
     this.selectedBooking = booking;
     this.showProofPopup = true;
   }
 
-  // Open the delete confirmation popup
   deleteBooking(booking: Booking): void {
     this.selectedBooking = booking;
     this.showDeletePopup = true;
   }
 
-  // Confirm deletion and remove the booking
   confirmDelete(): void {
     if (this.selectedBooking) {
-      this.bookings = this.bookings.filter(b => b.id !== this.selectedBooking!.id);
+      this.loading = true;
+      this.bookingService.deleteBooking(this.selectedBooking.bookingId).subscribe({
+        next: () => {
+          this.showSuccessPopup = true;
+          this.popupMessage = 'Successfully Deleted Booking!';
+          this.loading = false;
+        },
+        error: () => {
+          alert('Failed to update Booking. Please try again.');
+          this.loading = false;
+        }
+      });
+
+      this.bookings = this.bookings.filter(b => b.bookingId !== this.selectedBooking!.bookingId);
     }
     this.closePopup();
   }
 
-  // Close any open popup
   closePopup(): void {
     this.showProofPopup = false;
     this.showDeletePopup = false;
