@@ -24,7 +24,7 @@ namespace dotnetapp2.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin,User")]
-        public async Task<ActionResult<IEnumerable<Booking>>> GetAllBookings()
+        public async Task<ActionResult> GetAllBookings()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace dotnetapp2.Controllers
 
         [HttpGet("{userId}")]
         [Authorize(Roles = "Admin,User")]
-        public async Task<ActionResult<IEnumerable<Booking>>> GetBookingsByUserId(int userId)
+        public async Task<ActionResult> GetBookingsByUserId(int userId)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace dotnetapp2.Controllers
 
         // [HttpGet("{bookingId}")]
         // [Authorize(Roles = "Admin,User")]
-        // public async Task<ActionResult<Booking>> GetBookingsByUserId(int bookingId)
+        // public async Task<ActionResult<Booking>> GetBookingsByBookingId(int bookingId)
         // {
         //     try
         //     {
