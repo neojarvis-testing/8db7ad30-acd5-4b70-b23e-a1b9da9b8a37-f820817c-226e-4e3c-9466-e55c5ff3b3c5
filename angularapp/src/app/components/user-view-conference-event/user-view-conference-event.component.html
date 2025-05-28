@@ -1,3 +1,4 @@
+
 <div class="container">
     <h1>Available ConferenceEvents</h1>
     <div>
@@ -6,7 +7,7 @@
     <div *ngIf="loading" class="center-message">Loading...</div>
     <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
     <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
-    <table *ngIf="!loading && conferenceevents.length > 0">
+    <table *ngIf="conferenceevents.length>0 ">
       <thead>
         <tr>
           <th>#</th>
@@ -22,16 +23,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ce of conferenceEventList$; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ ce.EventName }}</td>
-          <td>{{ ce.OrganizerName }}</td>
-          <td>{{ ce.Category }}</td>
-          <td>{{ ce.Description }}</td>
-          <td>{{ ce.Location }}</td>
-          <td>{{ ce.StartDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ ce.EndDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ ce.Capacity }}</td>
+        <tr *ngFor="let event of conferenceevents ">
+          <td>{{event.conferenceEventId }}</td>
+          <td>{{ event.eventName }}</td>
+          <td>{{ event.organizerName }}</td>
+          <td>{{ event.category }}</td>
+          <td>{{ event.description }}</td>
+          <td>{{ event.location }}</td>
+          <td>{{ event.startDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ event.endDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ event.capacity }}</td>
           <td>
             <button (click)="openDialog()" class="register-btn">Register</button>
           </td>
@@ -43,5 +44,9 @@
         </tr>
       </tbody>
     </table>
-    <div *ngIf="!loading && conferenceevents.length === 0" class="center-message">No conferenceevents found.</div>
-  </div>
+    <ng-template #loadingTpl>
+
+    <p *ngIf="loading ">Loading ...</p>
+    <p *ngIf="!loading && conferenceevents.length===0">No DataFound</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    </ng-template>

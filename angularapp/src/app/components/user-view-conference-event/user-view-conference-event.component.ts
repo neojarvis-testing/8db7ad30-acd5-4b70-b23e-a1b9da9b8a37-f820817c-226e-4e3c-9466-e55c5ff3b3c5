@@ -1,8 +1,9 @@
+
 import { Component , OnInit } from '@angular/core';
 import { ConferenceEventService } from '../../services/conference-event.service';
 import { ConferenceEvent } from '../../models/conference-event.model';
 import { UserBookConferenceEventComponent } from '../../components/user-book-conference-event/user-book-conference-event.component';
-import { Observable } from 'rxjs';
+import { Observable, catchError, finalize, of } from 'rxjs';
 // import {Matdialog} from '@angular/material/dialogue';
 // import { DialogFormComponent } from '../dialogue-form/dialogue-form.component';
 //import {UserAppliedConferenceEventComponent} from '../../components/user-applied-conference-event';
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class UserViewConferenceEventComponent  implements OnInit {
   conferenceevents: ConferenceEvent[] = [];
+  conferenceevent: ConferenceEvent;
   conferenceEventList$!:Observable<any[]>;
   loading = false;
   errorMessage = '';
@@ -26,7 +28,7 @@ export class UserViewConferenceEventComponent  implements OnInit {
   ngOnInit(): void {
     this.totalpages=Math.ceil(this.conferenceevents.length/this.pageSize);
     this.updatePsgeItems();
-    this.getConferenceEvents();
+    //this.getConferenceEvents();
     this. getAllConferenceEvents();
   }
   updatePsgeItems(){
@@ -57,11 +59,19 @@ export class UserViewConferenceEventComponent  implements OnInit {
   getAllConferenceEvents(): void {
     this.loading = true;
     this.errorMessage = '';
-    this.conferenceEventList$= this.conferenceEventService.getAllConferenceEvents();
-    error: () => {
-      this.errorMessage = 'Failed to load conferenceEvents.';
-      this.loading = false;
-    }
+    this.conferenceEventService.getAllConferenceEvents().subscribe(
+      (data)=> {
+        console.log('API response:',data);
+        this.conferenceevents = data;
+        this.loading=false;
+      },
+      (error) => {
+        console.error('API error:',error);
+        this.errorMessage='Failed to load conference event';
+        this.loading=false;
+      }
+    
+    );
   }
   getConferenceEvents(): void {
     this.loading = true;
