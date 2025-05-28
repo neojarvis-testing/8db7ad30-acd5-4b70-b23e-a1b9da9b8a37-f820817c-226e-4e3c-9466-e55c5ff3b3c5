@@ -88,5 +88,20 @@ select.form-control {
   box-sizing: border-box;
   background-color: white;
   appearance: none;
-  
+
+}
+.submit-btn{
+  width:100%;
+  padding:0.75rem;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+.submit-btn:hover{
+  background-color: #0056b3;
 }
