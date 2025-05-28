@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 import { AdminCreateConferenceEventComponent } from './admin-create-conference-event.component';
@@ -18,7 +18,7 @@ describe('AdminCreateConferenceEventComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [AdminCreateConferenceEventComponent],
-      imports: [FormsModule, RouterTestingModule],
+      imports: [ReactiveFormsModule, FormsModule, RouterTestingModule],
       providers: [
         { provide: ConferenceEventService, useValue: conferenceEventServiceSpy },
         { provide: Router, useValue: routerSpy },

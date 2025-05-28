@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { AdminEditConferenceEventComponent } from './admin-edit-conference-event.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('AdminEditConferenceEventComponent', () => {
   let component: AdminEditConferenceEventComponent;
@@ -12,7 +12,7 @@ describe('AdminEditConferenceEventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, ReactiveFormsModule,FormsModule],
       declarations: [AdminEditConferenceEventComponent],
       providers: [
         {
