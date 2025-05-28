@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'userfeedback', component: UserviewfeedbackComponent, canActivate: [userGuard] },
   { path: 'addfeedback', component: UseraddfeedbackComponent, canActivate: [userGuard] },
   { path: 'userappliedconferenceevent', component: UserAppliedConferenceEventComponent, canActivate: [userGuard] },
-  { path: 'userbookconferenceevent', component: UserBookConferenceEventComponent, canActivate: [userGuard] },
+  { path: 'userbookconferenceevent/:id', component: UserBookConferenceEventComponent, canActivate: [userGuard] },
   { path: 'userviewconferenceevent', component: UserViewConferenceEventComponent, canActivate: [userGuard] },
 
   // Error routes
