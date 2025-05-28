@@ -1,5 +1,5 @@
 .container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 2rem auto;
     background-color: #fdfdfd;
     padding: 2rem;
@@ -21,6 +21,7 @@
     margin-bottom: 0.5rem;
    font-weight: bold;
    color:#444;
+   font-size: 0.875rem;
   }
   input.form-group{
     width:100%;
@@ -30,10 +31,17 @@
     font-size: 1rem;
     box-sizing: border-box;
   }
-  input.form-control:focus{
+  input.form-control{
     outline: none;
     border-color: #007bff;
     box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+    width: 100%;
+    padding:0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    display: block;
   }
   input
   .center-message {
@@ -69,5 +77,5 @@
   }
   .submit-btn:hover{
     background-color: #218833;
-    
+
   }
