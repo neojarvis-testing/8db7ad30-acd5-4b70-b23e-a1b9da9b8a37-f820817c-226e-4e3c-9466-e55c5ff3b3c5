@@ -16,8 +16,8 @@ export class UserBookConferenceEventComponent implements OnInit {
   errorMessage = '';
   successMessage = '';
   showSuccessPopup = false;
-  
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+
+  constructor(private formBuilder: FormBuilder, private router: Router,private conferenceEventService: ConferenceEventService) { }
 
   ngOnInit(): void {
     // Build the event form with all controls marked as required.
@@ -39,7 +39,7 @@ get f() {
 
 onSubmit(): void {
   this.submitted = true;
-
+  this.addConferenceEventBooking();
   // If the form is invalid, stop here.
   if (this.eventForm.invalid) {
     return;
@@ -56,26 +56,36 @@ addConferenceEventBooking():void{
     this.submitted = true;
     this.errorMessage = '';
     this.successMessage = '';
-
-    // Get userId from localStorage (or AuthService)
+    const userId = Number(localStorage.getItem('userId'));
     const conferenceEventId =1;
+    const bookingId =1;
+    var BookingStatus='Test';
+    var Proof='';
+    var comments='';
     const booking = {
-      gender: this.eventForm.value.gender,
-      age: this.eventForm.value.age,
-      age: this.eventForm.value.age
-      conferenceEventId,
-      feedbackText: this.eventForm.value.feedbackText
+      BookingId:bookingId,
+      UserId:userId,
+      ConferenceEventId: conferenceEventId,
+      BookingStatus: BookingStatus,
+      BookingDate:this.eventForm.value.startDateTime,
+      Gender: this.eventForm.value.gender,
+      Age: this.eventForm.value.age,
+      Occupation: this.eventForm.value.category,
+      City: this.eventForm.value.city,
+      Proof:Proof,
+      AdditionalNotes: this.eventForm.value.adddet,
+      
     };
 
-    this.feedbackService.sendFeedback(feedback).subscribe({
+    this.conferenceEventService.addConferenceEventBooking(booking).subscribe({
       next: () => {
-        this.successMessage = 'Feedback submitted successfully!';
-        this.feedbackForm.reset();
-        setTimeout(() => this.router.navigate(['/userfeedback']), 1500);
+        this.successMessage = 'Booking submitted successfully!';
+        this.eventForm.reset();
+        setTimeout(() => this.router.navigate(['/userviewconferenceevent']), 1500);
       },
       error: err => {
         this.errorMessage = err.error?.message || 'Failed to submit feedback.';
-        this.submitting = false;
+        this.submitted = false;
       }
     });
 }
