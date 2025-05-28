@@ -2,7 +2,7 @@ import { ConferenceEvent } from "./conference-event.model";
 import { User } from "./user.model";
 
 export interface Booking {
-    bookingId: number;
+    bookingId?: number;
     userId: number;
     conferenceEventId: number;
     bookingStatus: string;
@@ -13,6 +13,6 @@ export interface Booking {
     city: string;
     proof: string;
     additionalNotes?: string;
-    user: User;
-    conferenceEvent: ConferenceEvent;
+    user?: User;
+    conferenceEvent?: ConferenceEvent;
 }

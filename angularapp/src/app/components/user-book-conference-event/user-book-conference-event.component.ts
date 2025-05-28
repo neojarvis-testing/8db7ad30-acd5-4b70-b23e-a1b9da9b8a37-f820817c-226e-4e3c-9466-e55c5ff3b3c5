@@ -1,10 +1,9 @@
 import { Component , OnInit } from '@angular/core';
-import { ConferenceEventService } from '../../services/conference-event.service';
-import { ConferenceEvent } from '../../models/conference-event.model';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BookingService } from 'src/app/services/booking.service';
+import { Booking } from 'src/app/models/booking.model';
+
 @Component({
   selector: 'app-user-book-conference-event',
   templateUrl: './user-book-conference-event.component.html',
@@ -12,24 +11,21 @@ import { Router } from '@angular/router';
 })
 export class UserBookConferenceEventComponent implements OnInit {
   eventForm: FormGroup;
-  submitted = false;
   errorMessage = '';
   successMessage = '';
   showSuccessPopup = false;
   
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private bookingService: BookingService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     // Build the event form with all controls marked as required.
     this.eventForm = this.formBuilder.group({
-      eventName: ['', Validators.required],
-      organizerName: ['', Validators.required],
+      gender: ['', Validators.required],
+      age: ['', Validators.required],
       category: ['', Validators.required],
-      description: ['', Validators.required],
-      location: ['', Validators.required],
-      startDateTime: ['', Validators.required],
-      endDateTime: ['', Validators.required],
-      capacity: ['', [Validators.required, Validators.min(1)]]
+      city: ['', Validators.required],
+      proof: ['', Validators.required],
+      adddet: ['', Validators.required]
     });
   }
 // Convenience getter for easy access to form controls
@@ -38,44 +34,42 @@ get f() {
 }
 
 onSubmit(): void {
-  this.submitted = true;
 
   // If the form is invalid, stop here.
   if (this.eventForm.invalid) {
     return;
   }
-
-  // Process the valid form data (e.g., send data to the backend).
-  console.log(this.eventForm.value);
-
   // Show the popup on successful submission.
   this.showSuccessPopup = true;
 }
+
 addConferenceEventBooking():void{
   if (this.eventForm.invalid) return;
-    this.submitted = true;
     this.errorMessage = '';
     this.successMessage = '';
 
     // Get userId from localStorage (or AuthService)
-    const conferenceEventId =1;
-    const booking = {
+    const booking: Booking = {
+      userId: Number(localStorage.getItem('userId')),
+      conferenceEventId:Number(this.route.snapshot.paramMap.get('id')),
+      bookingStatus: 'Pending',
+      bookingDate: new Date(),
       gender: this.eventForm.value.gender,
       age: this.eventForm.value.age,
-      age: this.eventForm.value.age
-      conferenceEventId,
-      feedbackText: this.eventForm.value.feedbackText
+      occupation: this.eventForm.value.occupation,
+      city: this.eventForm.value.city,
+      proof: this.eventForm.value.proof,
+      additionalNotes: this.eventForm.value.adddet
     };
 
-    this.feedbackService.sendFeedback(feedback).subscribe({
+    this.bookingService.addBooking(booking).subscribe({
       next: () => {
-        this.successMessage = 'Feedback submitted successfully!';
-        this.feedbackForm.reset();
-        setTimeout(() => this.router.navigate(['/userfeedback']), 1500);
+        this.successMessage = 'Booked successfully!';
+        this.eventForm.reset();
+        setTimeout(() => this.router.navigate(['/userviewconferenceevent']), 1500);
       },
       error: err => {
         this.errorMessage = err.error?.message || 'Failed to submit feedback.';
-        this.submitting = false;
       }
     });
 }
@@ -85,6 +79,6 @@ closePopup(): void {
   //need to navigate to user-view-bookings component
   this.router.navigate(['/userviewconferenceevent']);
 }
-  }
+}
 
 

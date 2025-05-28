@@ -37,8 +37,8 @@ export class BookingService {
     return this.http.delete<void>(`${this.baseUrl}/booking/${bookingId}`, this.options);
   }
 
-  updateBooking(id: number, requestObject: Booking): Observable<Booking> {
-    return this.http.put<Booking>(`${this.baseUrl}/booking/${id}`, requestObject, this.options);
+  updateBooking(id: number, requestObject: Booking): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/booking/${id}`, requestObject, this.options);
   }
 
   // getBookingById(id: number): Observable<Booking> {

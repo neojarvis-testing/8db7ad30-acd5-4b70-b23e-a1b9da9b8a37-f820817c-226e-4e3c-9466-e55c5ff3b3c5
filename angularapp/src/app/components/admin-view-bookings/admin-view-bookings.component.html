@@ -51,14 +51,14 @@
                 'pending': booking.status === 'Pending',
                 'accepted': booking.status === 'Accepted',
                 'rejected': booking.status === 'Rejected'
-              }" [ngModel]="booking.status" (ngModelChange)="updateStatus(booking, $event)">
+              }" [ngModel]="booking.bookingStatus" (ngModelChange)="updateStatus(booking, $event)">
                             <option value="Pending">Pending</option>
                             <option value="Accepted">Accepted</option>
                             <option value="Rejected">Rejected</option>
                         </select>
                     </td>
                     <td>{{ booking.additionalNotes }}</td>
-                    <td>{{ booking.mobile }}</td>
+                    <td>{{ booking.user.mobileNumber }}</td>
                     <td>
                         <button class="action-btn view-print" (click)="viewProof(booking)">View Proof</button>
                         <button class="action-btn delete-btn" (click)="deleteBooking(booking)">Delete</button>

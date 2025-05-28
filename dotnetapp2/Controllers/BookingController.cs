@@ -102,7 +102,7 @@ namespace dotnetapp2.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{bookingId}")]
         [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult> UpdateBooking(int bookingId, [FromBody] Booking booking)
         {
@@ -111,7 +111,7 @@ namespace dotnetapp2.Controllers
                 var result = await _bookingService.UpdateBooking(bookingId, booking);
                 if (result)
                 {
-                    return Ok("Booking updated successfully");
+                    return Ok(new {message="Booking updated successfully"});
                 }
                 else
                 {

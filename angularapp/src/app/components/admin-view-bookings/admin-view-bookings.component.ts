@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Booking } from 'src/app/models/booking.model';
 import { BookingService } from 'src/app/services/booking.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class AdminViewBookingsComponent implements OnInit {
 
   constructor(
     private bookingService: BookingService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -82,7 +84,7 @@ export class AdminViewBookingsComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        alert('Failed to update Booking. Please try again.');
+        this.toastService.show('Failed to update Booking. Please try again.');
         this.loading = false;
       }
     });
@@ -120,6 +122,7 @@ export class AdminViewBookingsComponent implements OnInit {
 
   closePopup(): void {
     this.showProofPopup = false;
+    this.showSuccessPopup = false;
     this.showDeletePopup = false;
     this.selectedBooking = null;
   }

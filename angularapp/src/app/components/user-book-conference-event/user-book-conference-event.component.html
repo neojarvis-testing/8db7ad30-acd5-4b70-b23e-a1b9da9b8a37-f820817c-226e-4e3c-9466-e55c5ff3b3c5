@@ -42,24 +42,21 @@
           <div *ngIf="submitted && f.city.errors" class="error">
               <span *ngIf="f.city.errors.required">City is required.</span>
           </div>
-      </div>
+      </div>   
 
-      <!-- Start Date & Time Field -->
+      <!-- Proof Field -->
       <div class="form-group">
-          <label for="startDateTime">Start Date & Time*</label>
-          <input type="datetime-local" id="startDateTime" formControlName="startDateTime" class="form-control" />
-          <div *ngIf="submitted && f.startDateTime.errors" class="error">
-              <span *ngIf="f.startDateTime.errors.required">Start Date & Time is required.</span>
-          </div>
-      </div>
-
- 
+        <label for="proof">Proof*</label>
+        <input type="text" id="proof" formControlName="proof" class="form-control" />
+        <div *ngIf="submitted && f.proof.errors" class="error">
+            <span *ngIf="f.proof.errors.required">Proof is required.</span>
+        </div>
+    </div> 
 
       <!-- Additional details Field -->
       <div class="form-group">
           <label for="adddet">Additional Details -optional</label>
-          <input type="text" id="adddet" formControlName="adddet" class="form-control" />
-          
+          <input type="text" id="adddet" formControlName="adddet" class="form-control" />          
       </div>
 
       <!-- Submit Button -->
