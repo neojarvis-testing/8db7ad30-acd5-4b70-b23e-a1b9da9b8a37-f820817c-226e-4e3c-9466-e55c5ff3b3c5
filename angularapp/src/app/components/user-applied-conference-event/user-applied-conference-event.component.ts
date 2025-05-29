@@ -1,8 +1,11 @@
 import { Component , OnInit } from '@angular/core';
 import { ConferenceEventService } from '../../services/conference-event.service';
 import { ConferenceEvent } from '../../models/conference-event.model';
+import { Booking } from '../../models/booking.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
+
 @Component({
   selector: 'app-user-applied-conference-event',
   templateUrl: './user-applied-conference-event.component.html',
@@ -18,13 +21,13 @@ export class UserAppliedConferenceEventComponent implements OnInit {
   currentPage=1;
   totalpages=1;
   pagedItems:any[]=[];
+  bookings: Booking[] = [];
   constructor(private conferenceEventService: ConferenceEventService) {}
 
   ngOnInit(): void {
     this.totalpages=Math.ceil(this.conferenceevents.length/this.pageSize);
     this.updatePsgeItems();
-    this.getConferenceEvents();
-    this. getAllConferenceEvents();
+   // this. getAllConferenceEvents();
     this. getAllConferenceEventBookings();
   }
   getAllConferenceEvents(): void {
@@ -36,16 +39,24 @@ export class UserAppliedConferenceEventComponent implements OnInit {
       this.loading = false;
     }
   }
-  getAllConferenceEventBookings():void{
+  async getAllConferenceEventBookings():Promise<void>{
     this.loading = true;
     this.errorMessage = '';
-    this.conferenceEventList$= this.conferenceEventService.getAllConferenceEventBookings();
-    error: () => {
-      this.errorMessage = 'Failed to load conferenceEvents.';
-      this.loading = false;
-    }
+    try{
+      const data=await firstValueFrom(
+    this.conferenceEventService.getAllConferenceEventBookings());
+        console.log('API response:',data);
+        this.bookings = data;
+      }catch(error) {
+        console.error('API error:',error);
+        this.errorMessage='Failed to load bookings';
+      }
+      finally{
+        this.loading=false;
+      }
 
   }
+  
   updatePsgeItems(){
     const startIndex=(this.currentPage-1)*this.pageSize;
     const endIndex=(startIndex+this.pageSize);

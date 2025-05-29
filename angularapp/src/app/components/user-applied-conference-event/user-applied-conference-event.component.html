@@ -23,16 +23,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ce of conferenceEventList$; let i = index">
+        <tr *ngFor="let b of bookings; let i = index">
           <td>{{ i + 1 }}</td>
-          <td>{{ ce.EventName }}</td>
-          <td>{{ ce.OrganizerName }}</td>
-          <td>{{ ce.Category }}</td>
-          <td>{{ ce.Description }}</td>
-          <td>{{ ce.Location }}</td>
-          <td>{{ ce.StartDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ ce.EndDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ ce.Capacity }}</td>
+          <td>{{ b.EventName }}</td>
+          <td>{{ b.OrganizerName }}</td>
+          <td>{{ b.Category }}</td>
+          <td>{{ b.Description }}</td>
+          <td>{{ b.Location }}</td>
+          <td>{{ b.StartDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ b.EndDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ b.Capacity }}</td>
           <td><button (click)="openRegisterForm()" class="view-btn">View Proof</button></td>
           <td>
             <button (click)="deleteConferenceEvent(ce.ConferenceEventId)" class="delete-btn">Delete</button>
