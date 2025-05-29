@@ -138,6 +138,7 @@
   min-width: 110px;
   min-height: 40px;
   font-weight: 500;
+  font-size: 1rem;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, border-color 0.2s;
   box-shadow: 0 1px 4px #d32f2f22;
   display: inline-flex;
