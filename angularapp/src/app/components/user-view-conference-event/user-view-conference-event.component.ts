@@ -4,7 +4,7 @@ import { ConferenceEventService } from '../../services/conference-event.service'
 import { ConferenceEvent } from '../../models/conference-event.model';
 import { UserBookConferenceEventComponent } from '../../components/user-book-conference-event/user-book-conference-event.component';
 import { Observable, catchError, finalize, of } from 'rxjs';
-
+import{Router} from '@angular/router';
 @Component({
   selector: 'app-user-view-conference-event',
   templateUrl: './user-view-conference-event.component.html',
@@ -24,7 +24,7 @@ export class UserViewConferenceEventComponent  implements OnInit {
   totalpages=1;
   pagedItems:any[]=[];
   today: Date= new Date();
-  constructor(private conferenceEventService: ConferenceEventService) {}
+  constructor(private conferenceEventService: ConferenceEventService,private router:Router) {}
 //constructor(private dialogue:Matdialog){}
   ngOnInit(): void {
     this.getEvents();
@@ -111,11 +111,7 @@ export class UserViewConferenceEventComponent  implements OnInit {
   }
 openDialog():void
 {
-  // this.dialogue.open(DialogFormComponent,
-  //   {
-  //     width:'400px',
-  //     disableClose:true,
-  //   });
+  this.router.navigate['/userbookconferenceevent'];
 }
   deleteConferenceEvent(conferenceEventId: number): void {
     if (!confirm('Are you sure you want to delete this ConferenceEventId?')) return;
