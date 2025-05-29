@@ -16,7 +16,15 @@
         <ng-container *ngIf="userRole === 'Admin'">
           <a class="btn-admin" routerLink="/home" (click)="closeMenu()">Admin/{{userName}}</a>
           <a routerLink="/home" (click)="closeMenu()">Home</a>
-          <a routerLink="/conference-events" (click)="closeMenu()">Conference Events</a>
+          <div class="dropdown" (mouseenter)="dropdownOpen = true" (mouseleave)="dropdownOpen = false">
+            <button class="btn-feedback" (click)="dropdownOpen = !dropdownOpen">ConferenceEvents ▼</button>
+            <div class="dropdown-content" *ngIf="dropdownOpen">
+              <a routerLink="/admincreateconferenceevent" (click)="closeMenu(); dropdownOpen = false " >Create Conference Events</a>
+          <a routerLink="/admineditconferenceevent" (click)="closeMenu(); dropdownOpen = false">Edit Conference Events</a>
+          <a routerLink="/adminviewconferenceevent" (click)="closeMenu(); dropdownOpen = false">View Conference Events</a>
+            </div>
+          </div>
+
           <a routerLink="/requested-event-bookings" (click)="closeMenu()">Requested Event Bookings</a>
           <a routerLink="/adminfeedback" (click)="closeMenu()">Feedbacks</a>
         </ng-container>
@@ -24,9 +32,15 @@
         <ng-container *ngIf="userRole === 'User'">
           <a class="btn-admin" routerLink="/home" (click)="closeMenu()">User/{{userName}}</a>
           <a routerLink="/home" (click)="closeMenu()">Home</a>
-          <a routerLink="/userappliedconferenceevent" (click)="closeMenu()">Conference Events</a>
-          <a routerLink="/userbookconferenceevent" (click)="closeMenu()">Conference Events</a>
-          <a routerLink="/userviewconferenceevent" (click)="closeMenu()">Conference Events</a>
+          <div class="dropdown" (mouseenter)="dropdownOpen = true" (mouseleave)="dropdownOpen = false">
+            <button class="btn-feedback" (click)="dropdownOpen = !dropdownOpen">ConferenceEvents ▼</button>
+            <div class="dropdown-content" *ngIf="dropdownOpen">
+              <a routerLink="/userappliedconferenceevent" (click)="closeMenu(); dropdownOpen = false " >Applied Conference Events</a>
+          <a routerLink="/userbookconferenceevent" (click)="closeMenu(); dropdownOpen = false">Book Conference Events</a>
+          <a routerLink="/userviewconferenceevent" (click)="closeMenu(); dropdownOpen = false">View Conference Events</a>
+            </div>
+          </div>
+          
           <a routerLink="/requested-event-bookings" (click)="closeMenu()">My Bookings</a>
           <div class="dropdown" (mouseenter)="dropdownOpen = true" (mouseleave)="dropdownOpen = false">
             <button class="btn-feedback" (click)="dropdownOpen = !dropdownOpen">Feedback ▼</button>

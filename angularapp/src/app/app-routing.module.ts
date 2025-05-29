@@ -12,8 +12,7 @@ import { adminGuard, userGuard } from './components/authguard/authguard';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { AdminCreateConferenceEventComponent } from './components/admin-create-conference-event/admin-create-conference-event.component';
 import { AdminEditConferenceEventComponent } from './components/admin-edit-conference-event/admin-edit-conference-event.component';
-//import { AdminCreateConferenceEventComponent } from './components/admin-create-conference-event/admin-create-conference-event.component';
-
+import { AdminViewConferenceEventComponent } from './components/admin-view-conference-event/admin-view-conference-event.component';
 import { UserAppliedConferenceEventComponent } from './components/user-applied-conference-event/user-applied-conference-event.component';
 import { UserBookConferenceEventComponent } from './components/user-book-conference-event/user-book-conference-event.component';
 import { UserViewConferenceEventComponent } from './components/user-view-conference-event/user-view-conference-event.component';
@@ -35,9 +34,9 @@ const routes: Routes = [
   { path: 'adminviewbooking', component: AdminViewBookingsComponent },
   //Admin routes
     { path: 'adminfeedback', component: AdminviewfeedbackComponent, canActivate: [adminGuard] },
-    { path: 'admincreateconferenceevent', component: UserAppliedConferenceEventComponent, canActivate: [userGuard] },
-    { path: 'userappliedconferenceevent', component: UserAppliedConferenceEventComponent, canActivate: [userGuard] },
-    { path: 'userappliedconferenceevent', component: UserAppliedConferenceEventComponent, canActivate: [userGuard] },
+    { path: 'admincreateconferenceevent', component: AdminCreateConferenceEventComponent, canActivate: [userGuard] },
+    { path: 'admineditconferenceevent', component: AdminEditConferenceEventComponent, canActivate: [userGuard] },
+    { path: 'adminviewconferenceevent', component: AdminViewConferenceEventComponent, canActivate: [userGuard] },
   //User routes
   { path: 'userfeedback', component: UserviewfeedbackComponent, canActivate: [userGuard] },
   { path: 'addfeedback', component: UseraddfeedbackComponent, canActivate: [userGuard] },
