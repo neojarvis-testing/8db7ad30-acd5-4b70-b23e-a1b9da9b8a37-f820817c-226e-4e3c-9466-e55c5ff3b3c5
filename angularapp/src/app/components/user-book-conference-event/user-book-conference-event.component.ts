@@ -89,6 +89,7 @@ addConferenceEventBooking():void{
       }
     });
 }
+
 closePopup(): void {
   this.showSuccessPopup = false;
   // Optionally, reset the form or perform additional actions.
