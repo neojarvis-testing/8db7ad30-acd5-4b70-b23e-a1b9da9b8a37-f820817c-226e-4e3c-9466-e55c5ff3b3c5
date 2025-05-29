@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingService } from 'src/app/services/booking.service';
 import { Booking } from 'src/app/models/booking.model';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-user-book-conference-event',
@@ -16,7 +17,7 @@ export class UserBookConferenceEventComponent implements OnInit {
   showSuccessPopup = false;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private bookingService: BookingService, private route: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private bookingService: BookingService, private route: ActivatedRoute,private toast:ToastService) { }
 
   ngOnInit(): void {
     // Build the event form with all controls marked as required.
@@ -59,13 +60,14 @@ export class UserBookConferenceEventComponent implements OnInit {
 
     this.bookingService.addBooking(booking).subscribe({
       next: () => {
-        this.successMessage = 'Booked successfully!';
-        this.showSuccessPopup = true;
-        this.eventForm.reset();
-        this.router.navigate['/userviewconferenceevent'];
+        // this.successMessage = 'Booked successfully!';
+        // this.showSuccessPopup = true;
+        // this.eventForm.reset();
+        this.toast.show('Booked successfully!');
+        this.router.navigate(['/userviewconferenceevent']);
       },
       error: err => {
-        this.errorMessage = err.error?.message || 'Failed to submit booking.';
+        this.toast.show(err.error || 'Failed to submit booking.');
       }
     });
   }
