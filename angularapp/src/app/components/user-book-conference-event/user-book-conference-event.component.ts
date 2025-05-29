@@ -62,6 +62,7 @@ export class UserBookConferenceEventComponent implements OnInit {
         this.successMessage = 'Booked successfully!';
         this.showSuccessPopup = true;
         this.eventForm.reset();
+        this.router.navigate['/userviewconferenceevent'];
       },
       error: err => {
         this.errorMessage = err.error?.message || 'Failed to submit booking.';
