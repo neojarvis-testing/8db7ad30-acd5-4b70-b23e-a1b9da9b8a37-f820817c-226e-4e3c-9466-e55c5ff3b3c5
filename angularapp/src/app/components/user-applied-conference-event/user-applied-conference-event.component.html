@@ -7,7 +7,7 @@
     <div *ngIf="loading" class="center-message">Loading...</div>
     <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
     <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
-    <table *ngIf="!loading && conferenceevents.length > 0">
+    <table *ngIf="!loading && bookings.length > 0">
       <thead>
         <tr>
           <th>#</th>
