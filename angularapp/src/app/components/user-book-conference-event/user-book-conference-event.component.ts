@@ -16,11 +16,17 @@ export class UserBookConferenceEventComponent implements OnInit {
   successMessage = '';
   showSuccessPopup = false;
   submitted = false;
+  proofFileName: string = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private bookingService: BookingService, private route: ActivatedRoute,private toast:ToastService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private bookingService: BookingService,
+    private route: ActivatedRoute,
+    private toast: ToastService
+  ) {}
 
   ngOnInit(): void {
-    // Build the event form with all controls marked as required.
     this.eventForm = this.formBuilder.group({
       gender: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(1)]],
@@ -30,14 +36,51 @@ export class UserBookConferenceEventComponent implements OnInit {
       additionalNotes: ['']
     });
   }
-  // Convenience getter for easy access to form controls
+
   get f() {
     return this.eventForm.controls;
   }
 
+  onProofFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      // Restrict file type to image and size to 500kb
+      if (!file.type.startsWith('image/')) {
+        this.errorMessage = 'Only image files are allowed for proof.';
+        this.eventForm.patchValue({ proof: '' });
+        this.proofFileName = '';
+        return;
+      }
+      if (file.size > 500 * 1024) {
+        this.errorMessage = 'File size must be less than 500KB.';
+        this.eventForm.patchValue({ proof: '' });
+        this.proofFileName = '';
+        return;
+      }
+      this.errorMessage = '';
+      this.proofFileName = file.name;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageString = (reader.result as string);
+        this.eventForm.patchValue({ proof: imageString });
+      };
+      reader.onerror = () => {
+        this.errorMessage = 'Failed to read file.';
+        this.eventForm.patchValue({ proof: '' });
+        this.proofFileName = '';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      this.eventForm.patchValue({ proof: '' });
+      this.proofFileName = '';
+    }
+  }
+
   onSubmit(): void {
-    this.addConferenceEventBooking();
     this.submitted = true;
+    if (this.eventForm.invalid) return;
+    this.addConferenceEventBooking();
   }
 
   addConferenceEventBooking(): void {
@@ -60,9 +103,6 @@ export class UserBookConferenceEventComponent implements OnInit {
 
     this.bookingService.addBooking(booking).subscribe({
       next: () => {
-        // this.successMessage = 'Booked successfully!';
-        // this.showSuccessPopup = true;
-        // this.eventForm.reset();
         this.toast.show('Booked successfully!');
         this.router.navigate(['/userviewconferenceevent']);
       },
@@ -71,12 +111,9 @@ export class UserBookConferenceEventComponent implements OnInit {
       }
     });
   }
+
   closePopup(): void {
     this.showSuccessPopup = false;
-    // Optionally, reset the form or perform additional actions.
-    //need to navigate to user-view-bookings component
     this.router.navigate(['/userviewconferenceevent']);
   }
 }
-
-

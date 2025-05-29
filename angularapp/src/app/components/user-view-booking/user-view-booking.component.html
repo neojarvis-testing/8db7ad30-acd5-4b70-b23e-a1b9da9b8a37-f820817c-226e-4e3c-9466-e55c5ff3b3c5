@@ -1,94 +1,67 @@
 <div class="booking-container">
-    <!-- Main Content -->
     <section class="content">
-        <h2>Bookings Management</h2>
-        <!-- Light blue separator line -->
-        <div class="separator"></div>
-
-        <!-- Filter Section (left aligned) -->
-        <div class="filter">
-            <label for="statusFilter">Filter by Status:</label>
-            <select id="statusFilter" [(ngModel)]="filterStatus">
-                <option value="all">All</option>
-                <option value="Pending">Pending</option>
-                <option value="Accepted">Accepted</option>
-                <option value="Rejected">Rejected</option>
-            </select>
+        <h2 class="applied-title">Applied Conference Events</h2>
+        <div class="booking-table-controls">
+            <button class="sort-btn" (click)="sortBy('asc')">Sort Date by Asc</button>
+            <button class="sort-btn" (click)="sortBy('dsc')">Sort Date by Desc</button>
         </div>
-
-        <!-- Bookings Table -->
         <table class="booking-table">
             <thead>
                 <tr>
-                    <th>S.No</th>
-                    <th>Username</th>
+                    <th>S.No.</th>
                     <th>Event Name</th>
+                    <th>Organizer Name</th>
                     <th>Occupation</th>
                     <th>Gender</th>
                     <th>City</th>
                     <th>Booking Date</th>
-                    <th>Status</th>
+                    <th>Booking Status</th>
                     <th>Additional Notes</th>
-                    <th>Mobile Number</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="getFilteredBookings().length === 0">
-                    <td colspan="11" class="no-records">Oops! No records found</td>
+                <tr *ngIf="paginatedBooking.length === 0">
+                    <td colspan="10" class="no-records">Oops! No records found</td>
                 </tr>
-                <tr *ngFor="let booking of getFilteredBookings(); let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ booking.user?.username }}</td>
+                <tr *ngFor="let booking of paginatedBooking; let i = index">
+                    <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
                     <td>{{ booking.conferenceEvent?.eventName }}</td>
+                    <td>{{ booking.conferenceEvent?.organizerName }}</td>
                     <td>{{ booking.occupation }}</td>
                     <td>{{ booking.gender }}</td>
                     <td>{{ booking.city }}</td>
-                    <td>{{ booking.bookingDate }}</td>
+                    <td>{{ booking.bookingDate | date:'MMM d, y' }}</td>
                     <td>
-                        <!-- Status Dropdown with dynamic background color and custom arrow -->
-                        <select class="status-dropdown" disabled="true" [ngClass]="{
-                'pending': booking.bookingStatus === 'Pending',
-                'accepted': booking.bookingStatus === 'Accepted',
-                'rejected': booking.bookingStatus === 'Rejected'
-              }" [ngModel]="booking.bookingStatus" (ngModelChange)="updateStatus(booking, $event)">
-                            <option value="Pending">Pending</option>
-                            <option value="Accepted">Accepted</option>
-                            <option value="Rejected">Rejected</option>
-                        </select>
+                        <span class="status-badge" [ngClass]="{
+              'pending': booking.bookingStatus === 'Pending',
+              'accepted': booking.bookingStatus === 'Accepted',
+              'rejected': booking.bookingStatus === 'Rejected'
+            }">{{ booking.bookingStatus }}</span>
                     </td>
-                    <td>{{ booking.additionalNotes }}</td>
-                    <td>{{ booking.user.mobileNumber }}</td>
+                    <td>{{ booking.additionalNotes || 'NA' }}</td>
                     <td>
-                        <button class="action-btn view-print" (click)="viewProof(booking)">View Proof</button>
+                        <button class="action-btn view-proof" (click)="viewProof(booking)">View Proof</button>
                         <button class="action-btn delete-btn" (click)="deleteBooking(booking)">Delete</button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div class="pagination-controls">
+            <button class="pagination-btn" [disabled]="currentPage === 1"
+                (click)="goToPage(currentPage - 1)">Prev</button>
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <button class="pagination-btn" [disabled]="currentPage === totalPages"
+                (click)="goToPage(currentPage + 1)">Next</button>
+        </div>
     </section>
-
-    <div *ngIf="loading" class="center-message">Loading...</div>
-    <div *ngIf="getFilteredBookings().length > 0" class="event-pagination">
-        <button class="event-pagination-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
-            Prev
-        </button>
-        <span class="event-pagination-info">
-            Page {{ currentPage }} of {{ totalPages }}
-        </span>
-        <button class="event-pagination-btn" [disabled]="currentPage === totalPages"
-            (click)="goToPage(currentPage + 1)">
-            Next
-        </button>
-    </div>
 
     <!-- Proof Image Popup -->
     <div class="popup" *ngIf="showProofPopup">
         <div class="popup-content">
-            <!-- Red circular close button -->
             <button class="close-button" (click)="closePopup()">&times;</button>
             <h3>Proof Image</h3>
-            <img [src]="selectedBooking?.proofImage" alt="Proof Image" />
+            <img [src]="selectedBooking?.proof" alt="Proof Image" />
         </div>
     </div>
 
@@ -103,7 +76,6 @@
             </div>
         </div>
     </div>
-
     <!-- Success Popup -->
     <div class="popup" *ngIf="showSuccessPopup">
         <div class="popup-content">

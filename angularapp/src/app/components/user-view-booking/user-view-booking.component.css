@@ -1,154 +1,157 @@
-/* Overall container */
 .booking-container {
-    max-width: 1450px;
-    margin: 20px auto;
-    padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1100px;
+  margin: 10px auto;
+  background: #fff;
+  padding: 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #0001;
+}
+
+.applied-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
     color: #333;
 }
 
-/* Navigation Bar */
-.header {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+.booking-table-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
-.nav-left .admin-label {
-    font-weight: bold;
-    color: #007bff;
-    font-size: 16px;
+.sort-btn {
+  background: #2ca6c9;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-size: 0.98rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sort-btn:hover {
+  background: #2471a3;
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: #007bff;
-    margin: 0 12px;
-    font-size: 14px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  background: #fff;
 }
 
-.nav-links a.active,
-.nav-links a:hover {
-    text-decoration: underline;
+thead {
+  background-color: #2ca6c9;
+  color: white;
 }
 
-/* Main Content */
-.content h2 {
-    text-align: center;
-    margin-bottom: 10px;
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-/* Separator line between title and filter */
-.separator {
-    height: 3px;
-    background-color: #add8e6;
-    /* Light blue */
-    width: 100%;
-    margin-bottom: 20px;
+th {
+  font-weight: 600;
+  font-size: 1rem;
 }
 
-/* Filter styles left aligned */
-.filter {
-    text-align: left;
-    margin-bottom: 20px;
+tr:last-child td {
+  border-bottom: none;
 }
 
-.filter label {
-    font-weight: bold;
-    margin-right: 8px;
+tbody tr:hover {
+  background: #f4fafd;
 }
 
-.filter select {
-    padding: 6px 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.no-records {
+  text-align: center;
+  font-style: italic;
+  color: #c0392b;
+  background: #fff;
+  font-weight: 500;
 }
 
-/* Bookings Table */
-.booking-table {
-    width: 100%;
-    border-collapse: collapse;
+.status-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  text-align: center;
+}
+.status-badge.pending {
+  background: #ffe082;
+  color: #b26a00;
+}
+.status-badge.accepted {
+  background: #c8e6c9;
+  color: #388e3c;
+}
+.status-badge.rejected {
+  background: #ffcdd2;
+  color: #c62828;
 }
 
-.booking-table th,
-.booking-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    font-size: 14px;
-    text-align: left;
-}
-
-.booking-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-
-/* Status dropdown styling */
-.status-dropdown {
-    width: 100%;
-    padding: 4px 30px 4px 8px;
-    /* extra right padding for arrow */
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    /* Remove default appearance */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-    background-size: 12px;
-}
-
-.status-dropdown.pending {
-    background-color: #d3d3d3;
-    /* Grey */
-    color: #000;
-}
-
-.status-dropdown.accepted {
-    background-color: #28a745;
-    /* Green */
-    color: #fff;
-}
-
-.status-dropdown.rejected {
-    background-color: #dc3545;
-    /* Red */
-    color: #fff;
-}
-
-/* Custom arrow added using an inline SVG */
-.status-dropdown {
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 12,0 6,6" fill="%23666"/></svg>');
-}
-
-/* Action Buttons */
 .action-btn {
-    padding: 5px 10px;
-    margin: 2px;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 12px;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.97rem;
+  font-weight: 500;
+  margin-right: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.action-btn.view-proof {
+  background: #27ae60;
+  color: #fff;
+}
+.action-btn.view-proof:hover {
+  background: #219150;
+}
+.action-btn.delete-btn {
+  background: #e74c3c;
+  color: #fff;
+}
+.action-btn.delete-btn:hover {
+  background: #c0392b;
 }
 
-.action-btn:hover {
-    opacity: 0.9;
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-top: 10px;
 }
 
-.view-print {
-    background-color: #28a745;
+.pagination-btn {
+  background: #eaeaea;
+  color: #222;
+  border: none;
+  border-radius: 4px;
+  min-width: 48px;
+  padding: 6px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.pagination-btn:disabled {
+  background: #f4fafd;
+  color: #aaa;
+  cursor: not-allowed;
+}
+.pagination-btn:not(:disabled):hover {
+  background: #2ca6c9;
+  color: #fff;
 }
 
-.delete-btn {
-    background-color: #dc3545;
-}
 
 /* Popups */
 .popup {
@@ -232,43 +235,6 @@
 .popup-buttons .cancel {
     background-color: #dc3545;
     color: #fff;
-}
-
-.event-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 18px;
-}
-
-.event-pagination-btn {
-    background: #eaeaea;
-    color: #222;
-    border: none;
-    border-radius: 4px;
-    min-width: 48px;
-    margin: 0 8px;
-    padding: 6px 18px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.event-pagination-btn:disabled {
-    background: #f4fafd;
-    color: #aaa;
-    cursor: not-allowed;
-}
-
-.event-pagination-btn:not(:disabled):hover,
-.event-pagination-btn:not(:disabled):focus {
-    background: #2ca6c9;
-    color: #fff;
-}
-
-.event-pagination-info {
-    font-size: 15px;
 }
 
 .no-records {

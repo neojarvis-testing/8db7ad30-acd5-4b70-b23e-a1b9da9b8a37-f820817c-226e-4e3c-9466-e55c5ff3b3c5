@@ -85,10 +85,9 @@
     <!-- Proof Image Popup -->
     <div class="popup" *ngIf="showProofPopup">
         <div class="popup-content">
-            <!-- Red circular close button -->
             <button class="close-button" (click)="closePopup()">&times;</button>
             <h3>Proof Image</h3>
-            <img [src]="selectedBooking?.proofImage" alt="Proof Image" />
+            <img [src]="selectedBooking?.proof" alt="Proof Image" />
         </div>
     </div>
 

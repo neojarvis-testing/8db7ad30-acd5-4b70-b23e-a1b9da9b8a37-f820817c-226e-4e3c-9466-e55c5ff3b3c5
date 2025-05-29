@@ -43,13 +43,17 @@
       </div>
     </div>
 
-    <!-- Proof -->
+    <!-- Proof (Image File Upload) -->
     <div class="form-group">
-      <label for="proof">Proof*</label>
-      <input type="text" id="proof" formControlName="proof" class="form-control" />
+      <label for="proof">Proof* (Image, max 500KB)</label>
+      <input type="file" id="proof" accept="image/*" (change)="onProofFileChange($event)" class="form-control" />
+      <div *ngIf="proofFileName" style="margin-top: 4px; font-size: 13px;">
+        Selected file: {{ proofFileName }}
+      </div>
       <div *ngIf="submitted && f.proof.errors" class="error">
         <span *ngIf="f.proof.errors.required">Proof is required.</span>
       </div>
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
     </div>
 
     <!-- Additional Notes -->

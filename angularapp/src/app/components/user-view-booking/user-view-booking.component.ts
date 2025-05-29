@@ -73,6 +73,15 @@ export class UserViewBookingComponent {
     }
   }
 
+  sortBy(field: string): void {
+    if (field === 'asc') {
+      this.bookings.sort((a, b) => new Date(a.bookingDate).getTime() - new Date(b.bookingDate).getTime());
+    } else if (field === 'dsc') {
+      this.bookings.sort((a, b) => new Date(b.bookingDate).getTime() - new Date(a.bookingDate).getTime());
+    }
+    this.currentPage = 1;
+  }
+
   updateStatus(booking: Booking, newStatus: string): void {
     booking.bookingStatus = newStatus;
     this.loading = true;
