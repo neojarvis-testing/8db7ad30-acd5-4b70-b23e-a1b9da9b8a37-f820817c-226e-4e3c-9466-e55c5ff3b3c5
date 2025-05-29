@@ -89,7 +89,7 @@ namespace dotnetapp2.Controllers
                 var result = await _bookingService.AddBooking(booking);
                 if (result)
                 {
-                    return Ok("Booking added successfully");
+                    return Ok(new {message="Booking added successfully"});
                 }
                 else
                 {

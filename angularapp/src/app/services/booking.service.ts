@@ -29,8 +29,8 @@ export class BookingService {
     return this.http.get<Booking[]>(`${this.baseUrl}/bookings/${userId}`, this.options);
   }
 
-  addBooking(requestObject: Booking): Observable<Booking> {
-    return this.http.post<Booking>(`${this.baseUrl}/booking`, requestObject, this.options);
+  addBooking(requestObject: Booking): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/booking`, requestObject, this.options);
   }
 
   deleteBooking(bookingId: number): Observable<any> {
