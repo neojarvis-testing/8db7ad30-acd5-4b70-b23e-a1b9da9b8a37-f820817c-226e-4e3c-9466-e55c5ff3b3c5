@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Booking } from 'src/app/models/booking.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-user-view-booking',
@@ -31,7 +32,8 @@ export class UserViewBookingComponent {
 
   constructor(
     private bookingService: BookingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastService: ToastService,
   ) { }
 
   ngOnInit(): void {
@@ -91,8 +93,8 @@ export class UserViewBookingComponent {
         this.popupMessage = 'Successfully Updated Booking!';
         this.loading = false;
       },
-      error: () => {
-        alert('Failed to update Booking. Please try again.');
+      error: (err) => {
+        this.toastService.show(err.error?.message || 'Failed to update Booking. Please try again.');
         this.loading = false;
       }
     });
@@ -117,8 +119,8 @@ export class UserViewBookingComponent {
           this.popupMessage = 'Successfully Deleted Booking!';
           this.loading = false;
         },
-        error: () => {
-          alert('Failed to update Booking. Please try again.');
+        error: (err) => {
+          this.toastService.show(err.error?.message || 'Failed to delete Booking. Please try again.');
           this.loading = false;
         }
       });

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConferenceEventService } from '../../services/conference-event.service';
 import { ConferenceEvent } from '../../models/conference-event.model';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-admin-create-conference-event',
@@ -18,7 +19,8 @@ export class AdminCreateConferenceEventComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private conferenceEventService: ConferenceEventService
+    private conferenceEventService: ConferenceEventService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -82,8 +84,8 @@ export class AdminCreateConferenceEventComponent implements OnInit {
       next: () => {
         this.showSuccessPopup = true;
       },
-      error: () => {
-        alert('Failed to create event. Please try again.');
+      error: (err) => {
+        this.toastService.show(err.error?.Message || 'Failed to create conference event. Please try again.');
       }
     });
   }

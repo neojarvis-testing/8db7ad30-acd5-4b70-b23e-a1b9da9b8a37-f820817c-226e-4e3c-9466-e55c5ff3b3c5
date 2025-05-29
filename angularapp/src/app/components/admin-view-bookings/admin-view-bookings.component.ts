@@ -83,8 +83,8 @@ export class AdminViewBookingsComponent implements OnInit {
         this.popupMessage = 'Successfully Updated Booking!';
         this.loading = false;
       },
-      error: () => {
-        this.toastService.show('Failed to update Booking. Please try again.');
+      error: (err) => {
+        this.toastService.show(err.error?.message || 'Failed to update Booking. Please try again.');
         this.loading = false;
       }
     });
@@ -109,8 +109,8 @@ export class AdminViewBookingsComponent implements OnInit {
           this.popupMessage = 'Successfully Deleted Booking!';
           this.loading = false;
         },
-        error: () => {
-          alert('Failed to update Booking. Please try again.');
+        error: (err) => {
+          this.toastService.show(err.error?.message || 'Failed to delete Booking. Please try again.');
           this.loading = false;
         }
       });

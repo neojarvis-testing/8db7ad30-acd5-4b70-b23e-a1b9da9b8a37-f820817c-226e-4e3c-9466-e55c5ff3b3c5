@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           this.authService.logout();
-          this.toastService.show(error.error || 'Unauthorized access. Please log in again.');
+          this.toastService.show(error.error?.message || 'Unauthorized access. Please log in again.');
           this.router.navigate(['/login']);
         }
         return throwError(() => error);

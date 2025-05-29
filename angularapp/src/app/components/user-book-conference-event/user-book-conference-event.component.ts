@@ -107,7 +107,7 @@ export class UserBookConferenceEventComponent implements OnInit {
         this.router.navigate(['/userviewconferenceevent']);
       },
       error: err => {
-        this.toast.show(err.error || 'Failed to submit booking.');
+        this.toast.show(err.error?.message || 'Failed to submit booking.');
       }
     });
   }

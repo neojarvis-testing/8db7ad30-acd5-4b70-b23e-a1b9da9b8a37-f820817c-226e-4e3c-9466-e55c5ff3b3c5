@@ -27,7 +27,7 @@ namespace dotnetapp1.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest("Invalid login request");
+                return BadRequest(new {Success=false,Message="Invalid login request"});
             }
 
             try
@@ -47,7 +47,7 @@ namespace dotnetapp1.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500,$"Internal server error:{ex.Message}");
+                return StatusCode(500,new {Success=false,Message=$"Internal server error: {ex.Message}"});
     
             }
         }
@@ -57,7 +57,7 @@ namespace dotnetapp1.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest("Invalid registration request");
+                return BadRequest(new {Success=false,Message="Invalid registration request"});
             
             }
             try
@@ -67,7 +67,7 @@ namespace dotnetapp1.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(500,$"Internal server error:{ex.Message}");
+                return StatusCode(500, new { Success = false, Message = $"Internal server error: {ex.Message}" });
             }
         }
     }

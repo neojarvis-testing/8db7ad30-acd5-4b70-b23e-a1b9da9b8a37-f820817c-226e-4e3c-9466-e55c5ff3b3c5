@@ -42,7 +42,9 @@
                     <td>{{ booking.additionalNotes || 'NA' }}</td>
                     <td>
                         <button class="action-btn view-proof" (click)="viewProof(booking)">View Proof</button>
-                        <button class="action-btn delete-btn" (click)="deleteBooking(booking)">Delete</button>
+                        <button class="action-btn delete-btn" 
+                            [disabled]="booking.bookingStatus === 'Accepted'" 
+                            (click)="deleteBooking(booking)">Delete</button>
                     </td>
                 </tr>
             </tbody>

@@ -89,16 +89,16 @@ namespace dotnetapp2.Controllers
                 var result = await _bookingService.AddBooking(booking);
                 if (result)
                 {
-                    return Ok(new {message="Booking added successfully"});
+                    return Ok(new {Success=true, Message="Booking added successfully"});
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "Failed to add booking");
+                    return StatusCode(StatusCodes.Status500InternalServerError, new {Success=false, Message="Failed to add booking"});
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new {Success=false, Message=ex.Message});
             }
         }
 
@@ -111,7 +111,7 @@ namespace dotnetapp2.Controllers
                 var result = await _bookingService.UpdateBooking(bookingId, booking);
                 if (result)
                 {
-                    return Ok(new {message="Booking updated successfully"});
+                    return Ok(new {Success=true, Message="Booking updated successfully"});
                 }
                 else
                 {
@@ -120,7 +120,7 @@ namespace dotnetapp2.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new {Success=false, Message=ex.Message});
             }
         }
 
@@ -133,16 +133,16 @@ namespace dotnetapp2.Controllers
                 var result = await _bookingService.DeleteBooking(bookingId);
                 if (result)
                 {
-                    return Ok(new {message="Booking deleted successfully"});
+                    return Ok(new {Success=false,Message="Booking deleted successfully"});
                 }
                 else
                 {
-                    return NotFound("Booking not found");
+                    return NotFound(new {Success=false,Message="Booking not found"});
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new {Success=false, Message=ex.Message});
             }
         }
     }

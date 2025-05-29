@@ -30,8 +30,8 @@ export class ConferenceEventService {
         return this.http.post<ConferenceEvent>(`${this.baseUrl}/conference-event`, requestObject, this.options);
     }
 
-    deleteConferenceEvent(conferenceEventId: number): Observable<void> {
-        return this.http.delete<void>(`${this.baseUrl}/conference-event/${conferenceEventId}`, this.options);
+    deleteConferenceEvent(conferenceEventId: number): Observable<any> {
+        return this.http.delete<any>(`${this.baseUrl}/conference-event/${conferenceEventId}`, this.options);
     }
 
     getConferenceEventById(id: number): Observable<ConferenceEvent> {
@@ -46,8 +46,8 @@ export class ConferenceEventService {
         return this.http.get<ConferenceEvent[]>(`${this.baseUrl}/bookings/user/${userId}`, this.options);
     }
 
-    addConferenceEventBooking(data: Booking): Observable<Booking> {
-        return this.http.post<Booking>(`${this.baseUrl}/booking`, data, this.options);
+    addConferenceEventBooking(data: Booking): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}/booking`, data, this.options);
     }
 
     deleteConferenceEventBooking(bookingId: number): Observable<void> {

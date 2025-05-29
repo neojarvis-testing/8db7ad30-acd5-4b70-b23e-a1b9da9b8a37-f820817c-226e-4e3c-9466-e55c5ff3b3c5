@@ -28,7 +28,7 @@ namespace dotnetapp3.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
             }
         }
 
@@ -39,12 +39,12 @@ namespace dotnetapp3.Controllers
             {
                 var conferenceEvent = await _service.GetConferenceEventById(conferenceEventId);
                 if (conferenceEvent == null)
-                    return NotFound("Conference event not found");
+                    return NotFound(new { Success = false, Message = "Conference event not found" });
                 return Ok(conferenceEvent);
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
             }
         }
 
@@ -58,11 +58,11 @@ namespace dotnetapp3.Controllers
             }
             catch (ConferenceEventException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Success = false, Message = ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
             }
         }
 
@@ -76,11 +76,11 @@ namespace dotnetapp3.Controllers
             }
             catch (ConferenceEventException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Success = false, Message = ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
             }
         }
 
@@ -94,11 +94,11 @@ namespace dotnetapp3.Controllers
             }
             catch (ConferenceEventException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Success = false, Message = ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
             }
         }
     }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConferenceEventService } from '../../services/conference-event.service';
 import { ConferenceEvent } from '../../models/conference-event.model';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-admin-edit-conference-event',
@@ -19,7 +20,8 @@ export class AdminEditConferenceEventComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private conferenceEventService: ConferenceEventService
+    private conferenceEventService: ConferenceEventService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -56,8 +58,8 @@ export class AdminEditConferenceEventComponent implements OnInit {
           capacity: event.capacity
         });
       },
-      error: () => {
-        alert('Failed to load event details.');
+      error: (err) => {
+        this.toastService.show(err.error?.message || 'Failed to load event details.');
         this.router.navigate(['/adminviewconferenceevent']);
       }
     });
@@ -84,8 +86,8 @@ export class AdminEditConferenceEventComponent implements OnInit {
       next: () => {
         this.showSuccessPopup = true;
       },
-      error: () => {
-        alert('Failed to update event. Please try again.');
+      error: (err) => {
+        this.toastService.show(err.error?.message || 'Failed to update conference event. Please try again.');
       }
     });
   }

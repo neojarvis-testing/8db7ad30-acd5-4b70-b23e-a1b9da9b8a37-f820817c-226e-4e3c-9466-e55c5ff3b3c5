@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 
 @Component({
@@ -15,7 +16,10 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, 
+    private router: Router,
+    private toastService: ToastService
+  ) { }
 
   onSubmit(form: NgForm): void {
     // Validate the form before submission
@@ -47,8 +51,8 @@ export class LoginComponent {
         }
       },
       error => {
-        console.error('Login error:', error);
-        this.errorMessage = 'An error occurred during login. Please try again later.';
+        this.toastService.show(error.error?.message || 'Login failed. Please check your credentials and try again.');
+        //this.errorMessage = 'An error occurred during login. Please try again later.';
       }
     );
   }

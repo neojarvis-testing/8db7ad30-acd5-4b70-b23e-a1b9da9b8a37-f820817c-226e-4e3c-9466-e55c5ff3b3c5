@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 
 @Component({
@@ -19,7 +20,9 @@ export class RegistrationComponent {
   role: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,
+    private toastService: ToastService
+  ) { }
 
   // Getter to check if passwords match
   get passwordMismatch(): boolean {
@@ -51,7 +54,8 @@ export class RegistrationComponent {
       },
       error => {
         console.error('Registration error:', error);
-        this.errorMessage = 'An error occurred during registration. Please try again later.';
+        this.toastService.show(error.error?.message || 'Registration failed. Please try again.');
+        //this.errorMessage = 'An error occurred during registration. Please try again later.';
       }
     );
   }

@@ -27,7 +27,7 @@ namespace dotnetapp4.Controller
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
             }
         }
 
@@ -42,7 +42,7 @@ namespace dotnetapp4.Controller
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
             }
         }
 
@@ -57,7 +57,7 @@ namespace dotnetapp4.Controller
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError,new { Success = false, Message = ex.Message });
             }
         }
 
@@ -72,7 +72,7 @@ namespace dotnetapp4.Controller
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError,new { Success = false, Message = ex.Message });
             }
         }
     }

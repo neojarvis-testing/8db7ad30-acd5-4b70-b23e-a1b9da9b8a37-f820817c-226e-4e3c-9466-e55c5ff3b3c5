@@ -121,6 +121,12 @@ tbody tr:hover {
 .action-btn.delete-btn:hover {
   background: #c0392b;
 }
+.action-btn.delete-btn:disabled {
+  background-color: #b2bec3;
+  color: #fff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
 
 .pagination-controls {
   display: flex;
