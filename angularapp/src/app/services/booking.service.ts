@@ -33,8 +33,8 @@ export class BookingService {
     return this.http.post<Booking>(`${this.baseUrl}/booking`, requestObject, this.options);
   }
 
-  deleteBooking(bookingId: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/booking/${bookingId}`, this.options);
+  deleteBooking(bookingId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/booking/${bookingId}`, this.options);
   }
 
   updateBooking(id: number, requestObject: Booking): Observable<any> {

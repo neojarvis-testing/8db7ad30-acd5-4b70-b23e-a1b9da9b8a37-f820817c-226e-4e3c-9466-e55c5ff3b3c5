@@ -133,7 +133,7 @@ namespace dotnetapp2.Controllers
                 var result = await _bookingService.DeleteBooking(bookingId);
                 if (result)
                 {
-                    return Ok("Booking deleted successfully");
+                    return Ok(new {message="Booking deleted successfully"});
                 }
                 else
                 {
