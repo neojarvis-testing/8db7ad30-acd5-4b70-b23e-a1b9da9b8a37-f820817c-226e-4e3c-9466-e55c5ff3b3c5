@@ -25,17 +25,17 @@
       <tbody>
         <tr *ngFor="let b of bookings; let i = index">
           <td>{{ i + 1 }}</td>
-          <td>{{ b.EventName }}</td>
-          <td>{{ b.OrganizerName }}</td>
-          <td>{{ b.Category }}</td>
-          <td>{{ b.Description }}</td>
+          <td>{{ b.eventName }}</td>
+          <td>{{ b.organizerName }}</td>
+          <td>{{ b.category }}</td>
+          <td>{{ b.description }}</td>
           <td>{{ b.Location }}</td>
-          <td>{{ b.StartDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ b.EndDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ b.Capacity }}</td>
+          <td>{{ b.startDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ b.endDateTime | date:'dd/MM/yyyy' }}</td>
+          <td>{{ b.capacity }}</td>
           <td><button (click)="openRegisterForm()" class="view-btn">View Proof</button></td>
           <td>
-            <button (click)="deleteConferenceEvent(b.ConferenceEventId)" class="delete-btn">Delete</button>
+            <button (click)="deleteConferenceEvent(b.conferenceEventId)" class="delete-btn">Delete</button>
           </td>
         </tr>
         <tr>
@@ -45,5 +45,5 @@
         </tr>
       </tbody>
     </table>
-    <div *ngIf="!loading && conferenceevents.length === 0" class="center-message">No conferenceevents found.</div>
+    <div *ngIf="!loading && bookings.length === 0" class="center-message">No conferenceevents found.</div>
 </div>
