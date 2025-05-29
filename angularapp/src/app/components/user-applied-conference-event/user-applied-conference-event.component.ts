@@ -25,6 +25,7 @@ export class UserAppliedConferenceEventComponent implements OnInit {
     this.updatePsgeItems();
     this.getConferenceEvents();
     this. getAllConferenceEvents();
+    this. getAllConferenceEventBookings();
   }
   getAllConferenceEvents(): void {
     this.loading = true;
@@ -34,6 +35,16 @@ export class UserAppliedConferenceEventComponent implements OnInit {
       this.errorMessage = 'Failed to load conferenceEvents.';
       this.loading = false;
     }
+  }
+  getAllConferenceEventBookings():void{
+    this.loading = true;
+    this.errorMessage = '';
+    this.conferenceEventList$= this.conferenceEventService.getAllConferenceEventBookings();
+    error: () => {
+      this.errorMessage = 'Failed to load conferenceEvents.';
+      this.loading = false;
+    }
+
   }
   updatePsgeItems(){
     const startIndex=(this.currentPage-1)*this.pageSize;
