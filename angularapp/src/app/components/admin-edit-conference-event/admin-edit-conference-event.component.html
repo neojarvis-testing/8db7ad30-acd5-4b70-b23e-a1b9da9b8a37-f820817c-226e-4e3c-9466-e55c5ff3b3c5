@@ -1,1 +1,88 @@
-<p>admin-edit-conference-event works!</p>
+<div class="container">
+    <h2>Edit ConferenceEvent</h2>
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+        <!-- Event Name Field -->
+        <div class="form-group">
+           <div class="form-group">
+              <label for="eventName">EnterName</label>
+              <input type="text" id="eventName" formControlName="eventName" class="form-control" />
+            <div *ngIf="submitted && f.eventName.errors" class="error">
+                <span *ngIf="f.eventName.errors.required">Name is required.</span>
+            </div>
+            </div>
+        </div>
+  
+        <!-- Organizer Name Field -->
+        <div class="form-group">
+            <label for="organizerName">OrganiserName*</label>
+            <input type="text" id="organizerName" formControlName="organizerName" class="form-control" />
+            <div *ngIf="submitted && f.organizerName.errors" class="error">
+                <span *ngIf="f.organizerName.errors.required">Organiser Name is required.</span>
+            </div>
+        </div>
+  
+        <!-- Company Name Field -->
+        <div class="form-group">
+            <label for="category">CompanyName*</label>
+            <input type="text" id="category" formControlName="category" class="form-control" />
+            <div *ngIf="submitted && f.category.errors" class="error">
+                <span *ngIf="f.category.errors.required">CompanyName is required.</span>
+            </div>
+        </div>
+  
+        <!-- Description Field -->
+        <div class="form-group">
+            <label for="description">Description*</label>
+            <input type="text" id="description" formControlName="description" class="form-control" />
+            <div *ngIf="submitted && f.description.errors" class="error">
+                <span *ngIf="f.description.errors.required">Description is required.</span>
+            </div>
+        </div>
+  
+        <!-- Location -->
+        <div class="form-group">
+            <label for="location">Location*</label>
+            <input type="text" id="location" formControlName="location" class="form-control" />
+            <div *ngIf="submitted && f.location.errors" class="error">
+                <span *ngIf="f.location.errors.required">Location is required.</span>
+            </div>
+        </div>
+   <!-- Start Date & Time Field -->
+   <div class="form-group">
+    <label for="startDateTime">Start Date & Time*</label>
+    <input type="datetime-local" id="startDateTime" formControlName="startDateTime" class="form-control" />
+    <div *ngIf="submitted && f.startDateTime.errors" class="error">
+        <span *ngIf="f.startDateTime.errors.required">Start Date & Time is required.</span>
+    </div>
+</div>
+    <!-- End Date & Time Field -->
+    <div class="form-group">
+        <label for="endDateTime">End Date & Time*</label>
+        <input type="datetime-local" id="endDateTime" formControlName="endDateTime" class="form-control" />
+        <div *ngIf="submitted && f.endDateTime.errors" class="error">
+            <span *ngIf="f.endDateTime.errors.required">End Date & Time is required.</span>
+        </div>
+    </div>
+  
+        <!-- Capacity -->
+        <div class="form-group">
+            <label for="capacity">Capacity*</label>
+            <input type="text" id="capacity" formControlName="capacity" class="form-control" />
+            <div *ngIf="submitted && f.capacity.errors" class="error">
+                <span *ngIf="f.capacity.errors.required">Capacity is required.</span>
+            </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+  
+  <!-- Success Popup -->
+  <div class="popup" *ngIf="showSuccessPopup">
+    <div class="popup-content">
+  
+        <p>Successfully Update Conference Event!</p>
+        <button class="btn-ok" (click)="closePopup()">Ok</button>
+    </div>
+  </div>

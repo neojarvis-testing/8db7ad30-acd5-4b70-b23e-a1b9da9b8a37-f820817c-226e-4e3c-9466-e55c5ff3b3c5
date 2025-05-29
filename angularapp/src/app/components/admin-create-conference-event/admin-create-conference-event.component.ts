@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ConferenceEventService } from '../../services/conference-event.service';
+import { ConferenceEvent } from '../../models/conference-event.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-create-conference-event',
@@ -11,6 +15,8 @@ export class AdminCreateConferenceEventComponent implements OnInit {
   eventForm: FormGroup;
   submitted = false;
   showSuccessPopup = false;
+  errorMessage = '';
+  successMessage = '';
 
   constructor(private formBuilder: FormBuilder, private router: Router) { }
 
@@ -40,7 +46,7 @@ export class AdminCreateConferenceEventComponent implements OnInit {
     if (this.eventForm.invalid) {
       return;
     }
-
+   
     // Process the valid form data (e.g., send data to the backend).
     console.log(this.eventForm.value);
 
