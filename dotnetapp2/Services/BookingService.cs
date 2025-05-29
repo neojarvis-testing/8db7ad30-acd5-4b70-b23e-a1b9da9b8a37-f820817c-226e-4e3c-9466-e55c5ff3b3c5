@@ -87,7 +87,16 @@ namespace dotnetapp2.Services
             if (result == null)
                 return false;
 
+            var conferenceEvent = await _context.ConferenceEvents
+                .FirstOrDefaultAsync(x => x.ConferenceEventId == result.ConferenceEventId);
             _context.Bookings.Remove(result);
+
+            if(conferenceEvent!=null)
+            {
+            conferenceEvent.Capacity += 1;
+            _context.ConferenceEvents.Update(conferenceEvent);
+            }
+
             await _context.SaveChangesAsync();
             return true;
         }
