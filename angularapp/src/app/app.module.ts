@@ -24,6 +24,7 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminViewBookingsComponent } from './components/admin-view-bookings/admin-view-bookings.component';
+import { GlobalLoaderComponent } from './shared/components/global-loader/global-loader.component';
 
 @NgModule({
   declarations: [AppComponent,
@@ -43,7 +44,8 @@ import { AdminViewBookingsComponent } from './components/admin-view-bookings/adm
     AdminviewfeedbackComponent,
     UseraddfeedbackComponent,
     UserviewfeedbackComponent,
-    AdminViewBookingsComponent
+    AdminViewBookingsComponent,
+    GlobalLoaderComponent
   ],
   imports: [
     CommonModule,
