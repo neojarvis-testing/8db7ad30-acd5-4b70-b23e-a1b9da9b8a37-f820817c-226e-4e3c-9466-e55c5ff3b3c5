@@ -49,6 +49,7 @@ export class RegistrationComponent {
           // Navigate to login page upon successful registration
           this.router.navigate(['/login']);
         } else {
+          this.toastService.show(response.message || 'Registration failed. Please try again.');
           this.errorMessage = response.message || 'Registration failed. Please try again.';
         }
       },

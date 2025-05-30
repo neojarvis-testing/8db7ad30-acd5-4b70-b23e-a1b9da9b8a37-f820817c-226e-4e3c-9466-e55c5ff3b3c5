@@ -63,7 +63,7 @@ namespace dotnetapp1.Controllers
             try
             {
                 var result=await _authService.Registration(model,model.UserRole);
-                return Ok(new {Success= true,result});
+                return Ok(new {Success= result.Item1==0,Message=result.Item2});
             }
             catch(Exception ex)
             {
