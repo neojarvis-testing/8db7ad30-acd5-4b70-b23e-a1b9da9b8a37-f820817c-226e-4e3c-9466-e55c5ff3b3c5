@@ -12,7 +12,7 @@
     />
   </div>
 
-  <table class="event-table">
+  <table class="table-shared">
     <thead>
       <tr>
         <th>S.No</th>
@@ -42,8 +42,8 @@
         <td>{{ event.endDateTime | date:'M/d/yy, h:mm a' }}</td>
         <td>{{ event.capacity }}</td>
         <td>
-          <button class="event-edit-btn" (click)="editEvent(event.conferenceEventId)">Edit</button>
-          <button class="event-delete-btn" (click)="deleteEvent(event.conferenceEventId)">Delete</button>
+          <button class="btn-shared btn-green" (click)="editEvent(event.conferenceEventId)">Edit</button>
+          <button class="btn-shared btn-red" (click)="deleteEvent(event.conferenceEventId)">Delete</button>
         </td>
       </tr>
     </tbody>

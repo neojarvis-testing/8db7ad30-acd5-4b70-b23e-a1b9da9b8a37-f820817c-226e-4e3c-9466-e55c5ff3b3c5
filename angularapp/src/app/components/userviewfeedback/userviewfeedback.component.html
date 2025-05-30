@@ -1,7 +1,7 @@
-<div class="feedback-container">
-  <h2 class="feedback-title">My Feedback</h2>
-  <hr class="feedback-divider" />
-  <table class="feedback-table">
+<div class="shared-container">
+  <h2 class="shared-title">My Feedback</h2>
+  <hr class="shared-divider" />
+  <table class="table-shared">
     <thead>
       <tr>
         <th>S.No</th>
@@ -17,7 +17,7 @@
         <td>{{ i + 1 }}</td>
         <td>{{ fb.feedbackText }}</td>
         <td>
-          <button (click)="openDeleteModal(fb.feedbackId!)" class="delete-btn">Delete</button>
+          <button (click)="openDeleteModal(fb.feedbackId!)" class="btn-shared btn-red">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -32,8 +32,8 @@
       <div class="modal-content">
         <p>Are you sure you want to delete?</p>
         <div class="modal-actions">
-          <button class="modal-delete-btn" (click)="confirmDelete()">Yes, Delete</button>
-          <button class="modal-cancel-btn" (click)="closeDeleteModal()">Cancel</button>
+          <button class="btn-shared btn-red" (click)="confirmDelete()">Yes, Delete</button>
+          <button class="btn-shared" (click)="closeDeleteModal()">Cancel</button>
         </div>
       </div>
     </div>

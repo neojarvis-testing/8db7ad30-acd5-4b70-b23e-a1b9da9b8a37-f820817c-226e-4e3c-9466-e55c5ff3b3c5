@@ -1,5 +1,5 @@
-<div class="container">
-  <h1>Available Conference Events</h1>
+<div class="shared-container">
+  <h1 class="shared-title">Available Conference Events</h1>
   <div class="input-wrapper">
     <input
       type="text"
@@ -12,10 +12,10 @@
   <div *ngIf="loading" class="center-message">Loading...</div>
   <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
   <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
-  <table *ngIf="pagedItems.length > 0">
+  <table *ngIf="pagedItems.length > 0" class="table-shared">
     <thead>
       <tr>
-        <th>#</th>
+        <th>S No.</th>
         <th>Event Name</th>
         <th>Organizer</th>
         <th>Category</th>
@@ -39,7 +39,7 @@
         <td>{{ event.endDateTime | date:'dd/MM/yyyy' }}</td>
         <td>{{ event.capacity }}</td>
         <td>
-          <button (click)="register(event.conferenceEventId)" class="register-btn"
+          <button (click)="register(event.conferenceEventId)" class="btn-shared btn-green"
             [disabled]="isRegistrationClosed(event.endDateTime)">
             Register
           </button>
@@ -50,9 +50,9 @@
       </tr>
     </tbody>
   </table>
-  <div style="display: flex; justify-content: center; margin-top: 18px;">
-    <button (click)="previousPage()" class="previous-btn" [disabled]="currentPage === 1">Previous</button>
-    <span style="margin: 0 12px; align-self: center;">Page {{ currentPage }} of {{ totalpages }}</span>
-    <button (click)="nextPage()" class="next-btn" [disabled]="currentPage === totalpages">Next</button>
+  <div class="event-pagination">
+    <button (click)="previousPage()" class="event-pagination-btn" [disabled]="currentPage === 1">Previous</button>
+    <span class="event-pagination-info">Page {{ currentPage }} of {{ totalpages }}</span>
+    <button (click)="nextPage()" class="event-pagination-btn" [disabled]="currentPage === totalpages">Next</button>
   </div>
 </div>

@@ -1,5 +1,5 @@
-<div class="feedback-container">
-  <h2>Add Feedback</h2>
+<div class="shared-container">
+  <h2 class="shared-title">Add Feedback</h2>
   <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
     <div class="form-group">
       <label for="feedbackText">Your Feedback</label>
@@ -8,7 +8,7 @@
         Feedback is required (max 500 characters).
       </div>
     </div>
-    <button type="submit" [disabled]="submitting || feedbackForm.invalid">Submit</button>
+    <button type="submit" class="btn-shared btn-centered" [disabled]="submitting || feedbackForm.invalid">Submit</button>
   </form>
   <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
   <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>

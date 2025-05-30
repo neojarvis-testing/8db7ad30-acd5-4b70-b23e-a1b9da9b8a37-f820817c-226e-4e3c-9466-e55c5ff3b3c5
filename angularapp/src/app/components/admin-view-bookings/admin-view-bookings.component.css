@@ -7,35 +7,6 @@
     color: #333;
 }
 
-/* Navigation Bar */
-.header {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-.nav-left .admin-label {
-    font-weight: bold;
-    color: #007bff;
-    font-size: 16px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #007bff;
-    margin: 0 12px;
-    font-size: 14px;
-}
-
-.nav-links a.active,
-.nav-links a:hover {
-    text-decoration: underline;
-}
-
 /* Main Content */
 .content h2 {
     text-align: center;
@@ -46,7 +17,6 @@
 .separator {
     height: 3px;
     background-color: #add8e6;
-    /* Light blue */
     width: 100%;
     margin-bottom: 20px;
 }
@@ -68,86 +38,35 @@
     border-radius: 4px;
 }
 
-/* Bookings Table */
-.booking-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.booking-table th,
-.booking-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    font-size: 14px;
-    text-align: left;
-}
-
-.booking-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-
 /* Status dropdown styling */
 .status-dropdown {
     width: 100%;
     padding: 4px 30px 4px 8px;
-    /* extra right padding for arrow */
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    /* Remove default appearance */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 12px;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 12,0 6,6" fill="%23666"/></svg>');
 }
 
 .status-dropdown.pending {
     background-color: #d3d3d3;
-    /* Grey */
     color: #000;
 }
 
 .status-dropdown.accepted {
     background-color: #28a745;
-    /* Green */
     color: #fff;
 }
 
 .status-dropdown.rejected {
     background-color: #dc3545;
-    /* Red */
     color: #fff;
-}
-
-/* Custom arrow added using an inline SVG */
-.status-dropdown {
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 12,0 6,6" fill="%23666"/></svg>');
-}
-
-/* Action Buttons */
-.action-btn {
-    padding: 5px 10px;
-    margin: 2px;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 12px;
-}
-
-.action-btn:hover {
-    opacity: 0.9;
-}
-
-.view-print {
-    background-color: #28a745;
-}
-
-.delete-btn {
-    background-color: #dc3545;
 }
 
 /* Popups */
@@ -199,39 +118,6 @@
     line-height: 32px;
     text-align: center;
     padding: 0;
-}
-
-.popup-content {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    position: relative;
-}
-
-.popup-buttons {
-    margin-top: 20px;
-}
-
-.popup-buttons button {
-    padding: 8px 12px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.popup-buttons .confirm {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.popup-buttons .cancel {
-    background-color: #dc3545;
-    color: #fff;
 }
 
 .event-pagination {

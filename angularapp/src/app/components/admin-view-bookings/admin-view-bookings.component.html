@@ -2,10 +2,9 @@
     <!-- Main Content -->
     <section class="content">
         <h2>Bookings Management</h2>
-        <!-- Light blue separator line -->
         <div class="separator"></div>
 
-        <!-- Filter Section (left aligned) -->
+        <!-- Filter Section -->
         <div class="filter">
             <label for="statusFilter">Filter by Status:</label>
             <select id="statusFilter" [(ngModel)]="filterStatus">
@@ -17,7 +16,7 @@
         </div>
 
         <!-- Bookings Table -->
-        <table class="booking-table">
+        <table class="table-shared">
             <thead>
                 <tr>
                     <th>S.No</th>
@@ -46,12 +45,14 @@
                     <td>{{ booking.city }}</td>
                     <td>{{ booking.bookingDate }}</td>
                     <td>
-                        <!-- Status Dropdown with dynamic background color and custom arrow -->
-                        <select class="status-dropdown" [ngClass]="{
-                'pending': booking.status === 'Pending',
-                'accepted': booking.status === 'Accepted',
-                'rejected': booking.status === 'Rejected'
-              }" [ngModel]="booking.bookingStatus" (ngModelChange)="updateStatus(booking, $event)">
+                        <select class="status-dropdown"
+                            [ngClass]="{
+                                'pending': booking.status === 'Pending',
+                                'accepted': booking.status === 'Accepted',
+                                'rejected': booking.status === 'Rejected'
+                            }"
+                            [ngModel]="booking.bookingStatus"
+                            (ngModelChange)="updateStatus(booking, $event)">
                             <option value="Pending">Pending</option>
                             <option value="Accepted">Accepted</option>
                             <option value="Rejected">Rejected</option>
@@ -60,8 +61,8 @@
                     <td>{{ booking.additionalNotes }}</td>
                     <td>{{ booking.user.mobileNumber }}</td>
                     <td>
-                        <button class="action-btn view-print" (click)="viewProof(booking)">View Proof</button>
-                        <button class="action-btn delete-btn" (click)="deleteBooking(booking)">Delete</button>
+                        <button class="btn-shared btn-green" (click)="viewProof(booking)">View Proof</button>
+                        <button class="btn-shared btn-red" (click)="deleteBooking(booking)">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -97,8 +98,8 @@
             <h3>Confirm Delete</h3>
             <p>Are you sure you want to delete this booking?</p>
             <div class="popup-buttons">
-                <button class="confirm" (click)="confirmDelete()">Yes</button>
-                <button class="cancel" (click)="closePopup()">No</button>
+                <button class="btn-shared btn-green" (click)="confirmDelete()">Yes</button>
+                <button class="btn-shared btn-red" (click)="closePopup()">No</button>
             </div>
         </div>
     </div>
@@ -107,7 +108,7 @@
     <div class="popup" *ngIf="showSuccessPopup">
         <div class="popup-content">
             <p>{{popupMessage}}</p>
-            <button class="btn-ok" (click)="closePopup()">OK</button>
+            <button class="btn-shared btn-green" (click)="closePopup()">OK</button>
         </div>
     </div>
 </div>
