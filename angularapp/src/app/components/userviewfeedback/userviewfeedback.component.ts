@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from '../../services/feedback.service';
 import { Feedback } from '../../models/feedback.model';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-userviewfeedback',
@@ -10,13 +11,13 @@ import { Feedback } from '../../models/feedback.model';
 export class UserviewfeedbackComponent implements OnInit {
   feedbacks: Feedback[] = [];
   loading = false;
-  errorMessage = '';
-  successMessage = '';
 
   showDeleteModal = false;
   feedbackIdToDelete: number | null = null;
 
-  constructor(private feedbackService: FeedbackService) {}
+  constructor(private feedbackService: FeedbackService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.getFeedbacks();
@@ -24,7 +25,6 @@ export class UserviewfeedbackComponent implements OnInit {
 
   getFeedbacks(): void {
     this.loading = true;
-    this.errorMessage = '';
     const userId = Number(localStorage.getItem('userId'));
     this.feedbackService.getAllFeedbacksByUserId(userId).subscribe({
       next: (data) => {
@@ -32,7 +32,7 @@ export class UserviewfeedbackComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.errorMessage = 'Failed to load feedbacks.';
+        this.toastService.show('Failed to load feedbacks.');
         this.loading = false;
       }
     });
@@ -52,12 +52,12 @@ export class UserviewfeedbackComponent implements OnInit {
     if (this.feedbackIdToDelete == null) return;
     this.feedbackService.deleteFeedback(this.feedbackIdToDelete).subscribe({
       next: () => {
-        this.successMessage = 'Feedback deleted successfully!';
+        this.toastService.show('Feedback deleted successfully!');
         this.getFeedbacks();
         this.closeDeleteModal();
       },
-      error: () => {
-        this.errorMessage = 'Failed to delete feedback.';
+      error: (err) => {
+        this.toastService.show(err.error?.message || 'Failed to delete feedback.');
         this.closeDeleteModal();
       }
     });

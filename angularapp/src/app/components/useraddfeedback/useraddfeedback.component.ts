@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FeedbackService } from '../../services/feedback.service';
 import { Router } from '@angular/router';
 import { Feedback } from '../../models/feedback.model';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-useraddfeedback',
@@ -11,14 +12,12 @@ import { Feedback } from '../../models/feedback.model';
 })
 export class UseraddfeedbackComponent {
   feedbackForm: FormGroup;
-  submitting = false;
-  errorMessage = '';
-  successMessage = '';
 
   constructor(
     private fb: FormBuilder,
     private feedbackService: FeedbackService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {
     this.feedbackForm = this.fb.group({
       feedbackText: ['', [Validators.required, Validators.maxLength(500)]]
@@ -27,26 +26,22 @@ export class UseraddfeedbackComponent {
 
   submitFeedback() {
     if (this.feedbackForm.invalid) return;
-    this.submitting = true;
-    this.errorMessage = '';
-    this.successMessage = '';
 
     // Get userId from localStorage (or AuthService)
     const userId = Number(localStorage.getItem('userId'));
-    const feedback = {
+    const feedback:Feedback = {
       userId,
       feedbackText: this.feedbackForm.value.feedbackText
     };
 
     this.feedbackService.sendFeedback(feedback).subscribe({
       next: () => {
-        this.successMessage = 'Feedback submitted successfully!';
+        this.toastService.show('Feedback submitted successfully!');
         this.feedbackForm.reset();
-        setTimeout(() => this.router.navigate(['/userfeedback']), 1500);
+        this.router.navigate(['/userfeedback'])
       },
       error: err => {
-        this.errorMessage = err.error?.message || 'Failed to submit feedback.';
-        this.submitting = false;
+        this.toastService.show(err.error?.message || 'Failed to submit feedback.');
       }
     });
   }

@@ -1,9 +1,10 @@
 <div class="shared-container">
   <h1 class="shared-title">Available Conference Events</h1>
-  <div class="input-wrapper">
+  <hr class="shared-divider"/>
+  <div class="search-centered">
     <input
       type="text"
-      class="full-width-input"
+      class="search-input"
       placeholder="Search by Event Name, Organizer, Category, or Location"
       [(ngModel)]="searchTerm"
       (input)="onSearch()"
@@ -46,7 +47,7 @@
         </td>
       </tr>
       <tr *ngIf="pagedItems.length === 0">
-        <td colspan="10" class="center-message">No events found.</td>
+        <td colspan="10" class="no-data">No events found.</td>
       </tr>
     </tbody>
   </table>

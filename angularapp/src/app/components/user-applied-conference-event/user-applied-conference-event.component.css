@@ -6,14 +6,6 @@
   margin-bottom: 10px;
 }
 
-.no-records {
-  text-align: center !important;
-  font-style: italic;
-  color: #222;
-  background: #fff;
-  font-weight: 500;
-}
-
 .status-badge {
   display: inline-block;
   padding: 4px 14px;

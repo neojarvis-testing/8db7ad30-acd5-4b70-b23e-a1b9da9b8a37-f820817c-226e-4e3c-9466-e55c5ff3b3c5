@@ -1,5 +1,6 @@
-@import './shared-table-button.css';
 @import './shared-button.css';
+@import './table-styles.css';
+@import './form-styles.css';
 
 /* Shared container style */
 .shared-container {

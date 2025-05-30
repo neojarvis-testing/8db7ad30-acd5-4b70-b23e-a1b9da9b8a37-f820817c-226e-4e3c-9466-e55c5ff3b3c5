@@ -1,6 +1,6 @@
-<div class="register-container">
+<div class="form-container">
     <!-- Page Title -->
-    <h1>Registration</h1>
+    <h1 class="form-title">Registration</h1>
 
     <!-- Registration Form -->
     <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
@@ -15,7 +15,7 @@
                 Username<span class="required">*</span>
             </label>
             <input type="text" id="username" name="username" placeholder="Enter username" [(ngModel)]="username"
-                #usernameInput="ngModel" required minlength="3" />
+                class="form-control" #usernameInput="ngModel" required minlength="3" />
             <div class="error" *ngIf="usernameInput.invalid && usernameInput.touched">
                 <small *ngIf="usernameInput.errors?.required">Username is required.</small>
                 <small *ngIf="usernameInput.errors?.minlength">
@@ -30,7 +30,7 @@
                 Email<span class="required">*</span>
             </label>
             <input type="email" id="email" name="email" placeholder="Enter email" [(ngModel)]="email"
-                #emailInput="ngModel" required email />
+                class="form-control" #emailInput="ngModel" required email />
             <div class="error" *ngIf="emailInput.invalid && emailInput.touched">
                 <small *ngIf="emailInput.errors?.required">Email is required.</small>
                 <small *ngIf="emailInput.errors?.email">Enter a valid email.</small>
@@ -43,7 +43,7 @@
                 Password<span class="required">*</span>
             </label>
             <input type="password" id="password" name="password" placeholder="Enter password" [(ngModel)]="password"
-                #passwordInput="ngModel" required minlength="6" />
+                class="form-control" #passwordInput="ngModel" required minlength="6" />
             <div class="error" *ngIf="passwordInput.invalid && passwordInput.touched">
                 <small *ngIf="passwordInput.errors?.required">Password is required.</small>
                 <small *ngIf="passwordInput.errors?.minlength">
@@ -58,7 +58,7 @@
                 Confirm Password<span class="required">*</span>
             </label>
             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password"
-                [(ngModel)]="confirmPassword" #confirmPasswordInput="ngModel" required minlength="6" />
+                class="form-control" [(ngModel)]="confirmPassword" #confirmPasswordInput="ngModel" required minlength="6" />
             <div class="error" *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched">
                 <small *ngIf="confirmPasswordInput.errors?.required">
                     Confirm password is required.
@@ -78,7 +78,7 @@
                 Mobile Number<span class="required">*</span>
             </label>
             <input type="tel" id="mobile" name="mobile" placeholder="Enter mobile number" [(ngModel)]="mobile"
-                #mobileInput="ngModel" required pattern="[0-9]{10}" />
+                class="form-control" #mobileInput="ngModel" required pattern="[0-9]{10}" />
             <div class="error" *ngIf="mobileInput.invalid && mobileInput.touched">
                 <small *ngIf="mobileInput.errors?.required">
                     Mobile number is required.
@@ -94,7 +94,7 @@
             <label for="role">
                 Role<span class="required">*</span>
             </label>
-            <select id="role" name="role" [(ngModel)]="role" #roleInput="ngModel" required>
+            <select class="form-control"  id="role" name="role" [(ngModel)]="role" #roleInput="ngModel" required>
                 <option value="">Select role</option>
                 <option value="Admin">Admin</option>
                 <option value="User">User</option>

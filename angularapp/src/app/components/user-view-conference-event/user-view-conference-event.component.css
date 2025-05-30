@@ -7,24 +7,3 @@
 
 .error { color: #c0392b; }
 .success { color: #27ae60; }
-
-.input-wrapper {
-  width: 100%;
-  padding: 0 10px;
-  margin-bottom: 18px;
-}
-
-.full-width-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1.5px solid #2ca6c9;
-  border-radius: 6px;
-  box-sizing: border-box;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.full-width-input:focus {
-  border-color: #2471a3;
-}

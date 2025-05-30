@@ -1,15 +1,13 @@
-<div class="shared-container">
-  <h2 class="shared-title">Add Feedback</h2>
+<div class="form-container">
+  <h2 class="form-title">Add Feedback</h2>
   <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
     <div class="form-group">
       <label for="feedbackText">Your Feedback</label>
-      <textarea id="feedbackText" formControlName="feedbackText" rows="5" maxlength="500"></textarea>
+      <textarea class="form-control" id="feedbackText" formControlName="feedbackText" rows="5" maxlength="500"></textarea>
       <div *ngIf="feedbackForm.get('feedbackText')?.invalid && feedbackForm.get('feedbackText')?.touched" class="error">
         Feedback is required (max 500 characters).
       </div>
     </div>
-    <button type="submit" class="btn-shared btn-centered" [disabled]="submitting || feedbackForm.invalid">Submit</button>
+    <button type="submit" class="btn-shared btn-centered" [disabled]="feedbackForm.invalid">Submit</button>
   </form>
-  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 </div>

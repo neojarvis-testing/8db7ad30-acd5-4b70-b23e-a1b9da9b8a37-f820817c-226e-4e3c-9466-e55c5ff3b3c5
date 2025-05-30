@@ -85,7 +85,7 @@ export class AdminCreateConferenceEventComponent implements OnInit {
         this.showSuccessPopup = true;
       },
       error: (err) => {
-        this.toastService.show(err.error?.Message || 'Failed to create conference event. Please try again.');
+        this.toastService.show(err.error?.message || 'Failed to create conference event. Please try again.');
       }
     });
   }
