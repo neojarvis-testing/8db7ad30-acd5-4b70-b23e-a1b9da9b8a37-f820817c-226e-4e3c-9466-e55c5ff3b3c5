@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Create New Conference Event</h2>
+    <h2 class="shared-title">Create New Conference Event</h2>
     <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
         <!-- Event Name Field -->
         <div class="form-group">
@@ -78,15 +78,14 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn-shared btn-green btn-block">Submit</button>
     </form>
 </div>
 
 <!-- Success Popup -->
 <div class="popup" *ngIf="showSuccessPopup">
     <div class="popup-content">
-
         <p>Successfully Created Conference Event!</p>
-        <button class="btn-ok" (click)="closePopup()">Ok</button>
+        <button class="btn-shared btn-green btn-block" (click)="closePopup()">Ok</button>
     </div>
 </div>

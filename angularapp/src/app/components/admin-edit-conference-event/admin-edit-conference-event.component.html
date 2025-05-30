@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Edit Conference Event</h1>
+  <h2 class="shared-title">Edit Conference Event</h2>
   <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="eventName">Event Name</label>
@@ -53,8 +53,8 @@
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Update</button>
-      <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
+      <button type="submit" class="btn-shared btn-green btn-block">Update</button>
+      <button type="button" class="btn-shared btn-red btn-block" (click)="goBack()">Back</button>
     </div>
   </form>
 
@@ -62,7 +62,7 @@
   <div class="popup" *ngIf="showSuccessPopup">
     <div class="popup-content">
       <p>Successfully Updated Conference Event!</p>
-      <button class="btn-ok" (click)="closePopup()">OK</button>
+      <button class="btn-shared btn-green" (click)="closePopup()">OK</button>
     </div>
   </div>
 </div>

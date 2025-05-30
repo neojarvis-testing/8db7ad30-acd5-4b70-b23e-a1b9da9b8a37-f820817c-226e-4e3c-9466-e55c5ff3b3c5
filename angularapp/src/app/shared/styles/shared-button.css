@@ -1,0 +1,47 @@
+
+/* Shared Button Styles */
+.btn-shared {
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  margin: 2px;
+}
+
+.btn-green {
+  background-color: #27ae60;
+  color: #fff;
+}
+
+.btn-green:disabled {
+  background-color: #b2bec3;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.btn-green:hover:not(:disabled) {
+  background-color: #219150;
+}
+
+.btn-red {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.btn-red:disabled {
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.btn-red:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+.btn-block {
+  width: 100%;
+  box-sizing: border-box;
+}

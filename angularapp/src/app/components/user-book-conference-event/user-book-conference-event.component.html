@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Conference Event Booking Form</h2>
+  <h2 class="shared-title">Conference Event Booking Form</h2>
   <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
     <!-- Gender -->
     <div class="form-group">
@@ -63,7 +63,7 @@
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" class="submit-btn">Submit</button>
+    <button type="submit" class="btn-shared btn-green btn-block">Submit</button>
   </form>
 </div>
 
@@ -71,6 +71,6 @@
 <div class="popup" *ngIf="showSuccessPopup">
   <div class="popup-content">
     <p>Booked successfully!</p>
-    <button class="btn-ok" (click)="closePopup()">Ok</button>
+    <button class="btn-shared btn-green btn-block" (click)="closePopup()">Ok</button>
   </div>
 </div>

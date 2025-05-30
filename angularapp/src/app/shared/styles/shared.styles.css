@@ -1,1 +1,38 @@
 @import './shared-table-button.css';
+@import './shared-button.css';
+
+/* Shared container style */
+.shared-container {
+  margin: 10px auto 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px #0002;
+  padding: 15px 15px;
+}
+
+/* Shared title style */
+.shared-title {
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Segoe UI', 'Georgia', serif;
+  font-weight: bold;
+  margin: 0;
+  padding: 20px 0 0 0;
+  letter-spacing: 1px;
+  color: #000000;
+}
+/* Shared divider style */
+.shared-divider {
+  border: none;
+  border-top: 3px solid #3d405b;
+  margin: 18px 0 32px 0;
+  width: 100%;
+}
+
+/* Full width actions for forms */
+.full-width-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 24px;
+}
