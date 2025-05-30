@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FeedbackService } from '../../services/feedback.service';
 import { Router } from '@angular/router';
 import { Feedback } from '../../models/feedback.model';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-useraddfeedback',

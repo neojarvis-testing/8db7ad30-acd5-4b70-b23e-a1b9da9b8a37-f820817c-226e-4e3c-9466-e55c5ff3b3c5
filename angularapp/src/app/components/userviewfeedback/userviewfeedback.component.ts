@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from '../../services/feedback.service';
 import { Feedback } from '../../models/feedback.model';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-userviewfeedback',

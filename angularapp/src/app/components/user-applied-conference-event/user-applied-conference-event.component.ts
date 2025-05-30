@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Booking } from 'src/app/models/booking.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 @Component({
   selector: 'app-user-applied-conference-event',
   templateUrl: './user-applied-conference-event.component.html',

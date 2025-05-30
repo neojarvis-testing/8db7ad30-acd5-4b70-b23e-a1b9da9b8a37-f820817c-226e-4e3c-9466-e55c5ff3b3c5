@@ -3,8 +3,8 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 import { Observable, throwError, finalize } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { LoaderService } from './loader.service';
-import { ToastService } from './toast.service';
+import { LoaderService } from '../shared/services/loader.service';
+import { ToastService } from '../shared/services/toast.service';
 import { AuthService } from './auth.service';
 
 @Injectable()
