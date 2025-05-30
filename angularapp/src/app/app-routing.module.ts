@@ -16,8 +16,6 @@ import { AdminCreateConferenceEventComponent } from './components/admin-create-c
 import { UserAppliedConferenceEventComponent } from './components/user-applied-conference-event/user-applied-conference-event.component';
 import { UserBookConferenceEventComponent } from './components/user-book-conference-event/user-book-conference-event.component';
 import { UserViewConferenceEventComponent } from './components/user-view-conference-event/user-view-conference-event.component';
-import { UserViewBookingComponent } from './components/user-view-booking/user-view-booking.component';
-
 
 
 const routes: Routes = [
@@ -32,7 +30,6 @@ const routes: Routes = [
 
 
   { path: 'adminviewbooking', component: AdminViewBookingsComponent, canActivate: [adminGuard] },
-  { path: 'userviewbooking', component: UserViewBookingComponent, canActivate: [userGuard] },
   //Admin routes
   { path: 'admincreateconferenceevent', component: AdminCreateConferenceEventComponent, canActivate: [adminGuard] },
   { path: 'adminviewconferenceevent', component: AdminViewConferenceEventComponent, canActivate: [adminGuard] },

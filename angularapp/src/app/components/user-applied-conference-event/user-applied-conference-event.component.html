@@ -1,49 +1,89 @@
-<div class="container">
-    <h1>Applied Conference Events</h1>
-    <div>
-        <td><button (click)="sortbyAscending()" class="srtasc-btn">Sort By Ascending </button></td>
-        <td><button (click)="sortbyDeascending()" class="strdesc-btn">Sort By Deascending </button></td> 
+<div class="shared-container">
+    <section class="content">
+        <h2 class="shared-title">Applied Conference Events</h2>
+        <hr class="shared-divider"/>
+        <div class="booking-table-controls">
+            <button class="btn-shared btn-green" (click)="sortBy('asc')">Sort Date by Asc</button>
+            <button class="btn-shared btn-green" (click)="sortBy('dsc')">Sort Date by Desc</button>
+        </div>
+        <table class="table-shared">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Event Name</th>
+                    <th>Organizer Name</th>
+                    <th>Occupation</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                    <th>Booking Date</th>
+                    <th>Booking Status</th>
+                    <th>Additional Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="paginatedBooking.length === 0">
+                    <td colspan="10" class="no-records">Oops! No records found</td>
+                </tr>
+                <tr *ngFor="let booking of paginatedBooking; let i = index">
+                    <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                    <td>{{ booking.conferenceEvent?.eventName }}</td>
+                    <td>{{ booking.conferenceEvent?.organizerName }}</td>
+                    <td>{{ booking.occupation }}</td>
+                    <td>{{ booking.gender }}</td>
+                    <td>{{ booking.city }}</td>
+                    <td>{{ booking.bookingDate | date:'MMM d, y' }}</td>
+                    <td>
+                        <span class="status-badge" [ngClass]="{
+                            'pending': booking.bookingStatus === 'Pending',
+                            'accepted': booking.bookingStatus === 'Accepted',
+                            'rejected': booking.bookingStatus === 'Rejected'
+                        }">{{ booking.bookingStatus }}</span>
+                    </td>
+                    <td>{{ booking.additionalNotes || 'NA' }}</td>
+                    <td>
+                        <button class="btn-shared btn-green" (click)="viewProof(booking)">View Proof</button>
+                        <button class="btn-shared btn-red"
+                            [disabled]="booking.bookingStatus === 'Accepted'"
+                            (click)="deleteBooking(booking)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="event-pagination">
+            <button class="event-pagination-btn" [disabled]="currentPage === 1"
+                (click)="goToPage(currentPage - 1)">Prev</button>
+            <span class="event-pagination-info">Page {{ currentPage }} of {{ totalPages }}</span>
+            <button class="event-pagination-btn" [disabled]="currentPage === totalPages"
+                (click)="goToPage(currentPage + 1)">Next</button>
+        </div>
+    </section>
+
+    <!-- Proof Image Popup -->
+    <div class="popup" *ngIf="showProofPopup">
+        <div class="popup-content">
+            <button class="close-button" (click)="closePopup()">&times;</button>
+            <h3>Proof Image</h3>
+            <img [src]="selectedBooking?.proof" alt="Proof Image" />
+        </div>
     </div>
-    <div *ngIf="loading" class="center-message">Loading...</div>
-    <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
-    <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
-    <table *ngIf="!loading && conferenceevents.length > 0">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>EventName</th>
-          <th>OrganizerName</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Location</th>
-          <th>StartDateTime</th>
-          <th>EndDateTime</th>
-          <th>Capacity</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ce of conferenceEventList$; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ ce.EventName }}</td>
-          <td>{{ ce.OrganizerName }}</td>
-          <td>{{ ce.Category }}</td>
-          <td>{{ ce.Description }}</td>
-          <td>{{ ce.Location }}</td>
-          <td>{{ ce.StartDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ ce.EndDateTime | date:'dd/MM/yyyy' }}</td>
-          <td>{{ ce.Capacity }}</td>
-          <td><button (click)="openRegisterForm()" class="view-btn">View Proof</button></td>
-          <td>
-            <button (click)="deleteConferenceEvent(ce.ConferenceEventId)" class="delete-btn">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td><button (click)="previousPage()" class="previous-btn">Previous Page</button></td>
-          <td>{{ this.currentPage }}</td> <td>Page out Of</td> <td>{{ this.totalpages }}</td>
-          <td><button (click)="nextPage()" class="next-btn">Next Page</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <div *ngIf="!loading && conferenceevents.length === 0" class="center-message">No conferenceevents found.</div>
+
+    <!-- Delete Confirmation Popup -->
+    <div class="popup" *ngIf="showDeletePopup">
+        <div class="popup-content">
+            <h3>Confirm Delete</h3>
+            <p>Are you sure you want to delete this booking?</p>
+            <div class="popup-buttons">
+                <button class="btn-shared btn-green" (click)="confirmDelete()">Yes</button>
+                <button class="btn-shared btn-red" (click)="closePopup()">No</button>
+            </div>
+        </div>
+    </div>
+    <!-- Success Popup -->
+    <div class="popup" *ngIf="showSuccessPopup">
+        <div class="popup-content">
+            <p>{{popupMessage}}</p>
+            <button class="btn-shared btn-green" (click)="closePopup()">OK</button>
+        </div>
+    </div>
 </div>

@@ -14,7 +14,7 @@ export class ConferenceEventService {
     constructor(private http: HttpClient) { }
 
     private getHeaders(): HttpHeaders {
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem('token');
         return new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     }
 
@@ -42,8 +42,8 @@ export class ConferenceEventService {
         return this.http.put<ConferenceEvent>(`${this.baseUrl}/conference-event/${id}`, requestObject, this.options);
     }
 
-    getRegisteredEvents(userId: number): Observable<ConferenceEvent[]> {
-        return this.http.get<ConferenceEvent[]>(`${this.baseUrl}/bookings/user/${userId}`, this.options);
+    getRegisteredEvents(userId: number): Observable<Booking[]> {
+        return this.http.get<Booking[]>(`${this.baseUrl}/bookings/${userId}`, this.options);
     }
 
     addConferenceEventBooking(data: Booking): Observable<any> {
