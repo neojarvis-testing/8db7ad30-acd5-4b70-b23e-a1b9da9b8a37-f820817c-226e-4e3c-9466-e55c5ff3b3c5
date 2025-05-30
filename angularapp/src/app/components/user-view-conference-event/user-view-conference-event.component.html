@@ -13,7 +13,7 @@
   <div *ngIf="loading" class="center-message">Loading...</div>
   <div *ngIf="errorMessage" class="center-message error">{{ errorMessage }}</div>
   <div *ngIf="successMessage" class="center-message success">{{ successMessage }}</div>
-  <table *ngIf="pagedItems.length > 0" class="table-shared">
+  <table class="table-shared">
     <thead>
       <tr>
         <th>S No.</th>
@@ -47,11 +47,11 @@
         </td>
       </tr>
       <tr *ngIf="pagedItems.length === 0">
-        <td colspan="10" class="no-data">No events found.</td>
+        <td colspan="10" class="no-records">No events found.</td>
       </tr>
     </tbody>
   </table>
-  <div class="event-pagination">
+  <div *ngIf="pagedItems.length > 0" class="event-pagination">
     <button (click)="previousPage()" class="event-pagination-btn" [disabled]="currentPage === 1">Previous</button>
     <span class="event-pagination-info">Page {{ currentPage }} of {{ totalpages }}</span>
     <button (click)="nextPage()" class="event-pagination-btn" [disabled]="currentPage === totalpages">Next</button>

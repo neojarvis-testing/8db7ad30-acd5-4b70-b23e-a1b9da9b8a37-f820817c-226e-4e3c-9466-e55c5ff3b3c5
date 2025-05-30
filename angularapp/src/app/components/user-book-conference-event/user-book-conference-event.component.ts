@@ -24,7 +24,7 @@ export class UserBookConferenceEventComponent implements OnInit {
     private bookingService: BookingService,
     private route: ActivatedRoute,
     private toast: ToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.eventForm = this.formBuilder.group({
@@ -110,6 +110,9 @@ export class UserBookConferenceEventComponent implements OnInit {
         this.toast.show(err.error?.message || 'Failed to submit booking.');
       }
     });
+  }
+  goBack(): void {
+    this.router.navigate(['/user/viewconferenceevent']);
   }
 
   closePopup(): void {

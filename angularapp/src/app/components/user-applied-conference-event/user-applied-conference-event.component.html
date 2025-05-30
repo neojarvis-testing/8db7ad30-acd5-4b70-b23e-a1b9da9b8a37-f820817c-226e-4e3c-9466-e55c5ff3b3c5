@@ -50,7 +50,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="event-pagination">
+        <div *ngIf="paginatedBooking.length !== 0" class="event-pagination">
             <button class="event-pagination-btn" [disabled]="currentPage === 1"
                 (click)="goToPage(currentPage - 1)">Prev</button>
             <span class="event-pagination-info">Page {{ currentPage }} of {{ totalPages }}</span>

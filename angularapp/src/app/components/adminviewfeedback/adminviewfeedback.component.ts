@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Feedback } from 'src/app/models/feedback.model';
 import { User } from 'src/app/models/user.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-adminviewfeedback',
@@ -11,13 +12,14 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 export class AdminviewfeedbackComponent {
 
   feedbacks: Feedback[] = [];
-  errorMessage: string = '';
   loading: boolean = false;
 
   showModal: boolean = false;
   selectedUser: User | null = null;
 
-  constructor(private feedbackService: FeedbackService) {}
+  constructor(private feedbackService: FeedbackService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.getFeedbacks();
@@ -28,11 +30,10 @@ export class AdminviewfeedbackComponent {
     this.feedbackService.getFeedbacks().subscribe({
       next: (data) => {
         this.feedbacks = data || [];
-        this.errorMessage = '';
         this.loading = false;
       },
       error: (err) => {
-        this.errorMessage = 'Failed to load feedbacks.';
+        this.toastService.show(err.error?.message || 'Failed to load feedbacks.');
         this.feedbacks = [];
         this.loading = false;
       }

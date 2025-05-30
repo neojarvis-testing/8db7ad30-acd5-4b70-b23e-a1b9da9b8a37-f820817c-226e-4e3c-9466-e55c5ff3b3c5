@@ -108,14 +108,13 @@ export class AdminViewBookingsComponent implements OnInit {
           this.showSuccessPopup = true;
           this.popupMessage = 'Successfully Deleted Booking!';
           this.loading = false;
+          this.loadBookings(); 
         },
         error: (err) => {
           this.toastService.show(err.error?.message || 'Failed to delete Booking. Please try again.');
           this.loading = false;
         }
       });
-
-      this.bookings = this.bookings.filter(b => b.bookingId !== this.selectedBooking!.bookingId);
     }
     this.closePopup();
   }

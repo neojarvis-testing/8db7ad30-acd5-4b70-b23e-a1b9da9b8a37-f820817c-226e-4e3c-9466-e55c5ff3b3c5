@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConferenceEvent } from '../../models/conference-event.model';
 import { ConferenceEventService } from '../../services/conference-event.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   standalone: false,
@@ -17,10 +18,18 @@ export class AdminViewConferenceEventComponent implements OnInit {
   // Pagination properties
   currentPage: number = 1;  
   itemsPerPage: number = 5; 
-  
+
+  // Delete popup properties
+  showDeletePopup: boolean = false;
+  showSuccessPopup: boolean = false;
+  popupMessage: string = '';
+  loading: boolean = false;
+  selectedEvent: ConferenceEvent | null = null;
+
   constructor(
     private conferenceEventService: ConferenceEventService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -64,11 +73,36 @@ export class AdminViewConferenceEventComponent implements OnInit {
     this.router.navigate(['/admin/editconferenceevent', eventId]);
   }
 
+  // Updated delete logic with popup confirmation and success message
   deleteEvent(eventId: number): void {
-    if (confirm('Are you sure you want to delete this event?')) {
-      this.conferenceEventService.deleteConferenceEvent(eventId).subscribe(() => {
-        this.loadConferenceEvents();
+    const event = this.conferenceEvents.find(e => e.conferenceEventId === eventId) || null;
+    this.selectedEvent = event;
+    this.showDeletePopup = true;
+  }
+
+  confirmDelete(): void {
+    if (this.selectedEvent) {
+      this.loading = true;
+      this.conferenceEventService.deleteConferenceEvent(this.selectedEvent.conferenceEventId).subscribe({
+        next: () => {
+          this.showSuccessPopup = true;
+          this.popupMessage = 'Successfully Deleted Conference Event!';
+          this.loading = false;
+          this.loadConferenceEvents();
+        },
+        error: (err) => {
+          this.toastService.show(err.error?.message || 'Failed to delete Conference Event. Please try again.');
+          this.loading = false;
+        }
       });
     }
+    this.closePopup();
+  }
+
+  closePopup(): void {
+    this.showDeletePopup = false;
+    this.showSuccessPopup = false;
+    this.selectedEvent = null;
+    this.popupMessage = '';
   }
 }

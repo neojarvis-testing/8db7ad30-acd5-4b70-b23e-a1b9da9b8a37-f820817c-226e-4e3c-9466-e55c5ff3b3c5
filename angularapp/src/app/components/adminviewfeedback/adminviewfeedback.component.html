@@ -2,8 +2,7 @@
   <h2 class="shared-title">Feedback Details</h2>
   <hr class="shared-divider" />
   <div *ngIf="loading">Loading...</div>
-  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-  <table *ngIf="!loading && !errorMessage && feedbacks.length > 0" class="table-shared">
+  <table class="table-shared">
     <thead>
       <tr>
         <th>S.No</th>
@@ -14,6 +13,9 @@
       </tr>
     </thead>
     <tbody>
+      <tr *ngIf="feedbacks.length === 0">
+        <td colspan="10" class="no-records">No conference events found.</td>
+      </tr>
       <tr *ngFor="let fb of feedbacks; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ fb.user?.username || 'User' }}</td>
@@ -25,9 +27,6 @@
       </tr>
     </tbody>
   </table>
-  <div *ngIf="!loading && !errorMessage && feedbacks.length === 0" class="no-data">
-  No feedback found.
-</div>
 
   <!-- Modal for user details -->
   <div *ngIf="showModal" class="modal-backdrop">
