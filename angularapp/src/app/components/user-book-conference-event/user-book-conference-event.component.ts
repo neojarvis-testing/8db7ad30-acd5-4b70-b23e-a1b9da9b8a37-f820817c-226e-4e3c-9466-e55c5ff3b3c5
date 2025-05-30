@@ -104,7 +104,7 @@ export class UserBookConferenceEventComponent implements OnInit {
     this.bookingService.addBooking(booking).subscribe({
       next: () => {
         this.toast.show('Booked successfully!');
-        this.router.navigate(['/userviewconferenceevent']);
+        this.router.navigate(['/user/viewconferenceevent']);
       },
       error: err => {
         this.toast.show(err.error?.message || 'Failed to submit booking.');
@@ -114,6 +114,6 @@ export class UserBookConferenceEventComponent implements OnInit {
 
   closePopup(): void {
     this.showSuccessPopup = false;
-    this.router.navigate(['/userviewconferenceevent']);
+    this.router.navigate(['/user/viewconferenceevent']);
   }
 }

@@ -30,7 +30,13 @@ export class LoginComponent {
     this.authService.login(this.email, this.password).subscribe(
       (response: any) => {
         if (response && response.success) {
-          this.router.navigate(['/home']);
+          if(response.role === 'Admin') {
+            this.router.navigate(['/admin/home']);
+          } else if(response.role === 'User') {
+            this.router.navigate(['/user/home']);
+          }else{
+            this.router.navigate(['/home']);
+          }
         } else {
           this.toastService.show('Invalid email or password');
         }

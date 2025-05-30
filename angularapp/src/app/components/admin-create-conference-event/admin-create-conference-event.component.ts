@@ -92,6 +92,6 @@ export class AdminCreateConferenceEventComponent implements OnInit {
 
   closePopup(): void {
     this.showSuccessPopup = false;
-    this.router.navigate(['/adminviewconferenceevent']);
+    this.router.navigate(['/admin/viewconferenceevent']);
   }
 }

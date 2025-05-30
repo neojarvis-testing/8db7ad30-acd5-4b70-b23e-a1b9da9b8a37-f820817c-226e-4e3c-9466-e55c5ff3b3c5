@@ -1,1 +1,34 @@
-<p>adminnav works!</p>
+<div class="header">
+  <span class="title">CONFERENCE EVENT MANAGEMENT SYSTEM</span>
+  <div class="nav">
+    <!-- Hamburger icon for small screens -->
+    <button class="hamburger" [class.open]="menuOpen" (click)="toggleMenu()" aria-label="Toggle navigation"
+      [attr.aria-expanded]="menuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <!-- Backdrop for mobile menu -->
+    <div class="nav-backdrop" *ngIf="menuOpen" (click)="closeMenu()"></div>
+    <nav class="nav-links" [class.open]="menuOpen" role="navigation" aria-label="Admin main navigation">
+      <div class="user-info">
+        <span class="user-avatar">{{ userName ? userName[0] : 'A' }}</span>
+        <span class="user-label">Admin/{{userName}}</span>
+      </div>
+      <a routerLink="/admin/home" (click)="closeMenu()">Home</a>
+      <div class="dropdown" (mouseenter)="dropdownOpen = true" (mouseleave)="dropdownOpen = false">
+        <button class="btn-feedback" (click)="dropdownOpen = !dropdownOpen" aria-haspopup="true" [attr.aria-expanded]="dropdownOpen">
+          Conference Events
+          <span class="dropdown-arrow" [class.open]="dropdownOpen">▼</span>
+        </button>
+        <div class="dropdown-content" *ngIf="dropdownOpen">
+          <a routerLink="/admin/createconferenceevent" (click)="closeMenu(); dropdownOpen = false">Add Conference Event</a>
+          <a routerLink="/admin/viewconferenceevent" (click)="closeMenu(); dropdownOpen = false">View Conference Event</a>
+        </div>
+      </div>
+      <a routerLink="/admin/viewbooking" (click)="closeMenu()">Requested Event Bookings</a>
+      <a routerLink="/admin/feedback" (click)="closeMenu()">Feedbacks</a>
+      <button class="btn-logout" (click)="logout(); closeMenu()">Logout</button>
+    </nav>
+  </div>
+</div>

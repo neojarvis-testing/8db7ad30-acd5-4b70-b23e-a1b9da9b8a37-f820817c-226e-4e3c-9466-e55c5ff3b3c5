@@ -38,7 +38,7 @@ export class UseraddfeedbackComponent {
       next: () => {
         this.toastService.show('Feedback submitted successfully!');
         this.feedbackForm.reset();
-        this.router.navigate(['/userfeedback'])
+        this.router.navigate(['/user/feedback'])
       },
       error: err => {
         this.toastService.show(err.error?.message || 'Failed to submit feedback.');

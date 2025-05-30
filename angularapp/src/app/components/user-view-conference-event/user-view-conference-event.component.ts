@@ -126,7 +126,7 @@ export class UserViewConferenceEventComponent implements OnInit {
     return endDate < today;
   }
   register(conferenceEventId: number): void {
-    this.router.navigate(['/userbookconferenceevent', conferenceEventId]);
+    this.router.navigate(['/user/bookconferenceevent', conferenceEventId]);
   }
   deleteConferenceEvent(conferenceEventId: number): void {
     if (!confirm('Are you sure you want to delete this ConferenceEventId?')) return;

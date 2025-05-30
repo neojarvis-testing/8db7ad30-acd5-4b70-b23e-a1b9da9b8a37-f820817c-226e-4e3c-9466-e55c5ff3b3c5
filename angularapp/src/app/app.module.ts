@@ -8,52 +8,28 @@ import { InternalServerErrorComponent } from './error/internal-server-error/inte
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { AdminCreateConferenceEventComponent } from './components/admin-create-conference-event/admin-create-conference-event.component';
-import { AdminEditConferenceEventComponent } from './components/admin-edit-conference-event/admin-edit-conference-event.component';
-import { AdminViewConferenceEventComponent } from './components/admin-view-conference-event/admin-view-conference-event.component';
-import { AdminnavComponent } from './components/adminnav/adminnav.component';
-import { UserAppliedConferenceEventComponent } from './components/user-applied-conference-event/user-applied-conference-event.component';
-import { UserBookConferenceEventComponent } from './components/user-book-conference-event/user-book-conference-event.component';
-import { UserViewConferenceEventComponent } from './components/user-view-conference-event/user-view-conference-event.component';
-import { UsernavComponent } from './components/usernav/usernav.component';
+import { LoginComponent } from './components/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { CommonModule } from '@angular/common';
-import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
-import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
-import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
-import { LoginComponent } from './components/login/login.component';
-import { AdminViewBookingsComponent } from './components/admin-view-bookings/admin-view-bookings.component';
 import { GlobalLoaderComponent } from './shared/components/global-loader/global-loader.component';
+import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent,
+  declarations: [
+    AppComponent,
     NotFoundComponent,
     InternalServerErrorComponent,
     NavbarComponent,
     RegistrationComponent,
     LoginComponent,
-    AdminCreateConferenceEventComponent,
-    AdminEditConferenceEventComponent,
-    AdminViewConferenceEventComponent,
-    AdminnavComponent,
-    UserAppliedConferenceEventComponent,
-    UserBookConferenceEventComponent,
-    UserViewConferenceEventComponent,
-    UsernavComponent,
-    AdminviewfeedbackComponent,
-    UseraddfeedbackComponent,
-    UserviewfeedbackComponent,
-    AdminViewBookingsComponent,
-    GlobalLoaderComponent
+    HomeComponent
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

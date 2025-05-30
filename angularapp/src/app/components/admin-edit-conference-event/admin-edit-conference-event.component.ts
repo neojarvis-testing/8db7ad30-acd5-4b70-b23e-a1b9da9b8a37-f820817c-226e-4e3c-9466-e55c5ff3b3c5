@@ -60,7 +60,7 @@ export class AdminEditConferenceEventComponent implements OnInit {
       },
       error: (err) => {
         this.toastService.show(err.error?.message || 'Failed to load event details.');
-        this.router.navigate(['/adminviewconferenceevent']);
+        this.router.navigate(['/admin/viewconferenceevent']);
       }
     });
   }
@@ -94,10 +94,10 @@ export class AdminEditConferenceEventComponent implements OnInit {
 
   closePopup(): void {
     this.showSuccessPopup = false;
-    this.router.navigate(['/adminviewconferenceevent']);
+    this.router.navigate(['/admin/viewconferenceevent']);
   }
 
   goBack(): void {
-    this.router.navigate(['/adminviewconferenceevent']);
+    this.router.navigate(['/admin/viewconferenceevent']);
   }
 }
